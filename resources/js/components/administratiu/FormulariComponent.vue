@@ -40,13 +40,14 @@
                             <label for="nom_alertant" class="col-form-label"><strong>Nom</strong></label>
                             <input class="form-control" type="text" name="nom_alertant" id="nom_alertant" autofocus>
 
-                            <label for="telefon_alertant" class="col-form-label"><strong>Telèfon</strong></label>
-                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0">
+
                         </div>
 
                         <div class="col-sm-5 col-5">
                             <label for="cognom_alertant" class="col-form-label"><strong>Cognom</strong></label>
                             <input class="form-control" type="text" name="cognom_alertant" id="cognom_alertant">
+
+
 
                         </div>
 
@@ -54,23 +55,46 @@
 
                     <div class="form-group row">
 
+
+                        <div class="col-sm-5 col-5">
+                            <label for="telefon_alertant" class="col-form-label"><strong>Telèfon</strong></label>
+                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0">
+                        </div>
+
                         <div class="col-sm-5 col-5">
                             <label for="provincia" class="col-form-label"><strong>Província</strong></label><br>
-                            <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id">
-                                <input class="form-check-input" type="radio" name="provincia" v-model="provincia.id" :id="provincia.nom">
-                                <label class="form-check-label" :for="provincia.nom">{{ provincia-nom }}</label>
+                            <div>
+                                <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id" >
+                                    <input class="form-check-input" type="radio" name="provincia" :id="provincia.id" v-model="picked" :value="provincia.nom">
+                                    <label class="form-check-label" :for="provincia.id">{{ provincia.nom }}</label>
+                                </div>
+                                <span>check : {{ picked }}</span>
                             </div>
 
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group row">
+
+                        <div class="col-sm-5 col-5">
+                            <label for="comarca" class="col-form-label"><strong>Comarca</strong></label>
+                            <select v-model="ComarcaSelec" class="form-control" name="comarca" id="comarca">
+
+                                <option v-for="comarca in comarques" :key="comarca.id" :value="comarca.id">{{ comarca.nom }}</option>
+
+                            </select>
                         </div>
 
                         <div class="col-sm-5 col-5">
                             <label for="municipi" class="col-form-label"><strong>Municipi</strong></label>
-                            <select class="form-control" name="municipi" id="municipi">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
-                                <option value="">5</option>
+                            <select v-model="ProvinciaSelec" class="form-control" name="municipi" id="municipi">
+
+                                <option v-for="municipi in municipis" :key="municipi.id" :value="municipi.id">{{ municipi.nom }}</option>
+
                             </select>
                         </div>
                     </div>
@@ -94,76 +118,415 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-
-                        <div class="col-sm-5 col-5">
-                            <label for="nom_afectat" class="col-form-label"><strong>Nom</strong></label>
-                            <input class="form-control" type="text" name="nom_afectat" id="nom_afectat">
-                        </div>
-
-                        <div class="col-sm-5 col-5">
-                            <label for="cognom_afectat" class="col-form-label"><strong>Cognom</strong></label>
-                            <input class="form-control" type="text" name="cognom_afectat" id="cognom_afectat">
-
-                        </div>
-
+                        <a class="btn btn-primary m-2" data-toggle="collapse" href="#afectat1" role="button" aria-expanded="false" aria-controls="afectat1">Afectat 1</a>
+                        <a class="btn btn-primary m-2" data-toggle="collapse" href="#afectat2" role="button" aria-expanded="false" aria-controls="afectat2">Afectat 2</a>
+                        <a class="btn btn-primary m-2" data-toggle="collapse" href="#afectat3" role="button" aria-expanded="false" aria-controls="afectat3">Afectat 3</a>
+                        <a class="btn btn-primary m-2" data-toggle="collapse" href="#afectat4" role="button" aria-expanded="false" aria-controls="afectat4">Afectat 4</a>
+                        <a class="btn btn-primary m-2" data-toggle="collapse" href="#afectat5" role="button" aria-expanded="false" aria-controls="afectat5">Afectat 5</a>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="collapse multi-collapse mt-2 mb-2" id="afectat1">
+                         <h4 class="card-title">Afectat 1</h4>
+                        <div class="card card-body">
 
-                        <div class="col-sm-5 col-5">
-                            <label for="document_afectat" class="col-form-label"><strong>DNI, TS/NSS</strong></label>
-                            <input class="form-control" type="text" name="document_afectat" id="document_afectat" maxlength="14" min="0" >
+                            <div class="form-group row">
 
-                        </div>
+                                <div class="col-sm-5 col-5">
+                                    <label for="nom_afectat1" class="col-form-label"><strong>Nom</strong></label>
+                                    <input class="form-control" type="text" name="nom_afectat1" id="nom_afectat1">
+                                </div>
 
-                        <div class="col-sm-5 col-5">
-                            <label for="telefon_alertant" class="col-form-label"><strong>Telèfon</strong></label>
-                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0">
+                                <div class="col-sm-5 col-5">
+                                    <label for="cognom_afectat1" class="col-form-label"><strong>Cognom</strong></label>
+                                    <input class="form-control" type="text" name="cognom_afectat1" id="cognom_afectat1">
 
-                        </div>
+                                </div>
 
-                    </div>
-
-                    <div class="form-group row">
-
-                        <div class="col-sm-5 col-5">
-                            <label for="edat_afectat" class="col-form-label"><strong>Edat</strong></label>
-                            <input class="form-control" type="number" name="edat_afectat" id="edat_afectat" min="0" maxlength="3">
-                        </div>
-
-                        <div class="col-sm-5 col-5">
-                            <label for="genere" class="col-form-label"><strong>Génere</strong></label><br>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="genere" id="home" value="home">
-                                <label class="form-check-label" for="home">Home</label>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="genere" id="dona" value="dona">
-                                <label class="form-check-label" for="dona">Dona</label>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="document_afectat1" class="col-form-label"><strong>DNI, TS/NSS</strong></label>
+                                    <input class="form-control" type="text" name="document_afectat1" id="document_afectat1" maxlength="14" min="0" >
+
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="telefon_alertant1" class="col-form-label"><strong>Telèfon</strong></label>
+                                    <input class="form-control" type="tel" name="telefon_alertant1" id="telefon_alertant1" maxlength="9" min="0">
+
+                                </div>
+
                             </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="edat_afectat1" class="col-form-label"><strong>Edat</strong></label>
+                                    <input class="form-control" type="number" name="edat_afectat1" id="edat_afectat1" min="0" maxlength="3">
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="genere1" class="col-form-label"><strong>Génere</strong></label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere1" id="home" value="home">
+                                        <label class="form-check-label" for="home">Home</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere1" id="dona" value="dona">
+                                        <label class="form-check-label" for="dona">Dona</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="tipus_accident1" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
+                                    <select class="form-control" name="tipus_accident1" id="tipus_accident1">
+                                        <option value="">Accidents i traumatismes</option>
+                                        <option value="">Malaltia a un lloc públic</option>
+                                        <option value="">Malaltia a domicili</option>
+                                        <option value="">Consulta mèdica</option>
+                                        <option value="">Transports sanitari</option>
+                                    </select>
+
+                                    <label for="num_afectats1" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
+                                    <input type="number" class="form-control" name="num_afectats1" id="num_afectats1" min="0">
+                                </div>
+
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="descripcio1" class="col-form-label"><strong>Descripció d'accident o d'incident</strong></label>
+                                    <textarea class="form-control" id="descripcio1" name= "descripcio1" rows="4" placeholder="Descripció sobre l'accident o l'incident..."></textarea>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="collapse multi-collapse mt-2 mb-2" id="afectat2">
+                        <h4 class="card-title">Afectat 2</h4>
+                        <div class="card card-body">
 
-                        <div class="col-sm-5 col-5">
-                            <label for="tipus_accident" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
-                            <select class="form-control" name="tipus_accident" id="tipus_accident">
-                                <option value="">Accidents i traumatismes</option>
-                                <option value="">Malaltia a un lloc públic</option>
-                                <option value="">Malaltia a domicili</option>
-                                <option value="">Consulta mèdica</option>
-                                <option value="">Transports sanitari</option>
-                            </select>
+                            <div class="form-group row">
 
-                            <label for="num_afectats" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
-                            <input type="number" class="form-control" name="num_afectats" id="num_afectats" min="0">
+                                <div class="col-sm-5 col-5">
+                                    <label for="nom_afectat2" class="col-form-label"><strong>Nom</strong></label>
+                                    <input class="form-control" type="text" name="nom_afectat2" id="nom_afectat2">
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="cognom_afectat2" class="col-form-label"><strong>Cognom</strong></label>
+                                    <input class="form-control" type="text" name="cognom_afectat2" id="cognom_afectat2">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="document_afectat2" class="col-form-label"><strong>DNI, TS/NSS</strong></label>
+                                    <input class="form-control" type="text" name="document_afectat2" id="document_afectat2" maxlength="14" min="0" >
+
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="telefon_alertant2" class="col-form-label"><strong>Telèfon</strong></label>
+                                    <input class="form-control" type="tel" name="telefon_alertant2" id="telefon_alertant2" maxlength="9" min="0">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="edat_afectat2" class="col-form-label"><strong>Edat</strong></label>
+                                    <input class="form-control" type="number" name="edat_afectat2" id="edat_afectat2" min="0" maxlength="3">
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="genere2" class="col-form-label"><strong>Génere</strong></label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere2" id="home" value="home">
+                                        <label class="form-check-label" for="home">Home</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere2" id="dona" value="dona">
+                                        <label class="form-check-label" for="dona">Dona</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="tipus_accident2" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
+                                    <select class="form-control" name="tipus_accident2" id="tipus_accident2">
+                                        <option value="">Accidents i traumatismes</option>
+                                        <option value="">Malaltia a un lloc públic</option>
+                                        <option value="">Malaltia a domicili</option>
+                                        <option value="">Consulta mèdica</option>
+                                        <option value="">Transports sanitari</option>
+                                    </select>
+
+                                    <label for="num_afectats2" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
+                                    <input type="number" class="form-control" name="num_afectats2" id="num_afectats2" min="0">
+                                </div>
+
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="descripcio2" class="col-form-label"><strong>Descripció d'accident o d'incident</strong></label>
+                                    <textarea class="form-control" id="descripcio2" name= "descripcio2" rows="4" placeholder="Descripció sobre l'accident o l'incident..."></textarea>
+                                </div>
+                            </div>
+
                         </div>
+                    </div>
+
+                    <div class="collapse multi-collapse mt-2 mb-2" id="afectat3">
+                        <h4 class="card-title">Afectat 3</h4>
+                        <div class="card card-body">
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="nom_afectat1" class="col-form-label"><strong>Nom</strong></label>
+                                    <input class="form-control" type="text" name="nom_afectat1" id="nom_afectat3">
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="cognom_afectat3" class="col-form-label"><strong>Cognom</strong></label>
+                                    <input class="form-control" type="text" name="cognom_afectat3" id="cognom_afectat3">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="document_afectat3" class="col-form-label"><strong>DNI, TS/NSS</strong></label>
+                                    <input class="form-control" type="text" name="document_afectat3" id="document_afectat3" maxlength="14" min="0" >
+
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="telefon_alertant3" class="col-form-label"><strong>Telèfon</strong></label>
+                                    <input class="form-control" type="tel" name="telefon_alertant3" id="telefon_alertant3" maxlength="9" min="0">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="edat_afectat3" class="col-form-label"><strong>Edat</strong></label>
+                                    <input class="form-control" type="number" name="edat_afectat3" id="edat_afectat3" min="0" maxlength="3">
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="genere3" class="col-form-label"><strong>Génere</strong></label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere3" id="home" value="home">
+                                        <label class="form-check-label" for="home">Home</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere3" id="dona" value="dona">
+                                        <label class="form-check-label" for="dona">Dona</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="tipus_accident3" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
+                                    <select class="form-control" name="tipus_accident3" id="tipus_accident3">
+                                        <option value="">Accidents i traumatismes</option>
+                                        <option value="">Malaltia a un lloc públic</option>
+                                        <option value="">Malaltia a domicili</option>
+                                        <option value="">Consulta mèdica</option>
+                                        <option value="">Transports sanitari</option>
+                                    </select>
+
+                                    <label for="num_afectats3" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
+                                    <input type="number" class="form-control" name="num_afectats3" id="num_afectats3" min="0">
+                                </div>
 
 
-                        <div class="col-sm-5 col-5">
-                            <label for="descripcio" class="col-form-label"><strong>Descripció d'accident o d'incident</strong></label>
-                            <textarea class="form-control" id="descripcio" name= "descripcio" rows="4" placeholder="Descripció sobre l'accident o l'incident..."></textarea>
+                                <div class="col-sm-5 col-5">
+                                    <label for="descripcio3" class="col-form-label"><strong>Descripció d'accident o d'incident</strong></label>
+                                    <textarea class="form-control" id="descripcio3" name= "descripcio3" rows="4" placeholder="Descripció sobre l'accident o l'incident..."></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="collapse multi-collapse mt-2 mb-2" id="afectat4">
+                        <h4 class="card-title">Afectat 4</h4>
+                        <div class="card card-body">
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="nom_afectat4" class="col-form-label"><strong>Nom</strong></label>
+                                    <input class="form-control" type="text" name="nom_afectat4" id="nom_afectat4">
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="cognom_afectat4" class="col-form-label"><strong>Cognom</strong></label>
+                                    <input class="form-control" type="text" name="cognom_afectat4" id="cognom_afectat4">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="document_afectat4" class="col-form-label"><strong>DNI, TS/NSS</strong></label>
+                                    <input class="form-control" type="text" name="document_afectat4" id="document_afectat4" maxlength="14" min="0" >
+
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="telefon_alertant4" class="col-form-label"><strong>Telèfon</strong></label>
+                                    <input class="form-control" type="tel" name="telefon_alertant4" id="telefon_alertant4" maxlength="9" min="0">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="edat_afectat4" class="col-form-label"><strong>Edat</strong></label>
+                                    <input class="form-control" type="number" name="edat_afectat4" id="edat_afectat4" min="0" maxlength="3">
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="genere4" class="col-form-label"><strong>Génere</strong></label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere4" id="home" value="home">
+                                        <label class="form-check-label" for="home">Home</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere4" id="dona" value="dona">
+                                        <label class="form-check-label" for="dona">Dona</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="tipus_accident4" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
+                                    <select class="form-control" name="tipus_accident4" id="tipus_accident4">
+                                        <option value="">Accidents i traumatismes</option>
+                                        <option value="">Malaltia a un lloc públic</option>
+                                        <option value="">Malaltia a domicili</option>
+                                        <option value="">Consulta mèdica</option>
+                                        <option value="">Transports sanitari</option>
+                                    </select>
+
+                                    <label for="num_afectats4" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
+                                    <input type="number" class="form-control" name="num_afectats4" id="num_afectats4" min="0">
+                                </div>
+
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="descripcio4" class="col-form-label"><strong>Descripció d'accident o d'incident</strong></label>
+                                    <textarea class="form-control" id="descripcio4" name= "descripcio4" rows="4" placeholder="Descripció sobre l'accident o l'incident..."></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="collapse multi-collapse mt-2 mb-2" id="afectat5">
+                        <h4 class="card-title">Afectat 5</h4>
+                        <div class="card card-body">
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="nom_afectat5" class="col-form-label"><strong>Nom</strong></label>
+                                    <input class="form-control" type="text" name="nom_afectat1" id="nom_afectat5">
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="cognom_afectat5" class="col-form-label"><strong>Cognom</strong></label>
+                                    <input class="form-control" type="text" name="cognom_afectat5" id="cognom_afectat5">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="document_afectat5" class="col-form-label"><strong>DNI, TS/NSS</strong></label>
+                                    <input class="form-control" type="text" name="document_afectat5" id="document_afectat5" maxlength="14" min="0" >
+
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="telefon_alertant5" class="col-form-label"><strong>Telèfon</strong></label>
+                                    <input class="form-control" type="tel" name="telefon_alertant5" id="telefon_alertant5" maxlength="9" min="0">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="edat_afectat5" class="col-form-label"><strong>Edat</strong></label>
+                                    <input class="form-control" type="number" name="edat_afectat5" id="edat_afectat5" min="0" maxlength="3">
+                                </div>
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="genere5" class="col-form-label"><strong>Génere</strong></label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere5" id="home" value="home">
+                                        <label class="form-check-label" for="home">Home</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="genere5" id="dona" value="dona">
+                                        <label class="form-check-label" for="dona">Dona</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="tipus_accident5" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
+                                    <select class="form-control" name="tipus_accident5" id="tipus_accident5">
+                                        <option value="">Accidents i traumatismes</option>
+                                        <option value="">Malaltia a un lloc públic</option>
+                                        <option value="">Malaltia a domicili</option>
+                                        <option value="">Consulta mèdica</option>
+                                        <option value="">Transports sanitari</option>
+                                    </select>
+
+                                    <label for="num_afectats5" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
+                                    <input type="number" class="form-control" name="num_afectats5" id="num_afectats5" min="0">
+                                </div>
+
+
+                                <div class="col-sm-5 col-5">
+                                    <label for="descripcio5" class="col-form-label"><strong>Descripció d'accident o d'incident</strong></label>
+                                    <textarea class="form-control" id="descripcio5" name= "descripcio5" rows="4" placeholder="Descripció sobre l'accident o l'incident..."></textarea>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -284,12 +647,18 @@
     export default {
         data(){
             return{
-                provincies : [],
-                municipis : []
+                comarques: [],
+                provincies: [],
+                provincia: {
+                    nom: ''
+                },
+                ProvinciaSelec: {},
+                ComarcaSelec: {},
+                municipis: []
             }
         },
-        methods : {
-            selectProvincia(){
+        methods: {
+            selectLocal(){
                 let me = this;
                 axios
                     .get('/provincies')
@@ -301,26 +670,73 @@
                         this.errored = true;
                     })
                     .finally(() => this.loading = false)
-                },
-            selectMunicipi(){
-                let me = this;
+
+                let me2 = this;
                 axios
                     .get('/municipis')
                     .then( response => {
-                        me.municipis = response.data;
+                        me2.municipis = response.data;
                     })
                     .catch( error => {
                         console.log(error)
                         this.errored = true;
                     })
                     .finally(() => this.loading = false)
+
+                let me3 = this;
+                axios
+                    .get('/comarques')
+                    .then( response => {
+                        me3.comarques = response.data;
+                    })
+                    .catch( error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+            },
+            FiltrarCom(provincia){
+                this.provincia = provincia
+
+            },
+            comarcaFiltered: function () {
+                if (this.provincia.id > 0 && this.municipi.id == null) {
+                    let comarquesFiltered = [];
+                    let comarques = this.comarques;
+                    for (let i = 0; i < comarques.length; ++i) {
+                        if (comarques[i].provincies_id == this.provincia.id) {
+                            comarquesFiltered.push(comarques[i]);
+                        }
+                    }
+                    return ComarcaFiltered;
+                }else{
+                    return this.comarques;
+                }
+            },
+            municipisFiltered: function () {
+                if (this.comarca.id > 0) {
+                    let municipisFiltered = [];
+                    let municipis = this.municipis;
+                    for (let i = 0; i < municipis.length; ++i) {
+                    if (municipis[i].comarques_id == this.comarca.id) {
+                        municipisFiltered.push(municipis[i]);
+                    }
+                    }
+                    return municipisFiltered;
+                } else {
+                    return this.municipis;
+                }
+            },
+            selecCom(){
+
             }
 
 
         },
         created() {
-            this.selectProvincia();
-            this.selectMunicipi();
+            this.selectLocal();
+            this.municipisFiltered();
+            this.comarcaFiltered();
         },
         mounted() {
             console.log('Component mounted.')

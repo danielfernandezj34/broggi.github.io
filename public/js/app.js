@@ -2434,15 +2434,384 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      comarques: [],
       provincies: [],
+      provincia: {
+        nom: ''
+      },
+      ProvinciaSelec: {},
+      ComarcaSelec: {},
       municipis: []
     };
   },
   methods: {
-    selectProvincia: function selectProvincia() {
+    selectLocal: function selectLocal() {
       var _this = this;
 
       var me = this;
@@ -2454,24 +2823,66 @@ __webpack_require__.r(__webpack_exports__);
       })["finally"](function () {
         return _this.loading = false;
       });
-    },
-    selectMunicipi: function selectMunicipi() {
-      var _this2 = this;
-
-      var me = this;
+      var me2 = this;
       axios.get('/municipis').then(function (response) {
-        me.municipis = response.data;
+        me2.municipis = response.data;
       })["catch"](function (error) {
         console.log(error);
-        _this2.errored = true;
+        _this.errored = true;
       })["finally"](function () {
-        return _this2.loading = false;
+        return _this.loading = false;
       });
-    }
+      var me3 = this;
+      axios.get('/comarques').then(function (response) {
+        me3.comarques = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+        _this.errored = true;
+      })["finally"](function () {
+        return _this.loading = false;
+      });
+    },
+    FiltrarCom: function FiltrarCom(provincia) {
+      this.provincia = provincia;
+    },
+    comarcaFiltered: function comarcaFiltered() {
+      if (this.provincia.id > 0 && this.municipi.id == null) {
+        var comarquesFiltered = [];
+        var comarques = this.comarques;
+
+        for (var i = 0; i < comarques.length; ++i) {
+          if (comarques[i].provincies_id == this.provincia.id) {
+            comarquesFiltered.push(comarques[i]);
+          }
+        }
+
+        return ComarcaFiltered;
+      } else {
+        return this.comarques;
+      }
+    },
+    municipisFiltered: function municipisFiltered() {
+      if (this.comarca.id > 0) {
+        var municipisFiltered = [];
+        var municipis = this.municipis;
+
+        for (var i = 0; i < municipis.length; ++i) {
+          if (municipis[i].comarques_id == this.comarca.id) {
+            municipisFiltered.push(municipis[i]);
+          }
+        }
+
+        return municipisFiltered;
+      } else {
+        return this.municipis;
+      }
+    },
+    selecCom: function selecCom() {}
   },
   created: function created() {
-    this.selectProvincia();
-    this.selectMunicipi();
+    this.selectLocal();
+    this.municipisFiltered();
+    this.comarcaFiltered();
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2550,7 +2961,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = '/broggi/public/api/';
+window.axios.defaults.baseURL = '/broggi.github.io/public/api/';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -38816,7 +39227,275 @@ var render = function() {
         },
         [_c("i", { staticClass: "far fa-plus-circle fa-3x" })]
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modalUsuari",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modalBorrarLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-1 col-form-label",
+                        attrs: { for: "sigles" }
+                      },
+                      [_vm._v("Sigles")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-11" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.curs.sigles,
+                            expression: "curs.sigles"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "sigles",
+                          name: "sigles",
+                          autofocus: ""
+                        },
+                        domProps: { value: _vm.curs.sigles },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.curs, "sigles", $event.target.value)
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-1 col-form-label",
+                        attrs: { for: "nom" }
+                      },
+                      [_vm._v("Nom")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-11" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.curs.nom,
+                            expression: "curs.nom"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "nom", name: "nom" },
+                        domProps: { value: _vm.curs.nom },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.curs, "nom", $event.target.value)
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-1 col-form-label",
+                        attrs: { for: "cicle" }
+                      },
+                      [_vm._v("Cicle")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-11" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.curs.cicles_id,
+                              expression: "curs.cicles_id"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "cicle", name: "cicle" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.curs,
+                                "cicles_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        _vm._l(_vm.cicles, function(cicle) {
+                          return _c(
+                            "option",
+                            { key: cicle.id, domProps: { value: cicle.id } },
+                            [_vm._v(" " + _vm._s(cicle.nom))]
+                          )
+                        }),
+                        0
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-1 col-form-label",
+                        attrs: { for: "actiu" }
+                      },
+                      [_vm._v("Actiu")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-11" }, [
+                      _c(
+                        "div",
+                        { staticClass: "custom-control custom-checkbox" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.curs.actiu,
+                                expression: "curs.actiu"
+                              }
+                            ],
+                            staticClass: "custom-control-input",
+                            attrs: {
+                              type: "checkbox",
+                              id: "actiu",
+                              name: "actiu"
+                            },
+                            domProps: {
+                              checked: Array.isArray(_vm.curs.actiu)
+                                ? _vm._i(_vm.curs.actiu, null) > -1
+                                : _vm.curs.actiu
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.curs.actiu,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.curs,
+                                        "actiu",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.curs,
+                                        "actiu",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(_vm.curs, "actiu", $$c)
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", {
+                            staticClass: "custom-control-label",
+                            attrs: { for: "actiu" }
+                          })
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _vm.insert
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        attrs: { type: "button", id: "botonBorrar" },
+                        on: {
+                          click: function($event) {
+                            return _vm.insertCurs()
+                          }
+                        }
+                      },
+                      [_vm._v("Afegir")]
+                    )
+                  : _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        attrs: { type: "button", id: "botonBorrar" },
+                        on: {
+                          click: function($event) {
+                            return _vm.updateCurs()
+                          }
+                        }
+                      },
+                      [_vm._v("Modificar")]
+                    )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -38863,6 +39542,44 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } })
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "UsuariModalLabel" } },
+        [_vm._v("Usuari")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-secondary btn-sm",
+        attrs: { type: "button", "data-dismiss": "modal" }
+      },
+      [_c("i", { staticClass: "fas fa-times" }), _vm._v(" Tancar")]
+    )
   }
 ]
 render._withStripped = true
@@ -38904,75 +39621,169 @@ var render = function() {
             _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "div",
-                { staticClass: "col-sm-5 col-5" },
-                [
-                  _vm._m(3),
-                  _c("br"),
-                  _vm._v(" "),
-                  _vm._l(_vm.provincies, function(provincia) {
-                    return _c(
-                      "div",
-                      {
-                        key: provincia.id,
-                        staticClass: "form-check form-check-inline"
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: provincia.id,
-                              expression: "provincia.id"
-                            }
-                          ],
-                          staticClass: "form-check-input",
-                          attrs: {
-                            type: "radio",
-                            name: "provincia",
-                            id: provincia.nom
-                          },
-                          domProps: { checked: _vm._q(provincia.id, null) },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(provincia, "id", null)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "form-check-label",
-                            attrs: { for: provincia.nom }
-                          },
-                          [_vm._v(_vm._s(provincia - _vm.nom))]
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
-              ),
+              _vm._m(3),
               _vm._v(" "),
-              _vm._m(4)
+              _c("div", { staticClass: "col-sm-5 col-5" }, [
+                _vm._m(4),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  [
+                    _vm._l(_vm.provincies, function(provincia) {
+                      return _c(
+                        "div",
+                        {
+                          key: provincia.id,
+                          staticClass: "form-check form-check-inline"
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.picked,
+                                expression: "picked"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              name: "provincia",
+                              id: provincia.id
+                            },
+                            domProps: {
+                              value: provincia.nom,
+                              checked: _vm._q(_vm.picked, provincia.nom)
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.picked = provincia.nom
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: provincia.id }
+                            },
+                            [_vm._v(_vm._s(provincia.nom))]
+                          )
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("check : " + _vm._s(_vm.picked))])
+                  ],
+                  2
+                )
+              ])
             ]),
             _vm._v(" "),
-            _vm._m(5)
+            _c("div", { staticClass: "form-group row" }, [
+              _c("div", { staticClass: "col-sm-5 col-5" }, [
+                _vm._m(5),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.ComarcaSelec,
+                        expression: "ComarcaSelec"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { name: "comarca", id: "comarca" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.ComarcaSelec = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  _vm._l(_vm.comarques, function(comarca) {
+                    return _c(
+                      "option",
+                      { key: comarca.id, domProps: { value: comarca.id } },
+                      [_vm._v(_vm._s(comarca.nom))]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-5 col-5" }, [
+                _vm._m(6),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.ProvinciaSelec,
+                        expression: "ProvinciaSelec"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { name: "municipi", id: "municipi" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.ProvinciaSelec = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  _vm._l(_vm.municipis, function(municipi) {
+                    return _c(
+                      "option",
+                      { key: municipi.id, domProps: { value: municipi.id } },
+                      [_vm._v(_vm._s(municipi.nom))]
+                    )
+                  }),
+                  0
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(7)
           ])
         ]
       ),
       _vm._v(" "),
-      _vm._m(6)
+      _vm._m(8)
     ]),
     _vm._v(" "),
-    _vm._m(7),
+    _vm._m(9),
     _vm._v(" "),
-    _vm._m(8),
+    _vm._m(10),
     _vm._v(" "),
-    _vm._m(9)
+    _vm._m(11)
   ])
 }
 var staticRenderFns = [
@@ -39111,23 +39922,6 @@ var staticRenderFns = [
             id: "nom_alertant",
             autofocus: ""
           }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "col-form-label", attrs: { for: "telefon_alertant" } },
-          [_c("strong", [_vm._v("Telèfon")])]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "tel",
-            name: "telefon_alertant",
-            id: "telefon_alertant",
-            maxlength: "9",
-            min: "0"
-          }
         })
       ]),
       _vm._v(" "),
@@ -39153,6 +39947,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-5 col-5" }, [
+      _c(
+        "label",
+        { staticClass: "col-form-label", attrs: { for: "telefon_alertant" } },
+        [_c("strong", [_vm._v("Telèfon")])]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "tel",
+          name: "telefon_alertant",
+          id: "telefon_alertant",
+          maxlength: "9",
+          min: "0"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "label",
       { staticClass: "col-form-label", attrs: { for: "provincia" } },
@@ -39163,32 +39980,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-5 col-5" }, [
-      _c(
-        "label",
-        { staticClass: "col-form-label", attrs: { for: "municipi" } },
-        [_c("strong", [_vm._v("Municipi")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass: "form-control",
-          attrs: { name: "municipi", id: "municipi" }
-        },
-        [
-          _c("option", { attrs: { value: "" } }, [_vm._v("1")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("2")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("3")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("4")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("5")])
-        ]
-      )
-    ])
+    return _c(
+      "label",
+      { staticClass: "col-form-label", attrs: { for: "comarca" } },
+      [_c("strong", [_vm._v("Comarca")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-form-label", attrs: { for: "municipi" } },
+      [_c("strong", [_vm._v("Municipi")])]
+    )
   },
   function() {
     var _vm = this
@@ -39237,236 +40043,1426 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col-sm-5 col-5" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-form-label",
-                  attrs: { for: "nom_afectat" }
-                },
-                [_c("strong", [_vm._v("Nom")])]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", name: "nom_afectat", id: "nom_afectat" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-5 col-5" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-form-label",
-                  attrs: { for: "cognom_afectat" }
-                },
-                [_c("strong", [_vm._v("Cognom")])]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary m-2",
                 attrs: {
-                  type: "text",
-                  name: "cognom_afectat",
-                  id: "cognom_afectat"
+                  "data-toggle": "collapse",
+                  href: "#afectat1",
+                  role: "button",
+                  "aria-expanded": "false",
+                  "aria-controls": "afectat1"
                 }
-              })
-            ])
+              },
+              [_vm._v("Afectat 1")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary m-2",
+                attrs: {
+                  "data-toggle": "collapse",
+                  href: "#afectat2",
+                  role: "button",
+                  "aria-expanded": "false",
+                  "aria-controls": "afectat2"
+                }
+              },
+              [_vm._v("Afectat 2")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary m-2",
+                attrs: {
+                  "data-toggle": "collapse",
+                  href: "#afectat3",
+                  role: "button",
+                  "aria-expanded": "false",
+                  "aria-controls": "afectat3"
+                }
+              },
+              [_vm._v("Afectat 3")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary m-2",
+                attrs: {
+                  "data-toggle": "collapse",
+                  href: "#afectat4",
+                  role: "button",
+                  "aria-expanded": "false",
+                  "aria-controls": "afectat4"
+                }
+              },
+              [_vm._v("Afectat 4")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary m-2",
+                attrs: {
+                  "data-toggle": "collapse",
+                  href: "#afectat5",
+                  role: "button",
+                  "aria-expanded": "false",
+                  "aria-controls": "afectat5"
+                }
+              },
+              [_vm._v("Afectat 5")]
+            )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col-sm-5 col-5" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-form-label",
-                  attrs: { for: "document_afectat" }
-                },
-                [_c("strong", [_vm._v("DNI, TS/NSS")])]
-              ),
+          _c(
+            "div",
+            {
+              staticClass: "collapse multi-collapse mt-2 mb-2",
+              attrs: { id: "afectat1" }
+            },
+            [
+              _c("h4", { staticClass: "card-title" }, [_vm._v("Afectat 1")]),
               _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "document_afectat",
-                  id: "document_afectat",
-                  maxlength: "14",
-                  min: "0"
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-5 col-5" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-form-label",
-                  attrs: { for: "telefon_alertant" }
-                },
-                [_c("strong", [_vm._v("Telèfon")])]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "tel",
-                  name: "telefon_alertant",
-                  id: "telefon_alertant",
-                  maxlength: "9",
-                  min: "0"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col-sm-5 col-5" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-form-label",
-                  attrs: { for: "edat_afectat" }
-                },
-                [_c("strong", [_vm._v("Edat")])]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "number",
-                  name: "edat_afectat",
-                  id: "edat_afectat",
-                  min: "0",
-                  maxlength: "3"
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-5 col-5" }, [
-              _c(
-                "label",
-                { staticClass: "col-form-label", attrs: { for: "genere" } },
-                [_c("strong", [_vm._v("Génere")])]
-              ),
-              _c("br"),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check form-check-inline" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: {
-                    type: "radio",
-                    name: "genere",
-                    id: "home",
-                    value: "home"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  { staticClass: "form-check-label", attrs: { for: "home" } },
-                  [_vm._v("Home")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check form-check-inline" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: {
-                    type: "radio",
-                    name: "genere",
-                    id: "dona",
-                    value: "dona"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  { staticClass: "form-check-label", attrs: { for: "dona" } },
-                  [_vm._v("Dona")]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col-sm-5 col-5" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-form-label",
-                  attrs: { for: "tipus_accident" }
-                },
-                [_c("strong", [_vm._v("Tipus d'accident o d'incident")])]
-              ),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  staticClass: "form-control",
-                  attrs: { name: "tipus_accident", id: "tipus_accident" }
-                },
-                [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Accidents i traumatismes")
+              _c("div", { staticClass: "card card-body" }, [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "nom_afectat1" }
+                      },
+                      [_c("strong", [_vm._v("Nom")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "nom_afectat1",
+                        id: "nom_afectat1"
+                      }
+                    })
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Malaltia a un lloc públic")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Malaltia a domicili")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Consulta mèdica")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Transports sanitari")
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "cognom_afectat1" }
+                      },
+                      [_c("strong", [_vm._v("Cognom")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "cognom_afectat1",
+                        id: "cognom_afectat1"
+                      }
+                    })
                   ])
-                ]
-              ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "document_afectat1" }
+                      },
+                      [_c("strong", [_vm._v("DNI, TS/NSS")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "document_afectat1",
+                        id: "document_afectat1",
+                        maxlength: "14",
+                        min: "0"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "telefon_alertant1" }
+                      },
+                      [_c("strong", [_vm._v("Telèfon")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "tel",
+                        name: "telefon_alertant1",
+                        id: "telefon_alertant1",
+                        maxlength: "9",
+                        min: "0"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "edat_afectat1" }
+                      },
+                      [_c("strong", [_vm._v("Edat")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        name: "edat_afectat1",
+                        id: "edat_afectat1",
+                        min: "0",
+                        maxlength: "3"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "genere1" }
+                      },
+                      [_c("strong", [_vm._v("Génere")])]
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "genere1",
+                          id: "home",
+                          value: "home"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "home" }
+                        },
+                        [_vm._v("Home")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "genere1",
+                          id: "dona",
+                          value: "dona"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "dona" }
+                        },
+                        [_vm._v("Dona")]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "tipus_accident1" }
+                      },
+                      [_c("strong", [_vm._v("Tipus d'accident o d'incident")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "tipus_accident1",
+                          id: "tipus_accident1"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Accidents i traumatismes")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Malaltia a un lloc públic")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Malaltia a domicili")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Consulta mèdica")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Transports sanitari")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label mt-2",
+                        attrs: { for: "num_afectats1" }
+                      },
+                      [_c("strong", [_vm._v("Numero de afectats")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        name: "num_afectats1",
+                        id: "num_afectats1",
+                        min: "0"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "descripcio1" }
+                      },
+                      [
+                        _c("strong", [
+                          _vm._v("Descripció d'accident o d'incident")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "descripcio1",
+                        name: "descripcio1",
+                        rows: "4",
+                        placeholder:
+                          "Descripció sobre l'accident o l'incident..."
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse multi-collapse mt-2 mb-2",
+              attrs: { id: "afectat2" }
+            },
+            [
+              _c("h4", { staticClass: "card-title" }, [_vm._v("Afectat 2")]),
               _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "col-form-label mt-2",
-                  attrs: { for: "num_afectats" }
-                },
-                [_c("strong", [_vm._v("Numero de afectats")])]
-              ),
+              _c("div", { staticClass: "card card-body" }, [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "nom_afectat2" }
+                      },
+                      [_c("strong", [_vm._v("Nom")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "nom_afectat2",
+                        id: "nom_afectat2"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "cognom_afectat2" }
+                      },
+                      [_c("strong", [_vm._v("Cognom")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "cognom_afectat2",
+                        id: "cognom_afectat2"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "document_afectat2" }
+                      },
+                      [_c("strong", [_vm._v("DNI, TS/NSS")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "document_afectat2",
+                        id: "document_afectat2",
+                        maxlength: "14",
+                        min: "0"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "telefon_alertant2" }
+                      },
+                      [_c("strong", [_vm._v("Telèfon")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "tel",
+                        name: "telefon_alertant2",
+                        id: "telefon_alertant2",
+                        maxlength: "9",
+                        min: "0"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "edat_afectat2" }
+                      },
+                      [_c("strong", [_vm._v("Edat")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        name: "edat_afectat2",
+                        id: "edat_afectat2",
+                        min: "0",
+                        maxlength: "3"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "genere2" }
+                      },
+                      [_c("strong", [_vm._v("Génere")])]
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "genere2",
+                          id: "home",
+                          value: "home"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "home" }
+                        },
+                        [_vm._v("Home")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "genere2",
+                          id: "dona",
+                          value: "dona"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "dona" }
+                        },
+                        [_vm._v("Dona")]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "tipus_accident2" }
+                      },
+                      [_c("strong", [_vm._v("Tipus d'accident o d'incident")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "tipus_accident2",
+                          id: "tipus_accident2"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Accidents i traumatismes")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Malaltia a un lloc públic")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Malaltia a domicili")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Consulta mèdica")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Transports sanitari")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label mt-2",
+                        attrs: { for: "num_afectats2" }
+                      },
+                      [_c("strong", [_vm._v("Numero de afectats")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        name: "num_afectats2",
+                        id: "num_afectats2",
+                        min: "0"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "descripcio2" }
+                      },
+                      [
+                        _c("strong", [
+                          _vm._v("Descripció d'accident o d'incident")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "descripcio2",
+                        name: "descripcio2",
+                        rows: "4",
+                        placeholder:
+                          "Descripció sobre l'accident o l'incident..."
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse multi-collapse mt-2 mb-2",
+              attrs: { id: "afectat3" }
+            },
+            [
+              _c("h4", { staticClass: "card-title" }, [_vm._v("Afectat 3")]),
               _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "number",
-                  name: "num_afectats",
-                  id: "num_afectats",
-                  min: "0"
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-5 col-5" }, [
-              _c(
-                "label",
-                { staticClass: "col-form-label", attrs: { for: "descripcio" } },
-                [_c("strong", [_vm._v("Descripció d'accident o d'incident")])]
-              ),
+              _c("div", { staticClass: "card card-body" }, [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "nom_afectat1" }
+                      },
+                      [_c("strong", [_vm._v("Nom")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "nom_afectat1",
+                        id: "nom_afectat3"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "cognom_afectat3" }
+                      },
+                      [_c("strong", [_vm._v("Cognom")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "cognom_afectat3",
+                        id: "cognom_afectat3"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "document_afectat3" }
+                      },
+                      [_c("strong", [_vm._v("DNI, TS/NSS")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "document_afectat3",
+                        id: "document_afectat3",
+                        maxlength: "14",
+                        min: "0"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "telefon_alertant3" }
+                      },
+                      [_c("strong", [_vm._v("Telèfon")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "tel",
+                        name: "telefon_alertant3",
+                        id: "telefon_alertant3",
+                        maxlength: "9",
+                        min: "0"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "edat_afectat3" }
+                      },
+                      [_c("strong", [_vm._v("Edat")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        name: "edat_afectat3",
+                        id: "edat_afectat3",
+                        min: "0",
+                        maxlength: "3"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "genere3" }
+                      },
+                      [_c("strong", [_vm._v("Génere")])]
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "genere3",
+                          id: "home",
+                          value: "home"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "home" }
+                        },
+                        [_vm._v("Home")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "genere3",
+                          id: "dona",
+                          value: "dona"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "dona" }
+                        },
+                        [_vm._v("Dona")]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "tipus_accident3" }
+                      },
+                      [_c("strong", [_vm._v("Tipus d'accident o d'incident")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "tipus_accident3",
+                          id: "tipus_accident3"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Accidents i traumatismes")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Malaltia a un lloc públic")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Malaltia a domicili")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Consulta mèdica")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Transports sanitari")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label mt-2",
+                        attrs: { for: "num_afectats3" }
+                      },
+                      [_c("strong", [_vm._v("Numero de afectats")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        name: "num_afectats3",
+                        id: "num_afectats3",
+                        min: "0"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "descripcio3" }
+                      },
+                      [
+                        _c("strong", [
+                          _vm._v("Descripció d'accident o d'incident")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "descripcio3",
+                        name: "descripcio3",
+                        rows: "4",
+                        placeholder:
+                          "Descripció sobre l'accident o l'incident..."
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse multi-collapse mt-2 mb-2",
+              attrs: { id: "afectat4" }
+            },
+            [
+              _c("h4", { staticClass: "card-title" }, [_vm._v("Afectat 4")]),
               _vm._v(" "),
-              _c("textarea", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "descripcio",
-                  name: "descripcio",
-                  rows: "4",
-                  placeholder: "Descripció sobre l'accident o l'incident..."
-                }
-              })
-            ])
-          ])
+              _c("div", { staticClass: "card card-body" }, [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "nom_afectat4" }
+                      },
+                      [_c("strong", [_vm._v("Nom")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "nom_afectat4",
+                        id: "nom_afectat4"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "cognom_afectat4" }
+                      },
+                      [_c("strong", [_vm._v("Cognom")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "cognom_afectat4",
+                        id: "cognom_afectat4"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "document_afectat4" }
+                      },
+                      [_c("strong", [_vm._v("DNI, TS/NSS")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "document_afectat4",
+                        id: "document_afectat4",
+                        maxlength: "14",
+                        min: "0"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "telefon_alertant4" }
+                      },
+                      [_c("strong", [_vm._v("Telèfon")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "tel",
+                        name: "telefon_alertant4",
+                        id: "telefon_alertant4",
+                        maxlength: "9",
+                        min: "0"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "edat_afectat4" }
+                      },
+                      [_c("strong", [_vm._v("Edat")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        name: "edat_afectat4",
+                        id: "edat_afectat4",
+                        min: "0",
+                        maxlength: "3"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "genere4" }
+                      },
+                      [_c("strong", [_vm._v("Génere")])]
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "genere4",
+                          id: "home",
+                          value: "home"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "home" }
+                        },
+                        [_vm._v("Home")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "genere4",
+                          id: "dona",
+                          value: "dona"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "dona" }
+                        },
+                        [_vm._v("Dona")]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "tipus_accident4" }
+                      },
+                      [_c("strong", [_vm._v("Tipus d'accident o d'incident")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "tipus_accident4",
+                          id: "tipus_accident4"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Accidents i traumatismes")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Malaltia a un lloc públic")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Malaltia a domicili")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Consulta mèdica")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Transports sanitari")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label mt-2",
+                        attrs: { for: "num_afectats4" }
+                      },
+                      [_c("strong", [_vm._v("Numero de afectats")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        name: "num_afectats4",
+                        id: "num_afectats4",
+                        min: "0"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "descripcio4" }
+                      },
+                      [
+                        _c("strong", [
+                          _vm._v("Descripció d'accident o d'incident")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "descripcio4",
+                        name: "descripcio4",
+                        rows: "4",
+                        placeholder:
+                          "Descripció sobre l'accident o l'incident..."
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse multi-collapse mt-2 mb-2",
+              attrs: { id: "afectat5" }
+            },
+            [
+              _c("h4", { staticClass: "card-title" }, [_vm._v("Afectat 5")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card card-body" }, [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "nom_afectat5" }
+                      },
+                      [_c("strong", [_vm._v("Nom")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "nom_afectat1",
+                        id: "nom_afectat5"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "cognom_afectat5" }
+                      },
+                      [_c("strong", [_vm._v("Cognom")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "cognom_afectat5",
+                        id: "cognom_afectat5"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "document_afectat5" }
+                      },
+                      [_c("strong", [_vm._v("DNI, TS/NSS")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "document_afectat5",
+                        id: "document_afectat5",
+                        maxlength: "14",
+                        min: "0"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "telefon_alertant5" }
+                      },
+                      [_c("strong", [_vm._v("Telèfon")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "tel",
+                        name: "telefon_alertant5",
+                        id: "telefon_alertant5",
+                        maxlength: "9",
+                        min: "0"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "edat_afectat5" }
+                      },
+                      [_c("strong", [_vm._v("Edat")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        name: "edat_afectat5",
+                        id: "edat_afectat5",
+                        min: "0",
+                        maxlength: "3"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "genere5" }
+                      },
+                      [_c("strong", [_vm._v("Génere")])]
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "genere5",
+                          id: "home",
+                          value: "home"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "home" }
+                        },
+                        [_vm._v("Home")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "genere5",
+                          id: "dona",
+                          value: "dona"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "dona" }
+                        },
+                        [_vm._v("Dona")]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "tipus_accident5" }
+                      },
+                      [_c("strong", [_vm._v("Tipus d'accident o d'incident")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "tipus_accident5",
+                          id: "tipus_accident5"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Accidents i traumatismes")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Malaltia a un lloc públic")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Malaltia a domicili")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Consulta mèdica")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Transports sanitari")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label mt-2",
+                        attrs: { for: "num_afectats5" }
+                      },
+                      [_c("strong", [_vm._v("Numero de afectats")])]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        name: "num_afectats5",
+                        id: "num_afectats5",
+                        min: "0"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-5 col-5" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "descripcio5" }
+                      },
+                      [
+                        _c("strong", [
+                          _vm._v("Descripció d'accident o d'incident")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "descripcio5",
+                        name: "descripcio5",
+                        rows: "4",
+                        placeholder:
+                          "Descripció sobre l'accident o l'incident..."
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]
+          )
         ])
       ]
     )

@@ -64,7 +64,7 @@
                             <label for="cicle" class="col-sm-1 col-form-label">Cicle</label>
                             <div class="col-sm-11">
                                 <select class="form-control" id="cicle" name="cicle" v-model="curs.cicles_id">
-                                    <option v-for="cicle in cicles" :key="cicle.id" v-bind:value="cicle.id"> {{ cicle.nom   }}</option>
+                                    <option v-for="cicle in cicles" :key="cicle.id" v-bind:value="cicle.id"> {{ cicle.nom }}</option>
                                 </select>
                             </div>
                         </div>
