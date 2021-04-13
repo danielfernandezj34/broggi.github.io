@@ -56,22 +56,11 @@
 
                         <div class="col-sm-5 col-5">
                             <label for="provincia" class="col-form-label"><strong>Província</strong></label><br>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="provincia" id="Barcelona" value="Barcelona">
-                                <label class="form-check-label" for="Barcelona">Barcelona</label>
+                            <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id">
+                                <input class="form-check-input" type="radio" name="provincia" v-model="provincia.id" :id="provincia.nom">
+                                <label class="form-check-label" :for="provincia.nom">{{ provincia-nom }}</label>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="provincia" id="Girona" value="Girona">
-                                <label class="form-check-label" for="Girona">Girona</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="provincia" id="Tarragona" value="Tarragona">
-                                <label class="form-check-label" for="Tarragona">Tarragona</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="provincia" id="Lleida" value="Lleida">
-                                <label class="form-check-label" for="Lleida">Lleida</label>
-                            </div>
+
                         </div>
 
                         <div class="col-sm-5 col-5">
@@ -295,8 +284,43 @@
     export default {
         data(){
             return{
-
+                provincies : [],
+                municipis : []
             }
+        },
+        methods : {
+            selectProvincia(){
+                let me = this;
+                axios
+                    .get('/provincies')
+                    .then( response => {
+                        me.provincies = response.data;
+                    })
+                    .catch( error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+                },
+            selectMunicipi(){
+                let me = this;
+                axios
+                    .get('/municipis')
+                    .then( response => {
+                        me.municipis = response.data;
+                    })
+                    .catch( error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+            }
+
+
+        },
+        created() {
+            this.selectProvincia();
+            this.selectMunicipi();
         },
         mounted() {
             console.log('Component mounted.')
