@@ -26,6 +26,7 @@ Vue.component('usuari-component', require('./components/administrador/UsuarisCom
 Vue.component('recurs-principal', require('./components/RecursComponent.vue').default);
 Vue.component('formulari-administratiu', require('./components/administratiu/FormulariComponent.vue').default);
 
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
