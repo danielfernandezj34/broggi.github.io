@@ -68,10 +68,7 @@
                                     <input class="form-check-input" type="radio" name="provincia" :id="provincia.id" v-model="picked" :value="provincia.nom">
                                     <label class="form-check-label" :for="provincia.id">{{ provincia.nom }}</label>
                                 </div>
-                                <span>check : {{ picked }}</span>
                             </div>
-
-
                         </div>
 
                     </div>
@@ -118,17 +115,17 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-                        <a class="btn btn-primary m-2" data-toggle="collapse" href="#afectat1" role="button" aria-expanded="false" aria-controls="afectat1">Afectat 1</a>
-                        <a class="btn btn-primary m-2" data-toggle="collapse" href="#afectat2" role="button" aria-expanded="false" aria-controls="afectat2">Afectat 2</a>
-                        <a class="btn btn-primary m-2" data-toggle="collapse" href="#afectat3" role="button" aria-expanded="false" aria-controls="afectat3">Afectat 3</a>
-                        <a class="btn btn-primary m-2" data-toggle="collapse" href="#afectat4" role="button" aria-expanded="false" aria-controls="afectat4">Afectat 4</a>
-                        <a class="btn btn-primary m-2" data-toggle="collapse" href="#afectat5" role="button" aria-expanded="false" aria-controls="afectat5">Afectat 5</a>
+                        <a class="btn btn-primary m-2" v-on:click="colorboto()" :style="{ 'background-color': color}" data-toggle="collapse" href="#afectat1" role="button" aria-expanded="false" aria-controls="afectat1">Afectat 1</a>
+                        <a class="btn btn-primary m-2" v-on:click="colorboto2()" :style="{ 'background-color': color2}" data-toggle="collapse" href="#afectat2" role="button" aria-expanded="false" aria-controls="afectat2">Afectat 2</a>
+                        <a class="btn btn-primary m-2" v-on:click="colorboto3()" :style="{ 'background-color': color3}" data-toggle="collapse" href="#afectat3" role="button" aria-expanded="false" aria-controls="afectat3">Afectat 3</a>
+                        <a class="btn btn-primary m-2"  v-on:click="colorboto4()" :style="{ 'background-color': color4}" data-toggle="collapse" href="#afectat4" role="button" aria-expanded="false" aria-controls="afectat4">Afectat 4</a>
+                        <a class="btn btn-primary m-2"  v-on:click="colorboto5()" :style="{ 'background-color': color5}" data-toggle="collapse" href="#afectat5" role="button" aria-expanded="false" aria-controls="afectat5">Afectat 5</a>
                     </div>
 
-                    <div class="collapse multi-collapse mt-2 mb-2" id="afectat1">
-                         <h4 class="card-title">Afectat 1</h4>
-                        <div class="card card-body">
+                    <div class="collapse multi-collapse mt-2 mb-2 show" id="afectat1">
 
+                        <div class="card card-body" style="border: 2px solid black">
+                            <h4 class="card-title">Afectat 1</h4>
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
@@ -207,9 +204,9 @@
                     </div>
 
                     <div class="collapse multi-collapse mt-2 mb-2" id="afectat2">
-                        <h4 class="card-title">Afectat 2</h4>
-                        <div class="card card-body">
 
+                        <div class="card card-body" style="border: 2px solid black">
+                            <h4 class="card-title">Afectat 2</h4>
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
@@ -288,9 +285,9 @@
                     </div>
 
                     <div class="collapse multi-collapse mt-2 mb-2" id="afectat3">
-                        <h4 class="card-title">Afectat 3</h4>
-                        <div class="card card-body">
 
+                        <div class="card card-body" style="border: 2px solid black">
+                            <h4 class="card-title">Afectat 3</h4>
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
@@ -369,9 +366,9 @@
                     </div>
 
                     <div class="collapse multi-collapse mt-2 mb-2" id="afectat4">
-                        <h4 class="card-title">Afectat 4</h4>
-                        <div class="card card-body">
 
+                        <div class="card card-body" style="border: 2px solid black">
+                            <h4 class="card-title">Afectat 4</h4>
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
@@ -450,9 +447,9 @@
                     </div>
 
                     <div class="collapse multi-collapse mt-2 mb-2" id="afectat5">
-                        <h4 class="card-title">Afectat 5</h4>
-                        <div class="card card-body">
 
+                        <div class="card card-body" style="border: 2px solid black">
+                            <h4 class="card-title">Afectat 5</h4>
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
@@ -654,7 +651,12 @@
                 },
                 ProvinciaSelec: {},
                 ComarcaSelec: {},
-                municipis: []
+                municipis: [],
+                color : '#f70c74',
+                color2 : '#2c3e50',
+                color3 : '#2c3e50',
+                color4 : '#2c3e50',
+                color5 : '#2c3e50'
             }
         },
         methods: {
@@ -729,6 +731,41 @@
             },
             selecCom(){
 
+            },
+            colorboto : function(){
+                if(this.color == '#f70c74'){
+                    this.color = '#2c3e50';
+                }else{
+                    this.color = '#f70c74';
+                }
+            },
+            colorboto2 : function(){
+                if(this.color2 == '#f70c74'){
+                    this.color2 = '#2c3e50';
+                }else{
+                    this.color2 = '#f70c74';
+                }
+            },
+            colorboto3 : function(){
+                if(this.color3 == 'green'){
+                    this.color3 = '#2c3e50';
+                }else{
+                    this.color3= '#f70c74';
+                }
+            },
+            colorboto4 : function(){
+                if(this.color4 == '#f70c74'){
+                    this.color4 = '#2c3e50';
+                }else{
+                    this.color4 = '#f70c74';
+                }
+            },
+            colorboto5 : function(){
+                if(this.color5 == '#f70c74'){
+                    this.color5 = '#2c3e50';
+                }else{
+                    this.color5 = '#f70c74';
+                }
             }
 
 
