@@ -64,12 +64,13 @@
     export default {
         data() {
             return{
-                recursos:[],
-                recurs:{
+                recursos: [],
+                recurs: {
                     codi: '',
                     actiu: '',
                     tipus_recursos_id: ''
-                }
+                },
+                insert:false
             }
         },
         methods: {
@@ -84,7 +85,7 @@
                         console.log(error)
                         this.errored = true;
                     })
-                    .finally(() => this.loading = false)
+                   
             },
     created(){
             this.selectRecursos();
