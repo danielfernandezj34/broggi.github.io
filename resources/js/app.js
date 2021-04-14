@@ -27,7 +27,7 @@ Vue.component('recurs-principal', require('./components/RecursComponent.vue').de
 Vue.component('mostrar-incidencies', require('./components/administratiu/IncidenciesComponent.vue').default);
 Vue.component('formulari-administratiu', require('./components/administratiu/FormulariComponent.vue').default);
 
-
+Vue.component('administrador-recurs', require('./components/administrador/RecursComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
