@@ -5,8 +5,9 @@
 @section('boto_atras', './consultar')
 @section('container')
 
+  {{-- 
     <div class="container">
-        {{-- RECURS MOVIL --}}
+        {{-- RECURS MOVIL 
         <div class="card mt-3 mb-3">
             <div class="card-header bg-primary" id="titul_incidencia"><h5 class="card-title text-white"><strong>Recurs mòbil</strong></h5></div>
             <div class="card-body">
@@ -137,5 +138,7 @@
             </div>
         </div>
 
-    </div>
+    </div> 
+    --}} 
+<incidencies-asignades></incidencies-asignades>
 @endsection

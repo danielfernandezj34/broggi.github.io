@@ -85,12 +85,11 @@
                         console.log(error)
                         this.errored = true;
                     })
-                   
-            },
+                  },
+        },
     created(){
             this.selectRecursos();
-        }
-     },
+        },
     mounted() {
             console.log('Component mounted.')
         }
