@@ -11,86 +11,181 @@
 
                         <div class="col-sm-12 col-12">
                             <label for="tipus_alertant" class="col-form-label"><strong>Tipus alertant</strong></label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tipus_alertant" id="vip" value="vip">
-                                <label class="form-check-label" for="vip">Alertant VIP</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tipus_alertant" id="centre" value="sanitari">
-                                <label class="form-check-label" for="centre">Centre sanitari</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tipus_alertant" id="accidental" value="accidental">
-                                <label class="form-check-label" for="accidental">Accidental</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tipus_alertant" id="entorn_afectat" value="entorn_afectat">
-                                <label class="form-check-label" for="entorn_afectat">Entorn afectat</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tipus_alertant" id="afectat" value="afectat">
-                                <label class="form-check-label" for="afectat">Afectat</label>
+                            <div class="form-check form-check-inline" v-for="alertant in tipusAlertants" :key="alertant.id">
+                                <input class="form-check-input" type="radio" name="tipus_alertant" :id="alertant.id" :value="alertant.id" v-model="tipusaSelec">
+                                <label class="form-check-label" :for="alertant.id">{{ alertant.tipus }}</label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div v-if="tipusaSelec == 1">
+                        <div class="form-group row">
 
-                        <div class="col-sm-5 col-5">
-                            <label for="nom_alertant" class="col-form-label"><strong>Nom</strong></label>
-                            <input class="form-control" type="text" name="nom_alertant" id="nom_alertant" autofocus>
+                            <div class="col-sm-7 col-7">
+                                <label for="nom_alertant" class="col-form-label"><strong>Nom del centre Sanitari</strong></label>
+                                <select v-model="centreSelec" class="form-control" name="nom_alertant" id="nom_alertant">
 
+                                    <option  v-for="alertant in alertants" :key="alertant.id" :value="alertant.id"><div v-if="alertant.tipus_alertant_id == tipus" >{{ alertant.nom }}</div></option>
+
+                                </select>
+                            </div>
+
+                            <div class="col-sm-5 col-5">
+                                <label for="nom_afectat1" class="col-form-label"><strong>Nom del metge</strong></label>
+                                <input class="form-control" type="text" name="nom_afectat1" id="nom_afectat1">
+                            </div>
 
                         </div>
 
-                        <div class="col-sm-5 col-5">
-                            <label for="cognom_alertant" class="col-form-label"><strong>Cognom</strong></label>
-                            <input class="form-control" type="text" name="cognom_alertant" id="cognom_alertant">
+                        <div class="form-group row">
 
 
+                            <div class="col-sm-6 col-6">
+                                <label for="telefon_alertant" class="col-form-label"><strong>Telèfon del centre</strong></label>
+                                <div v-for="alertant in alertants" :key="alertant.id">
+                                    <input v-if="alertant.id == centreSelec" class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant"
+                                    :value="alertant.telefon" maxlength="9" min="0">
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-6" >
+                                <label for="municipi" class="col-form-label"><strong>Municipi</strong></label>
+                                <div v-for="alertant in alertants" :key="alertant.id">
+                                    <div v-for="municipi in municipis" :key="municipi.id" >
+                                        <input v-if="alertant.id == centreSelec && alertant.municipis_id == municipi.id" class="form-control" type="text" name="municipi" id="municipi" :value="municipi.nom">
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
 
-                    </div>
-
-                    <div class="form-group row">
-
-
-                        <div class="col-sm-5 col-5">
-                            <label for="telefon_alertant" class="col-form-label"><strong>Telèfon</strong></label>
-                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0">
-                        </div>
-
-                        <div class="col-sm-5 col-5">
-                            <label for="provincia" class="col-form-label"><strong>Província</strong></label><br>
-                            <div>
-                                <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id" >
-                                    <input class="form-check-input" type="radio" name="provincia" :id="provincia.id" v-model="picked" :value="provincia.nom">
-                                    <label class="form-check-label" :for="provincia.id">{{ provincia.nom }}</label>
+                        <div class="form-group row">
+                            <div class="col-sm-6 col-6" >
+                                <label for="direccio" class="col-form-label"><strong>Adreça</strong></label>
+                                <div v-for="alertant in alertants" :key="alertant.id">
+                                    <input v-if="alertant.id == centreSelec" type="text" class="form-control" name="direccio" id="direccio" :value="alertant.adreca">
                                 </div>
                             </div>
                         </div>
 
                     </div>
 
+                    <div v-if="tipusaSelec == 2">
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-5 col-5">
+                                <label for="nom_afectat1" class="col-form-label"><strong>Nom</strong></label>
+                                <input class="form-control" type="text" name="nom_afectat1" id="nom_afectat1" v-model="nomAfectat">
+                            </div>
+
+                            <div class="col-sm-5 col-5">
+                                <label for="cognom_afectat1" class="col-form-label"><strong>Cognom</strong></label>
+                                <input class="form-control" type="text" name="cognom_afectat1" id="cognom_afectat1" v-model="cognomAfectat">
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-5 col-5">
+                                <label for="telefon_alertant" class="col-form-label"><strong>Telèfon</strong></label>
+                                <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="telefonAfectat">
+                            </div>
+
+                            <div class="col-sm-5 col-5">
+                                <label for="provincia" class="col-form-label"><strong>Província</strong></label><br>
+                                <div>
+                                    <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id" >
+                                        <input class="form-check-input" type="radio" name="provincia" :id="provincia.nom" :value="provincia.id" v-model="provinciaSelec">
+                                        <label class="form-check-label" :for="provincia.nom">{{ provincia.nom }}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-5 col-5">
+                                <label for="comarca" class="col-form-label"><strong>Comarca</strong></label>
+                                <select v-model="ComarcaSelec" class="form-control" name="comarca" id="comarca">
+                                    <option  v-for="comarca in comarques" :key="comarca.id" :value="comarca.id"><div v-if="comarca.provincies_id == provinciaSelec" >{{ comarca.nom }}</div></option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-5 col-5">
+                                <label for="municipi" class="col-form-label"><strong>Municipi</strong></label>
+                                <select v-model="ProvinciaSelec" class="form-control" name="municipi" id="municipi">
+
+                                    <option v-for="municipi in municipis" :key="municipi.id" :value="municipi.id"><div v-if="municipi.comarques_id == ComarcaSelec">{{ municipi.nom }}</div></option>
+
+                                </select>
+                            </div>
 
 
-                    <div class="form-group row">
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-5 col-5">
+                                <label for="provincia" class="col-form-label"><strong>Província</strong></label><br>
+
+                                <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id" >
+                                    <input class="form-check-input" type="radio" name="provincia" :id="provincia.nom" :value="provincia.id" v-model="provinciaSelec">
+                                    <label class="form-check-label" :for="provincia.nom">{{ provincia.nom }}</label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-7 col-7">
+                                <label for="direccio" class="col-form-label"><strong>Adreça</strong></label>
+                                <input type="text" class="form-control" name="direccio" id="direccio">
+                                <label for="comp_direccio" class="col-form-label"><strong>Adreça complementària</strong></label>
+                                <input type="text" class="form-control" name="comp_direccio" id="comp_direccio">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <!-- <div class="form-group row">
+
+                        <div class="col-sm-5 col-5">
+                            <label for="provincia" class="col-form-label"><strong>Província</strong></label><br>
+                            <div>
+                                <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id" >
+                                    <input class="form-check-input" type="radio" name="provincia" :id="provincia.nom" :value="provincia.id" v-model="provinciaSelec">
+                                    <label class="form-check-label" :for="provincia.nom">{{ provincia.nom }}</label>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col-sm-5 col-5">
                             <label for="comarca" class="col-form-label"><strong>Comarca</strong></label>
                             <select v-model="ComarcaSelec" class="form-control" name="comarca" id="comarca">
-
-                                <option v-for="comarca in comarques" :key="comarca.id" :value="comarca.id">{{ comarca.nom }}</option>
-
+                                <option  v-for="comarca in comarques" :key="comarca.id" :value="comarca.id"><div v-if="comarca.provincies_id == provinciaSelec" >{{ comarca.nom }}</div></option>
                             </select>
                         </div>
+
+                    </div>
+
+
+
+                    <div class="form-group row">
+
+
 
                         <div class="col-sm-5 col-5">
                             <label for="municipi" class="col-form-label"><strong>Municipi</strong></label>
                             <select v-model="ProvinciaSelec" class="form-control" name="municipi" id="municipi">
 
-                                <option v-for="municipi in municipis" :key="municipi.id" :value="municipi.id">{{ municipi.nom }}</option>
+                                <option v-for="municipi in municipis" :key="municipi.id" :value="municipi.id"><div v-if="municipi.comarques_id == ComarcaSelec">{{ municipi.nom }}</div></option>
 
                             </select>
                         </div>
@@ -104,7 +199,7 @@
                             <input type="text" class="form-control" name="comp_direccio" id="comp_direccio">
                         </div>
 
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -124,38 +219,74 @@
 
                     <div class="collapse multi-collapse mt-2 mb-2 show" id="afectat1">
 
-                        <div class="card card-body" style="border: 2px solid black">
+                        <div class="card card-body" style="border: 2px solid #2c3e50">
                             <h4 class="card-title">Afectat 1</h4>
-                            <div class="form-group row">
+                            <div v-if="tipusaSelec == 2">
+                                <div class="form-group row">
 
-                                <div class="col-sm-5 col-5">
-                                    <label for="nom_afectat1" class="col-form-label"><strong>Nom</strong></label>
-                                    <input class="form-control" type="text" name="nom_afectat1" id="nom_afectat1">
+                                    <div class="col-sm-5 col-5">
+                                        <label for="nom_afectat1" class="col-form-label"><strong>Nom</strong></label>
+                                        <input class="form-control" type="text" name="nom_afectat1" id="nom_afectat1" :value="nomAfectat" disabled>
+                                    </div>
+
+                                    <div class="col-sm-5 col-5">
+                                        <label for="cognom_afectat1" class="col-form-label"><strong>Cognom</strong></label>
+                                        <input class="form-control" type="text" name="cognom_afectat1" id="cognom_afectat1" :value="cognomAfectat" disabled>
+
+                                    </div>
+
                                 </div>
 
-                                <div class="col-sm-5 col-5">
-                                    <label for="cognom_afectat1" class="col-form-label"><strong>Cognom</strong></label>
-                                    <input class="form-control" type="text" name="cognom_afectat1" id="cognom_afectat1">
+                                <div class="form-group row">
+
+                                    <div class="col-sm-5 col-5">
+                                        <label for="document_afectat1" class="col-form-label"><strong>DNI, TS/NSS</strong></label>
+                                        <input class="form-control" type="text" name="document_afectat1" id="document_afectat1" maxlength="14" min="0" >
+
+                                    </div>
+
+                                    <div class="col-sm-5 col-5">
+                                        <label for="telefon_alertant1" class="col-form-label"><strong>Telèfon</strong></label>
+                                        <input class="form-control" type="tel" name="telefon_alertant1" id="telefon_alertant1" maxlength="9" min="0" :value="telefonAfectat">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div class="form-group row">
+
+                                    <div class="col-sm-5 col-5">
+                                        <label for="nom_afectat1" class="col-form-label"><strong>Nom</strong></label>
+                                        <input class="form-control" type="text" name="nom_afectat1" id="nom_afectat1">
+                                    </div>
+
+                                    <div class="col-sm-5 col-5">
+                                        <label for="cognom_afectat1" class="col-form-label"><strong>Cognom</strong></label>
+                                        <input class="form-control" type="text" name="cognom_afectat1" id="cognom_afectat1" >
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group row">
+
+                                    <div class="col-sm-5 col-5">
+                                        <label for="document_afectat1" class="col-form-label"><strong>DNI, TS/NSS</strong></label>
+                                        <input class="form-control" type="text" name="document_afectat1" id="document_afectat1" maxlength="14" min="0" >
+
+                                    </div>
+
+                                    <div class="col-sm-5 col-5">
+                                        <label for="telefon_alertant1" class="col-form-label"><strong>Telèfon</strong></label>
+                                        <input class="form-control" type="tel" name="telefon_alertant1" id="telefon_alertant1" maxlength="9" min="0">
+
+                                    </div>
 
                                 </div>
 
                             </div>
 
-                            <div class="form-group row">
 
-                                <div class="col-sm-5 col-5">
-                                    <label for="document_afectat1" class="col-form-label"><strong>DNI, TS/NSS</strong></label>
-                                    <input class="form-control" type="text" name="document_afectat1" id="document_afectat1" maxlength="14" min="0" >
-
-                                </div>
-
-                                <div class="col-sm-5 col-5">
-                                    <label for="telefon_alertant1" class="col-form-label"><strong>Telèfon</strong></label>
-                                    <input class="form-control" type="tel" name="telefon_alertant1" id="telefon_alertant1" maxlength="9" min="0">
-
-                                </div>
-
-                            </div>
 
                             <div class="form-group row">
 
@@ -166,13 +297,9 @@
 
                                 <div class="col-sm-5 col-5">
                                     <label for="genere1" class="col-form-label"><strong>Génere</strong></label><br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="genere1" id="home" value="home">
-                                        <label class="form-check-label" for="home">Home</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="genere1" id="dona" value="dona">
-                                        <label class="form-check-label" for="dona">Dona</label>
+                                    <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
+                                        <input class="form-check-input" type="radio" name="genere1" :id="sexe.id" :value="sexe.sexe">
+                                        <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -182,11 +309,8 @@
                                 <div class="col-sm-5 col-5">
                                     <label for="tipus_accident1" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
                                     <select class="form-control" name="tipus_accident1" id="tipus_accident1">
-                                        <option value="">Accidents i traumatismes</option>
-                                        <option value="">Malaltia a un lloc públic</option>
-                                        <option value="">Malaltia a domicili</option>
-                                        <option value="">Consulta mèdica</option>
-                                        <option value="">Transports sanitari</option>
+                                        <option selected disabled>Seleccionar...</option>
+                                        <option v-for="accident in accidents" :key="accident.id" :value="accident.id">{{ accident.tipus }}</option>
                                     </select>
 
                                     <label for="num_afectats1" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
@@ -205,7 +329,7 @@
 
                     <div class="collapse multi-collapse mt-2 mb-2" id="afectat2">
 
-                        <div class="card card-body" style="border: 2px solid black">
+                        <div class="card card-body" style="border: 2px solid #2c3e50">
                             <h4 class="card-title">Afectat 2</h4>
                             <div class="form-group row">
 
@@ -247,13 +371,9 @@
 
                                 <div class="col-sm-5 col-5">
                                     <label for="genere2" class="col-form-label"><strong>Génere</strong></label><br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="genere2" id="home" value="home">
-                                        <label class="form-check-label" for="home">Home</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="genere2" id="dona" value="dona">
-                                        <label class="form-check-label" for="dona">Dona</label>
+                                    <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
+                                        <input class="form-check-input" type="radio" name="genere2" :id="sexe.id" v-model="checked" :value="sexe.sexe">
+                                        <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -263,11 +383,8 @@
                                 <div class="col-sm-5 col-5">
                                     <label for="tipus_accident2" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
                                     <select class="form-control" name="tipus_accident2" id="tipus_accident2">
-                                        <option value="">Accidents i traumatismes</option>
-                                        <option value="">Malaltia a un lloc públic</option>
-                                        <option value="">Malaltia a domicili</option>
-                                        <option value="">Consulta mèdica</option>
-                                        <option value="">Transports sanitari</option>
+                                        <option selected disabled>Seleccionar...</option>
+                                        <option v-for="accident in accidents" :key="accident.id" :value="accident.id">{{ accident.tipus }}</option>
                                     </select>
 
                                     <label for="num_afectats2" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
@@ -286,7 +403,7 @@
 
                     <div class="collapse multi-collapse mt-2 mb-2" id="afectat3">
 
-                        <div class="card card-body" style="border: 2px solid black">
+                        <div class="card card-body" style="border: 2px solid #2c3e50">
                             <h4 class="card-title">Afectat 3</h4>
                             <div class="form-group row">
 
@@ -328,13 +445,9 @@
 
                                 <div class="col-sm-5 col-5">
                                     <label for="genere3" class="col-form-label"><strong>Génere</strong></label><br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="genere3" id="home" value="home">
-                                        <label class="form-check-label" for="home">Home</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="genere3" id="dona" value="dona">
-                                        <label class="form-check-label" for="dona">Dona</label>
+                                    <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
+                                        <input class="form-check-input" type="radio" name="genere3" :id="sexe.id" v-model="checked" :value="sexe.sexe">
+                                        <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -344,11 +457,8 @@
                                 <div class="col-sm-5 col-5">
                                     <label for="tipus_accident3" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
                                     <select class="form-control" name="tipus_accident3" id="tipus_accident3">
-                                        <option value="">Accidents i traumatismes</option>
-                                        <option value="">Malaltia a un lloc públic</option>
-                                        <option value="">Malaltia a domicili</option>
-                                        <option value="">Consulta mèdica</option>
-                                        <option value="">Transports sanitari</option>
+                                        <option selected disabled>Seleccionar...</option>
+                                        <option v-for="accident in accidents" :key="accident.id" :value="accident.id">{{ accident.tipus }}</option>
                                     </select>
 
                                     <label for="num_afectats3" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
@@ -367,7 +477,7 @@
 
                     <div class="collapse multi-collapse mt-2 mb-2" id="afectat4">
 
-                        <div class="card card-body" style="border: 2px solid black">
+                        <div class="card card-body" style="border: 2px solid #2c3e50">
                             <h4 class="card-title">Afectat 4</h4>
                             <div class="form-group row">
 
@@ -409,13 +519,9 @@
 
                                 <div class="col-sm-5 col-5">
                                     <label for="genere4" class="col-form-label"><strong>Génere</strong></label><br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="genere4" id="home" value="home">
-                                        <label class="form-check-label" for="home">Home</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="genere4" id="dona" value="dona">
-                                        <label class="form-check-label" for="dona">Dona</label>
+                                    <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
+                                        <input class="form-check-input" type="radio" name="genere4" :id="sexe.id" v-model="checked" :value="sexe.sexe">
+                                        <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -425,11 +531,8 @@
                                 <div class="col-sm-5 col-5">
                                     <label for="tipus_accident4" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
                                     <select class="form-control" name="tipus_accident4" id="tipus_accident4">
-                                        <option value="">Accidents i traumatismes</option>
-                                        <option value="">Malaltia a un lloc públic</option>
-                                        <option value="">Malaltia a domicili</option>
-                                        <option value="">Consulta mèdica</option>
-                                        <option value="">Transports sanitari</option>
+                                        <option selected disabled>Seleccionar...</option>
+                                        <option v-for="accident in accidents" :key="accident.id" :value="accident.id">{{ accident.tipus }}</option>
                                     </select>
 
                                     <label for="num_afectats4" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
@@ -448,13 +551,13 @@
 
                     <div class="collapse multi-collapse mt-2 mb-2" id="afectat5">
 
-                        <div class="card card-body" style="border: 2px solid black">
+                        <div class="card card-body" style="border: 2px solid #2c3e50">
                             <h4 class="card-title">Afectat 5</h4>
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
                                     <label for="nom_afectat5" class="col-form-label"><strong>Nom</strong></label>
-                                    <input class="form-control" type="text" name="nom_afectat1" id="nom_afectat5">
+                                    <input class="form-control" type="text" name="nom_afectat5" id="nom_afectat5">
                                 </div>
 
                                 <div class="col-sm-5 col-5">
@@ -490,13 +593,9 @@
 
                                 <div class="col-sm-5 col-5">
                                     <label for="genere5" class="col-form-label"><strong>Génere</strong></label><br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="genere5" id="home" value="home">
-                                        <label class="form-check-label" for="home">Home</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="genere5" id="dona" value="dona">
-                                        <label class="form-check-label" for="dona">Dona</label>
+                                    <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
+                                        <input class="form-check-input" type="radio" name="genere5" :id="sexe.id" v-model="checked" :value="sexe.sexe">
+                                        <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -506,11 +605,8 @@
                                 <div class="col-sm-5 col-5">
                                     <label for="tipus_accident5" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
                                     <select class="form-control" name="tipus_accident5" id="tipus_accident5">
-                                        <option value="">Accidents i traumatismes</option>
-                                        <option value="">Malaltia a un lloc públic</option>
-                                        <option value="">Malaltia a domicili</option>
-                                        <option value="">Consulta mèdica</option>
-                                        <option value="">Transports sanitari</option>
+                                        <option selected disabled>Seleccionar...</option>
+                                        <option v-for="accident in accidents" :key="accident.id" :value="accident.id">{{ accident.tipus }}</option>
                                     </select>
 
                                     <label for="num_afectats5" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
@@ -545,42 +641,29 @@
                             <div class="col-sm-4 col-4">
                                 <h5><u>Primer recurs mòbil</u></h5>
                                 <label for="recurs1" class="col-form-label"><strong>Tipus de recurs</strong></label>
-                                <select class="form-control" name="recurs1" id="recurs1">
-                                    <option value="seleccionar" selected disabled>Seleccionar...</option>
-                                    <option value="usvb" name="usvb1">USVB</option>
-                                    <option value="usva" name="usva1">USVA</option>
-                                    <option value="usvap" name="usvap1">USVAP</option>
-                                    <option value="helicopter_medicalitzat" name="helicopter_medicalitzat1">Helicòpter medicalitzat</option>
-                                    <option value="transport_secundari" name="transport_secundari1">Transport secundari (col·lectiu i/o programat)</option>
-                                    <option value="altre" name="altre1">Altre</option>
+                                <select class="form-control" name="recurs1" id="recurs1" v-model="recursSelec1">
+
+                                    <option v-for="recurs in recursos" :key="recurs.id" :value="recurs.id">{{ recurs.tipus }}</option>
+                                    <option value="altre">Altre</option>
                                 </select>
                             </div>
 
                             <div class="col-sm-4 col-4">
                                 <h5><u>Segon recurs mòbil</u></h5>
                                 <label for="recurs2" class="col-form-label"><strong>Tipus de recurs</strong></label>
-                                <select class="form-control" name="recurs2" id="recurs2">
-                                    <option value="seleccionar" selected disabled>Seleccionar...</option>
-                                    <option value="usvb" name="usvb2">USVB</option>
-                                    <option value="usva" name="usv2a">USVA</option>
-                                    <option value="usvap" name="usvap2">USVAP</option>
-                                    <option value="helicopter_medicalitzat" name="helicopter_medicalitzat2">Helicòpter medicalitzat</option>
-                                    <option value="transport_secundari" name="transport_secundari2">Transport secundari (col·lectiu i/o programat)</option>
-                                    <option value="altre" name="altre2">Altre</option>
+                                <select class="form-control" name="recurs2" id="recurs2" v-model="recursSelec2">
+
+                                    <option v-for="recurs in recursos" :key="recurs.id" :value="recurs.id">{{ recurs.tipus }}</option>
+                                    <option value="altre2">Altre</option>
                                 </select>
                             </div>
 
                             <div class="col-sm-4 col-4">
                                 <h5><u>Tercer recurs mòbil</u></h5>
                                 <label for="recurs3" class="col-form-label"><strong>Tipus de recurs</strong></label>
-                                <select class="form-control" name="recurs3" id="recurs3">
-                                    <option value="seleccionar" selected disabled>Seleccionar...</option>
-                                    <option value="usvb" name="usvb3">USVB</option>
-                                    <option value="usva" name="usva3">USVA</option>
-                                    <option value="usvap" name="usvap3">USVAP</option>
-                                    <option value="helicopter_medicalitzat" name="helicopter_medicalitzat3">Helicòpter medicalitzat</option>
-                                    <option value="transport_secundari" name="transport_secundari3">Transport secundari (col·lectiu i/o programat)</option>
-                                    <option value="altre" name="altre3">Altre</option>
+                                <select class="form-control" name="recurs3" id="recurs3" v-model="recursSelec3">
+                                    <option v-for="recurs in recursos" :key="recurs.id" :value="recurs.id">{{ recurs.tipus }}</option>
+                                    <option value="altre3">Altre</option>
                                 </select>
                             </div>
                         </div>
@@ -605,6 +688,24 @@
                                 <output>0</output>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-4 col-4" v-if="recursSelec1 == 'altre'">
+                                <label for="altrer1"><strong>Recurs mòbil 1</strong></label>
+                                <input type="text" class="form-control" id="altrer1" name="altrer1" placeholder="Altre vehicle...">
+                            </div>
+
+                            <div class="col-sm-4 col-4" v-if="recursSelec2 == 'altre2'">
+                                <label for="altrer2"><strong>Recurs mòbil 2</strong></label>
+                                <input type="text" class="form-control" id="altrer2" name="altrer2" placeholder="Altre vehicle...">
+                            </div>
+
+                            <div class="col-sm-4 col-4" v-if="recursSelec3 == 'altre3'">
+                                <label for="altrer3"><strong>Recurs mòbil 3</strong></label>
+                                <input type="text" class="form-control" id="altrer3" name="altrer3" placeholder="Altre vehicle...">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -621,23 +722,25 @@
 
 
                             <label for="resp_no_recurs" class="col-form-label col-2 col-sm-2"><strong>Tipus de resposta</strong></label>
-                                <select class="form-control col-5 col-sm-5" name="resp_no_recurs" id="resp_no_recurs">
-                                    <option value="seleccionar" selected disabled>Seleccionar...</option>
-                                    <option value="consulta_telefonica" name="consulta_telefonica">Consulta telefònica</option>
-                                    <option value="informacio_telefonica" name="informacio_telefonica">Informació telefònica</option>
-                                    <option value="usvap" name="derivacio_centre">Derivació a centres sanitaris</option>
-                                    <option value="Derivació_a_altres_centres_sanitaris" name="derivacio_altre_sanitari">Derivació a altres centres sanitaris</option>
-                                    <option value="altre" name="altre_sense">Altre</option>
-                                </select>
+                            <select class="form-control col-5 col-sm-5" name="resp_no_recurs" id="resp_no_recurs">
+                                <option value="seleccionar" selected disabled>Seleccionar...</option>
+                                <option value="consulta_telefonica" name="consulta_telefonica">Consulta telefònica</option>
+                                <option value="informacio_telefonica" name="informacio_telefonica">Informació telefònica</option>
+                                <option value="usvap" name="derivacio_centre">Derivació a centres sanitaris</option>
+                                <option value="Derivació_a_altres_centres_sanitaris" name="derivacio_altre_sanitari">Derivació a altres centres sanitaris</option>
+                                <option value="altre" name="altre_sense">Altre</option>
+                            </select>
 
                         </div>
 
                     </div>
                 </div>
             </div>
-            <button type="submit" href="" class="btn btn-success btn-lg boto_enviar"><i class="fas fa-check fa-1x"></i>Enviar</button>
+            <button type="submit" href="" class="btn btn-success btn-lg boto_enviar" style="background-color: #f70c74"><i class="fas fa-check fa-1x"></i>Enviar</button>
         </div>
     </div>
+
+
 </template>
 
 <script>
@@ -646,12 +749,22 @@
             return{
                 comarques: [],
                 provincies: [],
-                provincia: {
-                    nom: ''
-                },
-                ProvinciaSelec: {},
-                ComarcaSelec: {},
                 municipis: [],
+                sexes : [],
+                accidents : [],
+                tipusAlertants : [],
+                recursos : [],
+                alertants : [],
+                recursSelec1 : '',
+                recursSelec2 : '',
+                recursSelec3 : '',
+                provinciaSelec: '',
+                comarcaSelec: '',
+                tipusaSelec : '',
+                centreSelec: '',
+                nomAfectat: '',
+                cognomAfectat: '',
+                telefonAfectat: '',
                 color : '#f70c74',
                 color2 : '#2c3e50',
                 color3 : '#2c3e50',
@@ -660,7 +773,7 @@
             }
         },
         methods: {
-            selectLocal(){
+            selectAll(){
                 let me = this;
                 axios
                     .get('/provincies')
@@ -696,40 +809,61 @@
                         this.errored = true;
                     })
                     .finally(() => this.loading = false)
-            },
-            FiltrarCom(provincia){
-                this.provincia = provincia
 
-            },
-            comarcaFiltered: function () {
-                if (this.provincia.id > 0 && this.municipi.id == null) {
-                    let comarquesFiltered = [];
-                    let comarques = this.comarques;
-                    for (let i = 0; i < comarques.length; ++i) {
-                        if (comarques[i].provincies_id == this.provincia.id) {
-                            comarquesFiltered.push(comarques[i]);
-                        }
-                    }
-                    return ComarcaFiltered;
-                }else{
-                    return this.comarques;
-                }
-            },
-            municipisFiltered: function () {
-                if (this.comarca.id > 0) {
-                    let municipisFiltered = [];
-                    let municipis = this.municipis;
-                    for (let i = 0; i < municipis.length; ++i) {
-                    if (municipis[i].comarques_id == this.comarca.id) {
-                        municipisFiltered.push(municipis[i]);
-                    }
-                    }
-                    return municipisFiltered;
-                } else {
-                    return this.municipis;
-                }
-            },
-            selecCom(){
+                let me4 = this;
+                axios
+                    .get('/sexes')
+                    .then( response => {
+                        me4.sexes = response.data;
+                    })
+                    .catch ( error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+
+                let me5 = this;
+                axios
+                    .get('/tipusIncidencies')
+                    .then( response => {
+                        me5.accidents = response.data;
+                    })
+                    .catch ( error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+
+                let me6 = this;
+                axios
+                    .get('/tipusAlertants')
+                    .then( response => {
+                        me6.tipusAlertants = response.data;
+                    })
+                    .catch ( error => {
+                        console.log(error)
+                        this.errored = response.data;
+                    })
+                    .finally(() => this.loading = false)
+
+                let me7 = this;
+                axios
+                    .get('/tipusRecursos')
+                    .then( response => {
+                        me7.recursos = response.data;
+                    })
+                    .catch ( error => {
+                        console.log(error)
+                        this.errored = response.data;
+                    })
+                    .finally(() => this.loading = false)
+                let me8 = this;
+                axios
+                    .get('/alertants')
+                    .then( response => {
+                        me8.alertants = response.data;
+                    })
+                    .finally(() => this.loading = false)
 
             },
             colorboto : function(){
@@ -747,7 +881,7 @@
                 }
             },
             colorboto3 : function(){
-                if(this.color3 == 'green'){
+                if(this.color3 == '#f70c74'){
                     this.color3 = '#2c3e50';
                 }else{
                     this.color3= '#f70c74';
@@ -770,10 +904,14 @@
 
 
         },
+        computed :{
+
+        },
         created() {
-            this.selectLocal();
+            this.selectAll();
             this.municipisFiltered();
             this.comarcaFiltered();
+
         },
         mounted() {
             console.log('Component mounted.')
