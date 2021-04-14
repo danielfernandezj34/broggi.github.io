@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Alertants;
+use App\Http\Resources\HelpboxResource;
+use App\Models\Helpbox;
 use Illuminate\Http\Request;
-use App\Http\Resources\AlertantsResource;
 use Illuminate\Database\QueryException;
 use App\Clases\Utilitat;
 
-class AlertantsController extends Controller
+class HelpboxController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class AlertantsController extends Controller
      */
     public function index()
     {
-        $alertants = Alertants::all();
+        $helpbox = Helpbox::all();
 
-        return AlertantsResource::collection($alertants);
+        return HelpboxResource::collection($helpbox);
     }
 
     /**
@@ -31,18 +31,14 @@ class AlertantsController extends Controller
      */
     public function store(Request $request)
     {
-        $alertant = new Alertants();
+        $helpbox = new Helpbox();
 
-        $alertant->nom = $request->input('nom');
-        $alertant->cognoms = $request->input('cognoms');
-        $alertant->telefon = $request->input('telefon_alertant');
-        $alertant->adreca = $request->input('adreca');
-        $alertant->tipus_alertants_id = $request->input('tipus_alertant');
-        $alertant->municipis_id = $request->input('municipi');
+        $helpbox->preguntaES = $request->input('preguntaES');
+        $helpbox->preguntaEN = $request->input('preguntaEN');
 
         try {
-            $alertant->save();
-            $response = (new AlertantsResource($alertant))
+            $helpbox->save();
+            $response = (new HelpboxResource($helpbox))
                         ->response()
                         ->setStatusCode(201);
         } catch (QueryException $exception) {
@@ -57,10 +53,10 @@ class AlertantsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Alertants  $alertants
+     * @param  \App\Models\Helpbox  $helpbox
      * @return \Illuminate\Http\Response
      */
-    public function show(Alertants $alertants)
+    public function show(Helpbox $helpbox)
     {
         //
     }
@@ -69,22 +65,17 @@ class AlertantsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Alertants  $alertants
+     * @param  \App\Models\Helpbox  $helpbox
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alertants $alertant)
+    public function update(Request $request, Helpbox $helpbox)
     {
-        $alertant->nom = $request->input('nom');
-        $alertant->cognoms = $request->input('cognoms');
-        $alertant->telefon = $request->input('telefon_alertant');
-        $alertant->adreca = $request->input('adreca');
-        $alertant->tipus_alertants_id = $request->input('tipus_alertant');
-        $alertant->municipis_id = $request->input('municipi');
-
+        $helpbox->preguntaES = $request->input('preguntaES');
+        $helpbox->preguntaEN = $request->input('preguntaEN');
 
         try {
-            $alertant->save();
-            $response = (new AlertantsResource($alertant))
+            $helpbox->save();
+            $response = (new HelpboxResource($helpbox))
                         ->response()
                         ->setStatusCode(201);
         } catch (QueryException $exception) {
@@ -99,13 +90,13 @@ class AlertantsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Alertants  $alertants
+     * @param  \App\Models\Helpbox  $helpbox
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alertants $alertant)
+    public function destroy(Helpbox $helpbox)
     {
         try {
-            $alertant->delete();
+            $helpbox->delete();
             $response = \response()
                     ->json(['error' => "Registre esborrat correctament"], 200);
         } catch (QueryException $exception) {
