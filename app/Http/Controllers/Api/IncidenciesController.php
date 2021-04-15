@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
 use App\Http\Resources\IncidenciesResource;
+use Illuminate\Database\QueryException;
+use App\Clases\Utilitat;
 
 class IncidenciesController extends Controller
 {
@@ -16,7 +18,7 @@ class IncidenciesController extends Controller
      */
     public function index()
     {
-        $incidencies = Incidencies::all();
+        $incidencies = Incidencies::with('recursos')->get();
 
         return IncidenciesResource::collection($incidencies);
     }

@@ -15,7 +15,7 @@ class Recursos extends Model
 
     public function incidencies()
     {
-        return $this->hasMany(Incidencies::class, 'incidencies_has_recursos', 'recursos_id', 'incidencies_id')->withPivot('hora_activacio', 'hora_mobilitzacio', 'hora_assistencia', 'hora_transport', 'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio', 'prioritat', 'desti');
+        return $this->belongsToMany(Incidencies::class, 'incidencies_has_recursos', 'recursos_id', 'incidencies_id')->withPivot('hora_activacio', 'hora_mobilitzacio', 'hora_assistencia', 'hora_transport', 'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio', 'prioritat', 'desti');
     }
 
     public function tipos_recursos()
@@ -25,6 +25,6 @@ class Recursos extends Model
 
     public function usuaris()
     {
-        return $this->hasMany(Usuaris::class, 'recursos_id');
+        return $this->hasMany(TipusRecursos::class, 'tipus_recursos_id');
     }
 }

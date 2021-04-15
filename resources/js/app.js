@@ -28,8 +28,8 @@ Vue.component('mostrar-incidencies', require('./components/administratiu/Inciden
 Vue.component('formulari-administratiu', require('./components/administratiu/FormulariComponent.vue').default);
 
 Vue.component('administrador-recurs', require('./components/administrador/RecursComponent.vue').default);
-
-
+Vue.component('incidencies-recurs',require('./components/recursos/incidenciesRComponent.vue').default);
+Vue.component('incidencies-asignades',require('./components/recursos/AsignatsComponent.vue').default);
 Vue.component('alertants-component', require('./components/administrador/AlertantComponent.vue').default);
 
 /**
