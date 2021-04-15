@@ -1998,6 +1998,533 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/AlertantComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/AlertantComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      alertants: [],
+      alertant: {
+        id: '',
+        telefon: '',
+        nom: '',
+        cognoms: '',
+        adreca: '',
+        municipis_id: '',
+        tipus_alertants_id: ''
+      },
+      tipus_alertants: [],
+      municipis: [],
+      insert: false
+    };
+  },
+  methods: {
+    selectAlertants: function selectAlertants() {
+      var _this = this;
+
+      var me = this;
+      axios.get('/alertants').then(function (response) {
+        me.alertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+        _this.errored = true;
+      })["finally"](function () {
+        return _this.loading = false;
+      });
+      var me2 = this;
+      axios.get('/tipusAlertants').then(function (response) {
+        me2.tipus_alertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+        _this.errored = true;
+      });
+    },
+    selectMunicipis: function selectMunicipis() {
+      var _this2 = this;
+
+      var me = this;
+      axios.get('/municipis').then(function (response) {
+        me.municipis = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+        _this2.errored = true;
+      })["finally"](function () {
+        return _this2.loading = false;
+      });
+    },
+    crearAlertant: function crearAlertant() {
+      this.insert = true;
+      $('#modalAlertant').modal('show');
+    },
+    insertAlertant: function insertAlertant() {
+      var me = this;
+      axios.post('/alertants', me.alertant).then(function (response) {
+        me.selectAlertants();
+        $('#modalAlertant').modal('hide');
+      })["catch"](function (error) {
+        me.errorMessage = error.response.data.error;
+      });
+    },
+    editAlertant: function editAlertant(alertant) {
+      this.insert = false;
+      this.alertant = alertant;
+      $('#modalAlertant').modal('show');
+    },
+    updateAlertant: function updateAlertant() {
+      var me = this;
+      axios.put('/alertants/' + me.alertant.id, me.alertant).then(function (response) {
+        me.selectAlertants();
+        $('#modalAlertant').modal('hide');
+      })["catch"](function (error) {
+        me.errorMessage = error.response.data.error;
+      });
+    },
+    confirmarDelete: function confirmarDelete(alertant) {
+      this.alertant = alertant;
+      $('#modalBorrar').modal('show');
+    },
+    borrarAlertant: function borrarAlertant() {
+      var me = this;
+      axios["delete"]('/alertants/' + me.alertant.id).then(function (response) {
+        me.infoMessage = response.data.missatge;
+        me.selectAlertants();
+        $('#modalBorrar').modal('hide'); // CERRAR MODAL
+      })["catch"](function (error) {
+        me.errorMessage = error.response.data.error;
+        $('modalBorrar').modal('hide');
+      });
+    },
+    mostrarAlertant: function mostrarAlertant(alertant) {
+      this.alertant = alertant;
+      $('#modalMostrarAlertant').modal('show');
+    }
+  },
+  created: function created() {
+    this.selectAlertants();
+    this.selectMunicipis();
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/HelpboxComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/HelpboxComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      helpbox: [],
+      pregunta: {
+        id: '',
+        preguntaES: '',
+        preguntaEN: ''
+      },
+      insert: false
+    };
+  },
+  methods: {
+    selectPreguntes: function selectPreguntes() {
+      var _this = this;
+
+      var me = this;
+      axios.get('/helpbox').then(function (response) {
+        me.helpbox = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+        _this.errored = true;
+      })["finally"](function () {
+        return _this.loading = false;
+      });
+    },
+    crearPregunta: function crearPregunta() {
+      this.insert = true;
+      $('#modalPregunta').modal('show');
+    },
+    insertPregunta: function insertPregunta() {
+      var me = this;
+      axios.post('/helpbox', me.pregunta).then(function (response) {
+        me.selectPreguntes();
+        $('#modalPregunta').modal('hide');
+      })["catch"](function (error) {
+        me.errorMessage = error.response.data.error;
+      });
+    },
+    editPregunta: function editPregunta(pregunta) {
+      this.insert = false;
+      this.pregunta = pregunta;
+      $('#modalPregunta').modal('show');
+    },
+    updatePregunta: function updatePregunta() {
+      var me = this;
+      axios.put('/helpbox/' + me.pregunta.id, me.pregunta).then(function (response) {
+        me.selectPreguntes();
+        $('#modalPregunta').modal('hide');
+      })["catch"](function (error) {
+        me.errorMessage = error.response.data.error;
+      });
+    },
+    confirmarDelete: function confirmarDelete(pregunta) {
+      this.pregunta = pregunta;
+      $('#modalBorrar').modal('show');
+    },
+    borrarPregunta: function borrarPregunta() {
+      var me = this;
+      axios["delete"]('/helpbox/' + me.pregunta.id).then(function (response) {
+        me.infoMessage = response.data.missatge;
+        me.selectPreguntes();
+        $('#modalBorrar').modal('hide'); // CERRAR MODAL
+      })["catch"](function (error) {
+        me.errorMessage = error.response.data.error;
+        $('modalBorrar').modal('hide');
+      });
+    }
+  },
+  created: function created() {
+    this.selectPreguntes();
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/UsuarisComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/UsuarisComponent.vue?vue&type=script&lang=js& ***!
@@ -2009,6 +2536,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -2163,6 +2694,7 @@ __webpack_require__.r(__webpack_exports__);
         rols_id: '',
         recursos_id: ''
       },
+      tipusRecursos: [],
       insert: false
     };
   },
@@ -2185,6 +2717,19 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
         _this.errored = true;
+      });
+    },
+    selectTipusRecursos: function selectTipusRecursos() {
+      var _this2 = this;
+
+      var me = this;
+      axios.get('/tipusRecursos').then(function (response) {
+        me.tipusRecursos = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+        _this2.errored = true;
+      })["finally"](function () {
+        return _this2.loading = false;
       });
     },
     crearUsuari: function crearUsuari() {
@@ -2232,6 +2777,322 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.selectUsuaris();
+    this.selectTipusRecursos();
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administratiu/FormulariComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administratiu/FormulariComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {};
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2323,7 +3184,7 @@ __webpack_require__.r(__webpack_exports__);
       });
       var me3 = this;
       axios.get('/usuaris').then(function (response) {
-        me3.incidencies = response.data;
+        me3.usuaris = response.data;
       })["catch"](function (error) {
         console.log(error);
         _this.errored = true;
@@ -2333,7 +3194,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    selectIncidencies();
+    this.selectIncidencies();
   }
 });
 
@@ -2369,6 +3230,9 @@ Vue.component('administratiu-principal', __webpack_require__(/*! ./components/Ad
 Vue.component('usuari-component', __webpack_require__(/*! ./components/administrador/UsuarisComponent.vue */ "./resources/js/components/administrador/UsuarisComponent.vue").default);
 Vue.component('recurs-principal', __webpack_require__(/*! ./components/RecursComponent.vue */ "./resources/js/components/RecursComponent.vue").default);
 Vue.component('mostrar-incidencies', __webpack_require__(/*! ./components/administratiu/IncidenciesComponent.vue */ "./resources/js/components/administratiu/IncidenciesComponent.vue").default);
+Vue.component('formulari-administratiu', __webpack_require__(/*! ./components/administratiu/FormulariComponent.vue */ "./resources/js/components/administratiu/FormulariComponent.vue").default);
+Vue.component('alertants-component', __webpack_require__(/*! ./components/administrador/AlertantComponent.vue */ "./resources/js/components/administrador/AlertantComponent.vue").default);
+Vue.component('helpbox-component', __webpack_require__(/*! ./components/administrador/HelpboxComponent.vue */ "./resources/js/components/administrador/HelpboxComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -2409,7 +3273,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = '/broggi.github.io/public/api/';
+window.axios.defaults.baseURL = '/broggi/public/api/';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -37978,6 +38842,84 @@ component.options.__file = "resources/js/components/RecursComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/administrador/AlertantComponent.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/administrador/AlertantComponent.vue ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AlertantComponent_vue_vue_type_template_id_74ad1476___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AlertantComponent.vue?vue&type=template&id=74ad1476& */ "./resources/js/components/administrador/AlertantComponent.vue?vue&type=template&id=74ad1476&");
+/* harmony import */ var _AlertantComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AlertantComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/administrador/AlertantComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _AlertantComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _AlertantComponent_vue_vue_type_template_id_74ad1476___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AlertantComponent_vue_vue_type_template_id_74ad1476___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/administrador/AlertantComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/administrador/HelpboxComponent.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/administrador/HelpboxComponent.vue ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _HelpboxComponent_vue_vue_type_template_id_0d5a2e20___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HelpboxComponent.vue?vue&type=template&id=0d5a2e20& */ "./resources/js/components/administrador/HelpboxComponent.vue?vue&type=template&id=0d5a2e20&");
+/* harmony import */ var _HelpboxComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HelpboxComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/administrador/HelpboxComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _HelpboxComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _HelpboxComponent_vue_vue_type_template_id_0d5a2e20___WEBPACK_IMPORTED_MODULE_0__.render,
+  _HelpboxComponent_vue_vue_type_template_id_0d5a2e20___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/administrador/HelpboxComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/administrador/UsuarisComponent.vue":
 /*!********************************************************************!*\
   !*** ./resources/js/components/administrador/UsuarisComponent.vue ***!
@@ -38013,6 +38955,45 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/administrador/UsuarisComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/administratiu/FormulariComponent.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/administratiu/FormulariComponent.vue ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FormulariComponent_vue_vue_type_template_id_b1fda838___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormulariComponent.vue?vue&type=template&id=b1fda838& */ "./resources/js/components/administratiu/FormulariComponent.vue?vue&type=template&id=b1fda838&");
+/* harmony import */ var _FormulariComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormulariComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/administratiu/FormulariComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _FormulariComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _FormulariComponent_vue_vue_type_template_id_b1fda838___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FormulariComponent_vue_vue_type_template_id_b1fda838___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/administratiu/FormulariComponent.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -38120,6 +39101,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/administrador/AlertantComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/administrador/AlertantComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AlertantComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/AlertantComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/administrador/HelpboxComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/administrador/HelpboxComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HelpboxComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./HelpboxComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/HelpboxComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HelpboxComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/administrador/UsuarisComponent.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************!*\
   !*** ./resources/js/components/administrador/UsuarisComponent.vue?vue&type=script&lang=js& ***!
@@ -38133,6 +39146,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UsuarisComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UsuarisComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/UsuarisComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UsuarisComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/administratiu/FormulariComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/administratiu/FormulariComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormulariComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FormulariComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administratiu/FormulariComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormulariComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -38220,6 +39249,40 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/administrador/AlertantComponent.vue?vue&type=template&id=74ad1476&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/administrador/AlertantComponent.vue?vue&type=template&id=74ad1476& ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantComponent_vue_vue_type_template_id_74ad1476___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantComponent_vue_vue_type_template_id_74ad1476___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantComponent_vue_vue_type_template_id_74ad1476___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AlertantComponent.vue?vue&type=template&id=74ad1476& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/AlertantComponent.vue?vue&type=template&id=74ad1476&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/administrador/HelpboxComponent.vue?vue&type=template&id=0d5a2e20&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/administrador/HelpboxComponent.vue?vue&type=template&id=0d5a2e20& ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HelpboxComponent_vue_vue_type_template_id_0d5a2e20___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HelpboxComponent_vue_vue_type_template_id_0d5a2e20___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HelpboxComponent_vue_vue_type_template_id_0d5a2e20___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./HelpboxComponent.vue?vue&type=template&id=0d5a2e20& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/HelpboxComponent.vue?vue&type=template&id=0d5a2e20&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/administrador/UsuarisComponent.vue?vue&type=template&id=80a4f4b0&":
 /*!***************************************************************************************************!*\
   !*** ./resources/js/components/administrador/UsuarisComponent.vue?vue&type=template&id=80a4f4b0& ***!
@@ -38233,6 +39296,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UsuarisComponent_vue_vue_type_template_id_80a4f4b0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UsuarisComponent_vue_vue_type_template_id_80a4f4b0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UsuarisComponent.vue?vue&type=template&id=80a4f4b0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/UsuarisComponent.vue?vue&type=template&id=80a4f4b0&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/administratiu/FormulariComponent.vue?vue&type=template&id=b1fda838&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/administratiu/FormulariComponent.vue?vue&type=template&id=b1fda838& ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormulariComponent_vue_vue_type_template_id_b1fda838___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormulariComponent_vue_vue_type_template_id_b1fda838___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormulariComponent_vue_vue_type_template_id_b1fda838___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FormulariComponent.vue?vue&type=template&id=b1fda838& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administratiu/FormulariComponent.vue?vue&type=template&id=b1fda838&");
 
 
 /***/ }),
@@ -38299,14 +39379,16 @@ var render = function() {
         attrs: { id: _vm.div_a }
       },
       [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-secondary",
-            attrs: { id: _vm.boto_a, type: "button" }
-          },
-          [_c("strong", [_vm._v("Alertants")])]
-        )
+        _c("a", { attrs: { href: "./alertants" } }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-secondary",
+              attrs: { id: _vm.boto_a, type: "button" }
+            },
+            [_c("strong", [_vm._v("Alertants")])]
+          )
+        ])
       ]
     ),
     _vm._v(" "),
@@ -38335,14 +39417,16 @@ var render = function() {
         attrs: { id: _vm.div_a }
       },
       [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-danger ml-lg-5",
-            attrs: { id: _vm.boto_h, type: "button" }
-          },
-          [_c("strong", [_vm._v("Helpbox")])]
-        )
+        _c("a", { attrs: { href: "./helpbox" } }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-danger ml-lg-5",
+              attrs: { id: _vm.boto_h, type: "button" }
+            },
+            [_c("strong", [_vm._v("Helpbox")])]
+          )
+        ])
       ]
     ),
     _vm._v(" "),
@@ -38596,6 +39680,1743 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/AlertantComponent.vue?vue&type=template&id=74ad1476&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/AlertantComponent.vue?vue&type=template&id=74ad1476& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", [
+    _c("div", { staticClass: "card mt-3" }, [
+      _c("div", { staticClass: "card-body mt-1" }, [
+        _c("h5", { staticClass: "card-title", attrs: { id: "titol_form" } }, [
+          _vm._v("Taula d'Alertants")
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("table", { staticClass: "table mt-2" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.alertants, function(alertant) {
+              return _c(
+                "tr",
+                { key: alertant.id },
+                [
+                  _c("td", [_vm._v(_vm._s(alertant.nom))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(alertant.cognoms))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(alertant.telefon))]),
+                  _vm._v(" "),
+                  _vm._l(_vm.tipus_alertants, function(tipus_alertant) {
+                    return _c("div", { key: tipus_alertant.id }, [
+                      alertant.tipus_alertants_id == tipus_alertant.id
+                        ? _c("td", [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(tipus_alertant.tipus) +
+                                "\n                            "
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary btn-sm",
+                        attrs: { type: "submit" },
+                        on: {
+                          click: function($event) {
+                            return _vm.mostrarAlertant(alertant)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-eye" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary btn-sm ml-1",
+                        attrs: { type: "submit" },
+                        on: {
+                          click: function($event) {
+                            return _vm.editAlertant(alertant)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "far fa-edit" }),
+                        _vm._v(" Editar")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm ml-1",
+                        attrs: { type: "submit", id: "botones" },
+                        on: {
+                          click: function($event) {
+                            return _vm.confirmarDelete(alertant)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "far fa-trash-alt" }),
+                        _vm._v(" Esborrar")
+                      ]
+                    )
+                  ])
+                ],
+                2
+              )
+            }),
+            0
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "a",
+      {
+        attrs: { id: "botoCrear" },
+        on: {
+          click: function($event) {
+            return _vm.crearAlertant()
+          }
+        }
+      },
+      [_c("i", { staticClass: "far fa-plus-circle fa-3x" })]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modalBorrar",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modalBorrarLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("p", [
+                  _vm._v(
+                    "Estas segur d'esborrar l'alertant " +
+                      _vm._s(_vm.alertant.nom) +
+                      " ?"
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-sm",
+                    attrs: { type: "button", id: "botonBorrar" },
+                    on: {
+                      click: function($event) {
+                        return _vm.borrarAlertant()
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-trash-alt" }),
+                    _vm._v(" Esborrar")
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modalAlertant",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modalBorrarLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _vm.insert
+                  ? _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "AlertantModalLabel" }
+                      },
+                      [_vm._v("Introduir Alertant")]
+                    )
+                  : _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "AlertantModalLabel" }
+                      },
+                      [_vm._v("Modificar Alertant")]
+                    ),
+                _vm._v(" "),
+                _vm._m(4)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "nom" }
+                      },
+                      [_vm._v("Nom")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-9" }, [
+                      _vm.insert
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.nom,
+                                expression: "alertant.nom"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "nom",
+                              id: "nom",
+                              placeholder: "Nom"
+                            },
+                            domProps: { value: _vm.alertant.nom },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "nom",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        : _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.nom,
+                                expression: "alertant.nom"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text", name: "nom", id: "nom" },
+                            domProps: { value: _vm.alertant.nom },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "nom",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "cognoms" }
+                      },
+                      [_vm._v("Cognoms")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _vm.insert
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.cognoms,
+                                expression: "alertant.cognoms"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "nom",
+                              name: "cognoms",
+                              id: "cognoms",
+                              placeholder: "Cognoms"
+                            },
+                            domProps: { value: _vm.alertant.cognoms },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "cognoms",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        : _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.cognoms,
+                                expression: "alertant.cognoms"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "nom",
+                              name: "cognoms",
+                              id: "cognoms"
+                            },
+                            domProps: { value: _vm.alertant.cognoms },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "cognoms",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "telefon_alertant" }
+                      },
+                      [_vm._v("Telefon de l'Alertant")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _vm.insert
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.telefon,
+                                expression: "alertant.telefon"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "tel",
+                              name: "telefon_alertant",
+                              id: "telefon_alertant",
+                              placeholder: "Exemple: 612345678",
+                              maxlength: "9",
+                              pattern: "[0-9]{9}"
+                            },
+                            domProps: { value: _vm.alertant.telefon },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "telefon",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        : _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.telefon,
+                                expression: "alertant.telefon"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "tel",
+                              name: "telefon_alertant",
+                              id: "telefon_alertant",
+                              maxlength: "9",
+                              pattern: "[0-9]{9}"
+                            },
+                            domProps: { value: _vm.alertant.telefon },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "telefon",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "adreca" }
+                      },
+                      [_vm._v("Adreça")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-9" }, [
+                      _vm.insert
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.adreca,
+                                expression: "alertant.adreca"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "adreca",
+                              id: "adreca",
+                              placeholder: "Exemple, 201"
+                            },
+                            domProps: { value: _vm.alertant.adreca },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "adreca",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        : _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.adreca,
+                                expression: "alertant.adreca"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "adreca",
+                              id: "adreca"
+                            },
+                            domProps: { value: _vm.alertant.adreca },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "adreca",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "tipus_alertant" }
+                      },
+                      [_vm._v("Tipus d'Alertant")]
+                    ),
+                    _vm._v(" "),
+                    _vm.insert
+                      ? _c("div", { staticClass: "col-sm-9" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.alertant.tipus_alertants_id,
+                                  expression: "alertant.tipus_alertants_id"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "tipus_alertant",
+                                name: "tipus_alertant"
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.alertant,
+                                    "tipus_alertants_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _vm.insert
+                                ? _c(
+                                    "option",
+                                    { attrs: { selected: "", disabled: "" } },
+                                    [_vm._v("Seleccionar...")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm._l(_vm.tipus_alertants, function(
+                                tipus_alertant
+                              ) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: tipus_alertant.id,
+                                    domProps: { value: tipus_alertant.id }
+                                  },
+                                  [_vm._v(_vm._s(tipus_alertant.tipus))]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ])
+                      : _c("div", { staticClass: "col-sm-9" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.alertant.tipus_alertants_id,
+                                  expression: "alertant.tipus_alertants_id"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "tipus_alertant",
+                                name: "tipus_alertant"
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.alertant,
+                                    "tipus_alertants_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.tipus_alertants, function(
+                              tipus_alertant
+                            ) {
+                              return _c(
+                                "option",
+                                {
+                                  key: tipus_alertant.id,
+                                  domProps: { value: tipus_alertant.id }
+                                },
+                                [_vm._v(_vm._s(tipus_alertant.tipus))]
+                              )
+                            }),
+                            0
+                          )
+                        ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "municipi" }
+                      },
+                      [_vm._v("Municipi")]
+                    ),
+                    _vm._v(" "),
+                    _vm.insert
+                      ? _c("div", { staticClass: "col-sm-9" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.alertant.municipis_id,
+                                  expression: "alertant.municipis_id"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { id: "municipi", name: "municipi" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.alertant,
+                                    "municipis_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _vm.insert
+                                ? _c(
+                                    "option",
+                                    { attrs: { selected: "", disabled: "" } },
+                                    [_vm._v("Seleccionar...")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm._l(_vm.municipis, function(municipi) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: municipi.id,
+                                    domProps: { value: municipi.id }
+                                  },
+                                  [_vm._v(_vm._s(municipi.nom))]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ])
+                      : _c("div", { staticClass: "col-sm-9" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.alertant.municipis_id,
+                                  expression: "alertant.municipis_id"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { id: "municipi", name: "municipi" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.alertant,
+                                    "municipis_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.municipis, function(municipi) {
+                              return _c(
+                                "option",
+                                {
+                                  key: municipi.id,
+                                  domProps: { value: municipi.id }
+                                },
+                                [_vm._v(_vm._s(municipi.nom))]
+                              )
+                            }),
+                            0
+                          )
+                        ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _vm._m(5),
+                _vm._v(" "),
+                _vm.insert
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        attrs: { type: "button", id: "botonBorrar" },
+                        on: {
+                          click: function($event) {
+                            return _vm.insertAlertant()
+                          }
+                        }
+                      },
+                      [_vm._v("Afegir")]
+                    )
+                  : _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        attrs: { type: "button", id: "botonBorrar" },
+                        on: {
+                          click: function($event) {
+                            return _vm.updateAlertant()
+                          }
+                        }
+                      },
+                      [_vm._v("Modificar")]
+                    )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modalMostrarAlertant",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modalBorrarLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "nom" }
+                      },
+                      [_vm._v("Nom")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.alertant.nom,
+                            expression: "alertant.nom"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "nom",
+                          id: "nom",
+                          disabled: ""
+                        },
+                        domProps: { value: _vm.alertant.nom },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.alertant, "nom", $event.target.value)
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "cognoms" }
+                      },
+                      [_vm._v("Cognoms")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.alertant.cognoms,
+                            expression: "alertant.cognoms"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "cognoms",
+                          id: "cognoms",
+                          disabled: ""
+                        },
+                        domProps: { value: _vm.alertant.cognoms },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.alertant,
+                              "cognoms",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "telefon_alertant" }
+                      },
+                      [_vm._v("Telefon de l'Alertant")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.alertant.telefon,
+                            expression: "alertant.telefon"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "tel",
+                          name: "telefon_alertant",
+                          id: "telefon_alertant",
+                          maxlength: "9",
+                          pattern: "[0-9]{9}",
+                          disabled: ""
+                        },
+                        domProps: { value: _vm.alertant.telefon },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.alertant,
+                              "telefon",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "adreca" }
+                      },
+                      [_vm._v("Adreça")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.alertant.adreca,
+                            expression: "alertant.adreca"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "adreca",
+                          id: "adreca",
+                          disabled: ""
+                        },
+                        domProps: { value: _vm.alertant.adreca },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.alertant,
+                              "adreca",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "tipus_alertant" }
+                      },
+                      [_vm._v("Tipus d'Alertant")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-sm-9" },
+                      _vm._l(_vm.tipus_alertants, function(tipus_alertant) {
+                        return _c("div", { key: tipus_alertant.id }, [
+                          tipus_alertant.id == _vm.alertant.tipus_alertants_id
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: tipus_alertant.tipus,
+                                    expression: "tipus_alertant.tipus"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  name: "tipus_alertant",
+                                  id: "tipus_alertant",
+                                  disabled: ""
+                                },
+                                domProps: { value: tipus_alertant.tipus },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      tipus_alertant,
+                                      "tipus",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "municipi" }
+                      },
+                      [_vm._v("Municipi")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-sm-9" },
+                      _vm._l(_vm.municipis, function(municipi) {
+                        return _c("div", { key: municipi.id }, [
+                          municipi.id == _vm.alertant.municipis_id
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: municipi.nom,
+                                    expression: "municipi.nom"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  name: "tipus_alertant",
+                                  id: "tipus_alertant",
+                                  disabled: ""
+                                },
+                                domProps: { value: municipi.nom },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      municipi,
+                                      "nom",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(7)
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", { staticClass: "form-inline my-2 my-lg-0" }, [
+      _c("input", {
+        staticClass: "form-control mr-sm-2",
+        attrs: {
+          type: "search",
+          placeholder: "Número d'incidència",
+          "aria-label": "Buscar ID incidència"
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-success my-2 my-sm-0",
+          attrs: { type: "submit", id: "boto_buscar" }
+        },
+        [_c("i", { staticClass: "fal fa-search" }, [_vm._v(" Buscar")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nom")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cognoms")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Telèfon")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus d'alertant")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Esborrar Alertant")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-secondary btn-sm",
+        attrs: { type: "button", "data-dismiss": "modal" }
+      },
+      [_c("i", { staticClass: "fas fa-times" }), _vm._v(" Tancar")]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-secondary btn-sm",
+        attrs: { type: "button", "data-dismiss": "modal" }
+      },
+      [_c("i", { staticClass: "fas fa-times" }), _vm._v(" Tancar")]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "AlertantModalLabel" } },
+        [_vm._v("Mostrar Alertant")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary btn-sm",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("i", { staticClass: "fas fa-times" }), _vm._v(" Tancar")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/HelpboxComponent.vue?vue&type=template&id=0d5a2e20&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/HelpboxComponent.vue?vue&type=template&id=0d5a2e20& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", [
+    _c("div", { staticClass: "card mt-3" }, [
+      _c("div", { staticClass: "card-body mt-1" }, [
+        _c("h5", { staticClass: "card-title", attrs: { id: "titol_form" } }, [
+          _vm._v("Helpbox")
+        ]),
+        _vm._v(" "),
+        _c("table", { staticClass: "table mt-2" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.helpbox, function(pregunta) {
+              return _c("tr", { key: pregunta.id }, [
+                _c("td", [_vm._v(_vm._s(pregunta.preguntaES))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(pregunta.preguntaEN))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary btn-sm",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.editPregunta(pregunta)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "far fa-edit" }), _vm._v(" Editar")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-sm",
+                      attrs: { type: "submit", id: "botones" },
+                      on: {
+                        click: function($event) {
+                          return _vm.confirmarDelete(pregunta)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "far fa-trash-alt" }),
+                      _vm._v(" Esborrar")
+                    ]
+                  )
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        attrs: { id: "botoCrear" },
+        on: {
+          click: function($event) {
+            return _vm.crearPregunta()
+          }
+        }
+      },
+      [_c("i", { staticClass: "far fa-plus-circle fa-3x" })]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modalBorrar",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modalBorrarLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("p", [
+                  _vm._v(
+                    "Estas segur d'esborrar la pregunta \"" +
+                      _vm._s(_vm.pregunta.preguntaES) +
+                      '" ?'
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-sm",
+                    attrs: { type: "button", id: "botonBorrar" },
+                    on: {
+                      click: function($event) {
+                        return _vm.borrarPregunta()
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-trash-alt" }),
+                    _vm._v(" Esborrar")
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modalPregunta",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modalBorrarLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _vm.insert
+                  ? _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "PreguntaModalLabel" }
+                      },
+                      [_vm._v("Introduir Pregunta")]
+                    )
+                  : _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "PreguntaModalLabel" }
+                      },
+                      [_vm._v("Modificar Pregunta")]
+                    ),
+                _vm._v(" "),
+                _vm._m(3)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("form", [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-4 col-form-label",
+                      attrs: { for: "preguntaES" }
+                    },
+                    [_vm._v("Pregunta en Espanyol")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("div", { staticClass: "col-sm-12" }, [
+                      _vm.insert
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pregunta.preguntaES,
+                                expression: "pregunta.preguntaES"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "preguntaES",
+                              name: "preguntaES"
+                            },
+                            domProps: { value: _vm.pregunta.preguntaES },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pregunta,
+                                  "preguntaES",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        : _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pregunta.preguntaES,
+                                expression: "pregunta.preguntaES"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "preguntaES",
+                              id: "preguntaES"
+                            },
+                            domProps: { value: _vm.pregunta.preguntaES },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pregunta,
+                                  "preguntaES",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-4 col-form-label",
+                      attrs: { for: "preguntaEN" }
+                    },
+                    [_vm._v("Pregunta en Anglés")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("div", { staticClass: "col-sm-12" }, [
+                      _vm.insert
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pregunta.preguntaEN,
+                                expression: "pregunta.preguntaEN"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "preguntaEN",
+                              name: "preguntaEN"
+                            },
+                            domProps: { value: _vm.pregunta.preguntaEN },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pregunta,
+                                  "preguntaEN",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        : _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pregunta.preguntaEN,
+                                expression: "pregunta.preguntaEN"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "preguntaEN",
+                              id: "preguntaEN"
+                            },
+                            domProps: { value: _vm.pregunta.preguntaEN },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pregunta,
+                                  "preguntaEN",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _vm._m(4),
+                _vm._v(" "),
+                _vm.insert
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        attrs: { type: "button", id: "botonBorrar" },
+                        on: {
+                          click: function($event) {
+                            return _vm.insertPregunta()
+                          }
+                        }
+                      },
+                      [_vm._v("Afegir")]
+                    )
+                  : _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        attrs: { type: "button", id: "botonBorrar" },
+                        on: {
+                          click: function($event) {
+                            return _vm.updatePregunta()
+                          }
+                        }
+                      },
+                      [_vm._v("Modificar")]
+                    )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Pregunta Espanyol")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Pregunta Anglés")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Esborrar Pregunta")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-secondary btn-sm",
+        attrs: { type: "button", "data-dismiss": "modal" }
+      },
+      [_c("i", { staticClass: "fas fa-times" }), _vm._v(" Tancar")]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-secondary btn-sm",
+        attrs: { type: "button", "data-dismiss": "modal" }
+      },
+      [_c("i", { staticClass: "fas fa-times" }), _vm._v(" Tancar")]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/UsuarisComponent.vue?vue&type=template&id=80a4f4b0&":
 /*!******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/UsuarisComponent.vue?vue&type=template&id=80a4f4b0& ***!
@@ -38615,11 +41436,9 @@ var render = function() {
   return _c("main", [
     _c("div", { staticClass: "card mt-3" }, [
       _c("div", { staticClass: "card-body mt-1" }, [
-        _c(
-          "h5",
-          { staticClass: "card-title", attrs: { id: "titol_usuaris" } },
-          [_vm._v("Usuaris")]
-        ),
+        _c("h5", { staticClass: "card-title", attrs: { id: "titol_form" } }, [
+          _vm._v("Usuaris")
+        ]),
         _vm._v(" "),
         _vm._m(0),
         _vm._v(" "),
@@ -38676,7 +41495,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-danger btn-sm ml-1 float-right",
+                        staticClass: "btn btn-danger btn-sm ml-1",
                         attrs: { type: "submit", id: "botones" },
                         on: {
                           click: function($event) {
@@ -38816,83 +41635,6 @@ var render = function() {
                       "label",
                       {
                         staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "username" }
-                      },
-                      [_vm._v("Username")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.usuari.username,
-                            expression: "usuari.username"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "username",
-                          id: "username",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.usuari.username },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.usuari,
-                              "username",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "email" }
-                      },
-                      [_vm._v("Email")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.usuari.email,
-                            expression: "usuari.email"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", name: "email", id: "email" },
-                        domProps: { value: _vm.usuari.email },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.usuari, "email", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
                         attrs: { for: "nom" }
                       },
                       [_vm._v("Nom")]
@@ -38961,6 +41703,83 @@ var render = function() {
                       "label",
                       {
                         staticClass: "col-sm-2 col-form-label",
+                        attrs: { for: "email" }
+                      },
+                      [_vm._v("Email")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-10" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.usuari.email,
+                            expression: "usuari.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "email", id: "email" },
+                        domProps: { value: _vm.usuari.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.usuari, "email", $event.target.value)
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-2 col-form-label",
+                        attrs: { for: "username" }
+                      },
+                      [_vm._v("Username")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-4" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.usuari.username,
+                            expression: "usuari.username"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "username",
+                          id: "username",
+                          autofocus: ""
+                        },
+                        domProps: { value: _vm.usuari.username },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.usuari,
+                              "username",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-2 col-form-label",
                         attrs: { for: "contrasenya" }
                       },
                       [_vm._v("Contrasenya")]
@@ -38996,18 +41815,66 @@ var render = function() {
                           }
                         }
                       })
-                    ]),
-                    _vm._v(" "),
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
                     _c(
                       "label",
                       {
-                        staticClass: "col-sm-3 col-form-label",
+                        staticClass: "col-sm-2 col-form-label",
                         attrs: { for: "recurs" }
                       },
                       [_vm._v("Tipus de Recurs")]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-3" })
+                    _c("div", { staticClass: "col-sm-7 mt-2" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.usuari.recursos_id,
+                              expression: "usuari.recursos_id"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "recurs", name: "recurs" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.usuari,
+                                "recursos_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        _vm._l(_vm.tipusRecursos, function(tipusRecurs) {
+                          return _c(
+                            "option",
+                            {
+                              key: tipusRecurs.id,
+                              domProps: { value: tipusRecurs.id }
+                            },
+                            [_vm._v(_vm._s(tipusRecurs.tipus))]
+                          )
+                        }),
+                        0
+                      )
+                    ])
                   ]),
                   _vm._v(" "),
                   _c(
@@ -39017,7 +41884,7 @@ var render = function() {
                       _c(
                         "label",
                         {
-                          staticClass: "col-sm-3 col-form-label",
+                          staticClass: "col-sm-2 col-form-label",
                           attrs: { for: "rol" }
                         },
                         [_vm._v("Tipus de Rol")]
@@ -39028,7 +41895,7 @@ var render = function() {
                           "div",
                           {
                             key: rol.id,
-                            staticClass: "form-check form-check-inline"
+                            staticClass: "form-check form-check-inline ml-3"
                           },
                           [
                             _c("input", {
@@ -39234,6 +42101,1131 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administratiu/FormulariComponent.vue?vue&type=template&id=b1fda838&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administratiu/FormulariComponent.vue?vue&type=template&id=b1fda838& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container mr-4 col-12" }, [
+      _c("div", { staticClass: "form-group row ml-5" }, [
+        _c(
+          "div",
+          {
+            staticClass: "card col-md-5 ml-2 mt-2 col-sm-12",
+            attrs: { id: "card" }
+          },
+          [
+            _c("div", { staticClass: "card-header bg-primary text-white" }, [
+              _c("h3", { staticClass: "card-title" }, [_vm._v("Alertant")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "form-group row" }, [
+                _c("div", { staticClass: "col-sm-12 col-12" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "tipus_alertant" }
+                    },
+                    [_c("strong", [_vm._v("Tipus alertant")])]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "tipus_alertant",
+                        id: "vip",
+                        value: "vip"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "vip" }
+                      },
+                      [_vm._v("Alertant VIP")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "tipus_alertant",
+                        id: "centre",
+                        value: "sanitari"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "centre" }
+                      },
+                      [_vm._v("Centre sanitari")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "tipus_alertant",
+                        id: "accidental",
+                        value: "accidental"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "accidental" }
+                      },
+                      [_vm._v("Accidental")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "tipus_alertant",
+                        id: "entorn_afectat",
+                        value: "entorn_afectat"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "entorn_afectat" }
+                      },
+                      [_vm._v("Entorn afectat")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "tipus_alertant",
+                        id: "afectat",
+                        value: "afectat"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "afectat" }
+                      },
+                      [_vm._v("Afectat")]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "nom_alertant" }
+                    },
+                    [_c("strong", [_vm._v("Nom")])]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "nom_alertant",
+                      id: "nom_alertant",
+                      autofocus: ""
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "telefon_alertant" }
+                    },
+                    [_c("strong", [_vm._v("Telèfon")])]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "tel",
+                      name: "telefon_alertant",
+                      id: "telefon_alertant",
+                      maxlength: "9",
+                      min: "0"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "cognom_alertant" }
+                    },
+                    [_c("strong", [_vm._v("Cognom")])]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "cognom_alertant",
+                      id: "cognom_alertant"
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "provincia" }
+                    },
+                    [_c("strong", [_vm._v("Província")])]
+                  ),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "provincia",
+                        id: "Barcelona",
+                        value: "Barcelona"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "Barcelona" }
+                      },
+                      [_vm._v("Barcelona")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "provincia",
+                        id: "Girona",
+                        value: "Girona"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "Girona" }
+                      },
+                      [_vm._v("Girona")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "provincia",
+                        id: "Tarragona",
+                        value: "Tarragona"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "Tarragona" }
+                      },
+                      [_vm._v("Tarragona")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "provincia",
+                        id: "Lleida",
+                        value: "Lleida"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "Lleida" }
+                      },
+                      [_vm._v("Lleida")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "municipi" }
+                    },
+                    [_c("strong", [_vm._v("Municipi")])]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: { name: "municipi", id: "municipi" }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [_vm._v("1")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "" } }, [_vm._v("2")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "" } }, [_vm._v("3")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "" } }, [_vm._v("4")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "" } }, [_vm._v("5")])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c("div", { staticClass: "col-sm-7 col-7" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "direccio" }
+                    },
+                    [_c("strong", [_vm._v("Adreça")])]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", name: "direccio", id: "direccio" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "comp_direccio" }
+                    },
+                    [_c("strong", [_vm._v("Adreça complementària")])]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "comp_direccio",
+                      id: "comp_direccio"
+                    }
+                  })
+                ])
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "card col-md-5 ml-2 mt-2 col-sm-12",
+            attrs: { id: "card" }
+          },
+          [
+            _c("div", { staticClass: "card-header bg-primary text-white" }, [
+              _c("h3", { staticClass: "card-title" }, [_vm._v("Afectat")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "form-group row" }, [
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "nom_afectat" }
+                    },
+                    [_c("strong", [_vm._v("Nom")])]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "nom_afectat",
+                      id: "nom_afectat"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "cognom_afectat" }
+                    },
+                    [_c("strong", [_vm._v("Cognom")])]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "cognom_afectat",
+                      id: "cognom_afectat"
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "document_afectat" }
+                    },
+                    [_c("strong", [_vm._v("DNI, TS/NSS")])]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "document_afectat",
+                      id: "document_afectat",
+                      maxlength: "14",
+                      min: "0"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "telefon_alertant" }
+                    },
+                    [_c("strong", [_vm._v("Telèfon")])]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "tel",
+                      name: "telefon_alertant",
+                      id: "telefon_alertant",
+                      maxlength: "9",
+                      min: "0"
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "edat_afectat" }
+                    },
+                    [_c("strong", [_vm._v("Edat")])]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "number",
+                      name: "edat_afectat",
+                      id: "edat_afectat",
+                      min: "0",
+                      maxlength: "3"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-form-label", attrs: { for: "genere" } },
+                    [_c("strong", [_vm._v("Génere")])]
+                  ),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "genere",
+                        id: "home",
+                        value: "home"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "home" }
+                      },
+                      [_vm._v("Home")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "genere",
+                        id: "dona",
+                        value: "dona"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "dona" }
+                      },
+                      [_vm._v("Dona")]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "tipus_accident" }
+                    },
+                    [_c("strong", [_vm._v("Tipus d'accident o d'incident")])]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: { name: "tipus_accident", id: "tipus_accident" }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("Accidents i traumatismes")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("Malaltia a un lloc públic")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("Malaltia a domicili")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("Consulta mèdica")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("Transports sanitari")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label mt-2",
+                      attrs: { for: "num_afectats" }
+                    },
+                    [_c("strong", [_vm._v("Numero de afectats")])]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "number",
+                      name: "num_afectats",
+                      id: "num_afectats",
+                      min: "0"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-5 col-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "descripcio" }
+                    },
+                    [
+                      _c("strong", [
+                        _vm._v("Descripció d'accident o d'incident")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "descripcio",
+                      name: "descripcio",
+                      rows: "4",
+                      placeholder: "Descripció sobre l'accident o l'incident..."
+                    }
+                  })
+                ])
+              ])
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row ml-5" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary m-2 btn-lg",
+            attrs: {
+              "data-toggle": "collapse",
+              href: "#recurs_mobil",
+              role: "button",
+              "aria-expanded": "false",
+              "aria-controls": "recurs_mobil"
+            }
+          },
+          [_vm._v("Resposta amb recurs mòbil")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary m-2 btn-lg",
+            attrs: {
+              "data-toggle": "collapse",
+              href: "#no_recurs",
+              role: "button",
+              "aria-expanded": "false",
+              "aria-controls": "no_recurs"
+            }
+          },
+          [_vm._v("Resposta sense recurs mòbil")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mt-2 mb-1" }, [
+        _c("div", { staticClass: "col" }, [
+          _c(
+            "div",
+            {
+              staticClass: "collapse multi-collapse",
+              attrs: { id: "recurs_mobil" }
+            },
+            [
+              _c("div", { staticClass: "card card-body" }, [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-4 col-4" }, [
+                    _c("h5", [_c("u", [_vm._v("Primer recurs mòbil")])]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "recurs1" }
+                      },
+                      [_c("strong", [_vm._v("Tipus de recurs")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: { name: "recurs1", id: "recurs1" }
+                      },
+                      [
+                        _c(
+                          "option",
+                          {
+                            attrs: {
+                              value: "seleccionar",
+                              selected: "",
+                              disabled: ""
+                            }
+                          },
+                          [_vm._v("Seleccionar...")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "usvb", name: "usvb1" } },
+                          [_vm._v("USVB")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "usva", name: "usva1" } },
+                          [_vm._v("USVA")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "usvap", name: "usvap1" } },
+                          [_vm._v("USVAP")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: {
+                              value: "helicopter_medicalitzat",
+                              name: "helicopter_medicalitzat1"
+                            }
+                          },
+                          [_vm._v("Helicòpter medicalitzat")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: {
+                              value: "transport_secundari",
+                              name: "transport_secundari1"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "Transport secundari (col·lectiu i/o programat)"
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "altre", name: "altre1" } },
+                          [_vm._v("Altre")]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4 col-4" }, [
+                    _c("h5", [_c("u", [_vm._v("Segon recurs mòbil")])]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "recurs2" }
+                      },
+                      [_c("strong", [_vm._v("Tipus de recurs")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: { name: "recurs2", id: "recurs2" }
+                      },
+                      [
+                        _c(
+                          "option",
+                          {
+                            attrs: {
+                              value: "seleccionar",
+                              selected: "",
+                              disabled: ""
+                            }
+                          },
+                          [_vm._v("Seleccionar...")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "usvb", name: "usvb2" } },
+                          [_vm._v("USVB")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "usva", name: "usv2a" } },
+                          [_vm._v("USVA")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "usvap", name: "usvap2" } },
+                          [_vm._v("USVAP")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: {
+                              value: "helicopter_medicalitzat",
+                              name: "helicopter_medicalitzat2"
+                            }
+                          },
+                          [_vm._v("Helicòpter medicalitzat")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: {
+                              value: "transport_secundari",
+                              name: "transport_secundari2"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "Transport secundari (col·lectiu i/o programat)"
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "altre", name: "altre2" } },
+                          [_vm._v("Altre")]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4 col-4" }, [
+                    _c("h5", [_c("u", [_vm._v("Tercer recurs mòbil")])]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "recurs3" }
+                      },
+                      [_c("strong", [_vm._v("Tipus de recurs")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: { name: "recurs3", id: "recurs3" }
+                      },
+                      [
+                        _c(
+                          "option",
+                          {
+                            attrs: {
+                              value: "seleccionar",
+                              selected: "",
+                              disabled: ""
+                            }
+                          },
+                          [_vm._v("Seleccionar...")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "usvb", name: "usvb3" } },
+                          [_vm._v("USVB")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "usva", name: "usva3" } },
+                          [_vm._v("USVA")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "usvap", name: "usvap3" } },
+                          [_vm._v("USVAP")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: {
+                              value: "helicopter_medicalitzat",
+                              name: "helicopter_medicalitzat3"
+                            }
+                          },
+                          [_vm._v("Helicòpter medicalitzat")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: {
+                              value: "transport_secundari",
+                              name: "transport_secundari3"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "Transport secundari (col·lectiu i/o programat)"
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "altre", name: "altre3" } },
+                          [_vm._v("Altre")]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-sm-4 col-4" }, [
+                    _c("label", { attrs: { for: "prioritat1" } }, [
+                      _c("strong", [_vm._v("Prioritat")])
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control-range",
+                      attrs: {
+                        type: "range",
+                        id: "prioritat1",
+                        name: "prioritat1",
+                        value: "0",
+                        min: "0",
+                        max: "4",
+                        oninput: "this.nextElementSibling.value = this.value"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("output", [_vm._v("0")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4 col-4" }, [
+                    _c("label", { attrs: { for: "prioritat2" } }, [
+                      _c("strong", [_vm._v("Prioritat")])
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control-range",
+                      attrs: {
+                        type: "range",
+                        id: "prioritat2",
+                        name: "prioritat2",
+                        value: "0",
+                        min: "0",
+                        max: "4",
+                        oninput: "this.nextElementSibling.value = this.value"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("output", [_vm._v("0")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-4 col-4" }, [
+                    _c("label", { attrs: { for: "prioritat3" } }, [
+                      _c("strong", [_vm._v("Prioritat")])
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control-range",
+                      attrs: {
+                        type: "range",
+                        id: "prioritat3",
+                        name: "prioritat3",
+                        value: "0",
+                        min: "0",
+                        max: "4",
+                        oninput: "this.nextElementSibling.value = this.value"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("output", [_vm._v("0")])
+                  ])
+                ])
+              ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mt-2 mb-1" }, [
+        _c("div", { staticClass: "col" }, [
+          _c(
+            "div",
+            {
+              staticClass: "collapse multi-collapse",
+              attrs: { id: "no_recurs" }
+            },
+            [
+              _c("div", { staticClass: "card card-body" }, [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label col-2 col-sm-2",
+                      attrs: { for: "resp_no_recurs" }
+                    },
+                    [_c("strong", [_vm._v("Tipus de resposta")])]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control col-5 col-sm-5",
+                      attrs: { name: "resp_no_recurs", id: "resp_no_recurs" }
+                    },
+                    [
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            value: "seleccionar",
+                            selected: "",
+                            disabled: ""
+                          }
+                        },
+                        [_vm._v("Seleccionar...")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            value: "consulta_telefonica",
+                            name: "consulta_telefonica"
+                          }
+                        },
+                        [_vm._v("Consulta telefònica")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            value: "informacio_telefonica",
+                            name: "informacio_telefonica"
+                          }
+                        },
+                        [_vm._v("Informació telefònica")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        { attrs: { value: "usvap", name: "derivacio_centre" } },
+                        [_vm._v("Derivació a centres sanitaris")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            value: "Derivació_a_altres_centres_sanitaris",
+                            name: "derivacio_altre_sanitari"
+                          }
+                        },
+                        [_vm._v("Derivació a altres centres sanitaris")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        { attrs: { value: "altre", name: "altre_sense" } },
+                        [_vm._v("Altre")]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success btn-lg boto_enviar",
+            attrs: { type: "submit", href: "" }
+          },
+          [_c("i", { staticClass: "fas fa-check fa-1x" }), _vm._v("Enviar")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administratiu/IncidenciesComponent.vue?vue&type=template&id=292eedaa&":
 /*!**********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administratiu/IncidenciesComponent.vue?vue&type=template&id=292eedaa& ***!
@@ -39252,7 +43244,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card mt-3" }, [
     _c("div", { staticClass: "card-body mt-1" }, [
-      _c("h5", { staticClass: "card-title", attrs: { id: "titol_usuaris" } }, [
+      _c("h5", { staticClass: "card-title", attrs: { id: "titol_form" } }, [
         _vm._v("Taula d'Incidencies")
       ]),
       _vm._v(" "),
@@ -39293,7 +43285,7 @@ var render = function() {
                           _vm._v(
                             "\n                            " +
                               _vm._s(usuari.nom) +
-                              ' " " ' +
+                              " " +
                               _vm._s(usuari.cognoms) +
                               "\n                        "
                           )
