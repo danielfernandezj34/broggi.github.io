@@ -3333,6 +3333,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3341,6 +3395,8 @@ __webpack_require__.r(__webpack_exports__);
       usuaris: [],
       municipis: [],
       alertants: [],
+      recursos: [],
+      recursosIncidencia: [],
       incidencia: {
         id: '',
         num_incident: '',
@@ -3407,6 +3463,15 @@ __webpack_require__.r(__webpack_exports__);
       })["finally"](function () {
         return _this.loading = false;
       });
+      var me6 = this;
+      axios.get('/recursos').then(function (response) {
+        me6.recursos = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+        _this.errored = true;
+      })["finally"](function () {
+        return _this.loading = false;
+      });
     },
     editIncidencia: function editIncidencia(incidencia) {
       this.incidencia = incidencia;
@@ -3438,6 +3503,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     mostrarIncidencia: function mostrarIncidencia(incidencia) {
       this.incidencia = incidencia;
+      this.recursosIncidencia = incidencia.recursos;
       $('#modalMostrarIncidencia').modal('show');
     }
   },
@@ -44059,512 +44125,989 @@ var render = function() {
               _vm._m(6),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("form", [
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "num_incident" }
-                      },
-                      [_vm._v("Número de l'incidència")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.incidencia.num_incident,
-                            expression: "incidencia.num_incident"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "number",
-                          name: "num_incident",
-                          id: "num_incident",
-                          placeholder: "Número de l'incidència",
-                          disabled: ""
+                _c(
+                  "form",
+                  [
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-2 col-form-label",
+                          attrs: { for: "num_incident" }
                         },
-                        domProps: { value: _vm.incidencia.num_incident },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                        [_vm._v("Número de l'incidència")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.num_incident,
+                              expression: "incidencia.num_incident"
                             }
-                            _vm.$set(
-                              _vm.incidencia,
-                              "num_incident",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "usuaris_id" }
-                      },
-                      [_vm._v("Nom de l'Administratiu")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-sm-4" },
-                      _vm._l(_vm.usuaris, function(usuari) {
-                        return _c("div", { key: usuari.id }, [
-                          usuari.id == _vm.incidencia.usuaris_id
-                            ? _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: usuari.nom,
-                                    expression: "usuari.nom"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  type: "text",
-                                  name: "usuaris_id",
-                                  id: "usuaris_id",
-                                  disabled: ""
-                                },
-                                domProps: { value: usuari.nom },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(usuari, "nom", $event.target.value)
-                                  }
-                                }
-                              })
-                            : _vm._e()
-                        ])
-                      }),
-                      0
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "data" }
-                      },
-                      [_vm._v("Data")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.incidencia.data,
-                            expression: "incidencia.data"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "date",
-                          name: "data",
-                          id: "data",
-                          placeholder: "Data de l'incidència",
-                          disabled: ""
-                        },
-                        domProps: { value: _vm.incidencia.data },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "number",
+                            name: "num_incident",
+                            id: "num_incident",
+                            placeholder: "Número de l'incidència",
+                            disabled: ""
+                          },
+                          domProps: { value: _vm.incidencia.num_incident },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.incidencia,
+                                "num_incident",
+                                $event.target.value
+                              )
                             }
-                            _vm.$set(
-                              _vm.incidencia,
-                              "data",
-                              $event.target.value
-                            )
                           }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "hora" }
-                      },
-                      [_vm._v("Hora")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.incidencia.hora,
-                            expression: "incidencia.hora"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "time",
-                          name: "hora",
-                          id: "hora",
-                          placeholder: "Hora de l'incidència",
-                          disabled: ""
-                        },
-                        domProps: { value: _vm.incidencia.hora },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.incidencia,
-                              "hora",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "adreca" }
-                      },
-                      [_vm._v("Adreça")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.incidencia.adreca,
-                            expression: "incidencia.adreca"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "adreca",
-                          id: "adreca",
-                          disabled: ""
-                        },
-                        domProps: { value: _vm.incidencia.adreca },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.incidencia,
-                              "adreca",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "adreca_complement" }
-                      },
-                      [_vm._v("Adreça Complementària")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.incidencia.adreca_complement,
-                            expression: "incidencia.adreca_complement"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "adreca_complement",
-                          id: "adreca_complement",
-                          disabled: ""
-                        },
-                        domProps: { value: _vm.incidencia.adreca_complement },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.incidencia,
-                              "adreca_complement",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "nom_metge" }
-                      },
-                      [_vm._v("Nom del Metge")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.incidencia.nom_metge,
-                            expression: "incidencia.nom_metge"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "nom_metge",
-                          id: "nom_metge",
-                          disabled: ""
-                        },
-                        domProps: { value: _vm.incidencia.nom_metge },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.incidencia,
-                              "nom_metge",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "tipus_incidencies_id" }
-                      },
-                      [_vm._v("Tipus d'Incidència")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-sm-4" },
-                      _vm._l(_vm.tipusIncidencies, function(tipusIncidencia) {
-                        return _c("div", { key: tipusIncidencia.id }, [
-                          tipusIncidencia.id ==
-                          _vm.incidencia.tipus_incidencies_id
-                            ? _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: tipusIncidencia.tipus,
-                                    expression: "tipusIncidencia.tipus"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  type: "text",
-                                  name: "tipus_incidencies_id",
-                                  id: "tipus_incidencies_id",
-                                  disabled: ""
-                                },
-                                domProps: { value: tipusIncidencia.tipus },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      tipusIncidencia,
-                                      "tipus",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            : _vm._e()
-                        ])
-                      }),
-                      0
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "alertants_id" }
-                      },
-                      [_vm._v("Nom de l'Alertant")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-sm-4" },
-                      _vm._l(_vm.alertants, function(alertant) {
-                        return _c("div", { key: alertant.id }, [
-                          alertant.id == _vm.incidencia.alertants_id
-                            ? _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: alertant.nom,
-                                    expression: "alertant.nom"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  type: "text",
-                                  name: "alertants_id",
-                                  id: "alertants_id",
-                                  disabled: ""
-                                },
-                                domProps: { value: alertant.nom },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      alertant,
-                                      "nom",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            : _vm._e()
-                        ])
-                      }),
-                      0
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "municipis_id" }
-                      },
-                      [_vm._v("Municipi")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-sm-4" },
-                      _vm._l(_vm.municipis, function(municipi) {
-                        return _c("div", { key: municipi.id }, [
-                          municipi.id == _vm.incidencia.municipis_id
-                            ? _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: municipi.nom,
-                                    expression: "municipi.nom"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  type: "text",
-                                  name: "tipus_incidencies_id",
-                                  id: "tipus_incidencies_id",
-                                  disabled: ""
-                                },
-                                domProps: { value: municipi.nom },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      municipi,
-                                      "nom",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            : _vm._e()
-                        ])
-                      }),
-                      0
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c("div", { staticClass: "col-sm-12" }, [
-                      _c("label", { attrs: { for: "descripcio" } }, [
-                        _vm._v("Descripció")
+                        })
                       ]),
                       _vm._v(" "),
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.incidencia.descripcio,
-                            expression: "incidencia.descripcio"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          name: "descripcio",
-                          id: "descripcio",
-                          rows: "4",
-                          disabled: ""
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-2 col-form-label",
+                          attrs: { for: "usuaris_id" }
                         },
-                        domProps: { value: _vm.incidencia.descripcio },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                        [_vm._v("Nom de l'Administratiu")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-4" },
+                        _vm._l(_vm.usuaris, function(usuari) {
+                          return _c("div", { key: usuari.id }, [
+                            usuari.id == _vm.incidencia.usuaris_id
+                              ? _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: usuari.nom,
+                                      expression: "usuari.nom"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    type: "text",
+                                    name: "usuaris_id",
+                                    id: "usuaris_id",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: usuari.nom },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        usuari,
+                                        "nom",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              : _vm._e()
+                          ])
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-2 col-form-label",
+                          attrs: { for: "data" }
+                        },
+                        [_vm._v("Data")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.data,
+                              expression: "incidencia.data"
                             }
-                            _vm.$set(
-                              _vm.incidencia,
-                              "descripcio",
-                              $event.target.value
-                            )
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "date",
+                            name: "data",
+                            id: "data",
+                            placeholder: "Data de l'incidència",
+                            disabled: ""
+                          },
+                          domProps: { value: _vm.incidencia.data },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.incidencia,
+                                "data",
+                                $event.target.value
+                              )
+                            }
                           }
-                        }
-                      })
-                    ])
-                  ])
-                ])
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-2 col-form-label",
+                          attrs: { for: "hora" }
+                        },
+                        [_vm._v("Hora")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.hora,
+                              expression: "incidencia.hora"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "time",
+                            name: "hora",
+                            id: "hora",
+                            placeholder: "Hora de l'incidència",
+                            disabled: ""
+                          },
+                          domProps: { value: _vm.incidencia.hora },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.incidencia,
+                                "hora",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-2 col-form-label",
+                          attrs: { for: "adreca" }
+                        },
+                        [_vm._v("Adreça")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.adreca,
+                              expression: "incidencia.adreca"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            name: "adreca",
+                            id: "adreca",
+                            disabled: ""
+                          },
+                          domProps: { value: _vm.incidencia.adreca },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.incidencia,
+                                "adreca",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-2 col-form-label",
+                          attrs: { for: "adreca_complement" }
+                        },
+                        [_vm._v("Adreça Complementària")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.adreca_complement,
+                              expression: "incidencia.adreca_complement"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            name: "adreca_complement",
+                            id: "adreca_complement",
+                            disabled: ""
+                          },
+                          domProps: { value: _vm.incidencia.adreca_complement },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.incidencia,
+                                "adreca_complement",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-2 col-form-label",
+                          attrs: { for: "nom_metge" }
+                        },
+                        [_vm._v("Nom del Metge")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.nom_metge,
+                              expression: "incidencia.nom_metge"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            name: "nom_metge",
+                            id: "nom_metge",
+                            disabled: ""
+                          },
+                          domProps: { value: _vm.incidencia.nom_metge },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.incidencia,
+                                "nom_metge",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-2 col-form-label",
+                          attrs: { for: "tipus_incidencies_id" }
+                        },
+                        [_vm._v("Tipus d'Incidència")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-4" },
+                        _vm._l(_vm.tipusIncidencies, function(tipusIncidencia) {
+                          return _c("div", { key: tipusIncidencia.id }, [
+                            tipusIncidencia.id ==
+                            _vm.incidencia.tipus_incidencies_id
+                              ? _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: tipusIncidencia.tipus,
+                                      expression: "tipusIncidencia.tipus"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    type: "text",
+                                    name: "tipus_incidencies_id",
+                                    id: "tipus_incidencies_id",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: tipusIncidencia.tipus },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        tipusIncidencia,
+                                        "tipus",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              : _vm._e()
+                          ])
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-2 col-form-label",
+                          attrs: { for: "alertants_id" }
+                        },
+                        [_vm._v("Nom de l'Alertant")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-4" },
+                        _vm._l(_vm.alertants, function(alertant) {
+                          return _c("div", { key: alertant.id }, [
+                            alertant.id == _vm.incidencia.alertants_id
+                              ? _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: alertant.nom,
+                                      expression: "alertant.nom"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    type: "text",
+                                    name: "alertants_id",
+                                    id: "alertants_id",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: alertant.nom },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        alertant,
+                                        "nom",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              : _vm._e()
+                          ])
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-sm-2 col-form-label",
+                          attrs: { for: "municipis_id" }
+                        },
+                        [_vm._v("Municipi")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-4" },
+                        _vm._l(_vm.municipis, function(municipi) {
+                          return _c("div", { key: municipi.id }, [
+                            municipi.id == _vm.incidencia.municipis_id
+                              ? _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: municipi.nom,
+                                      expression: "municipi.nom"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    type: "text",
+                                    name: "tipus_incidencies_id",
+                                    id: "tipus_incidencies_id",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: municipi.nom },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        municipi,
+                                        "nom",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              : _vm._e()
+                          ])
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c("div", { staticClass: "col-sm-12" }, [
+                        _c("label", { attrs: { for: "descripcio" } }, [
+                          _vm._v("Descripció")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.descripcio,
+                              expression: "incidencia.descripcio"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            name: "descripcio",
+                            id: "descripcio",
+                            rows: "4",
+                            disabled: ""
+                          },
+                          domProps: { value: _vm.incidencia.descripcio },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.incidencia,
+                                "descripcio",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.recursosIncidencia, function(recursIncidencia) {
+                      return _c("div", { key: recursIncidencia.id }, [
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 col-form-label",
+                              attrs: { for: "recursos_id" }
+                            },
+                            [_vm._v("Id del Recurs")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: recursIncidencia.pivot.recursos_id,
+                                  expression:
+                                    "recursIncidencia.pivot.recursos_id"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "recursos_id",
+                                id: "recursos_id",
+                                disabled: ""
+                              },
+                              domProps: {
+                                value: recursIncidencia.pivot.recursos_id
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    recursIncidencia.pivot,
+                                    "recursos_id",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 col-form-label",
+                              attrs: { for: "prioritat" }
+                            },
+                            [_vm._v("Prioritat")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: recursIncidencia.pivot.prioritat,
+                                  expression: "recursIncidencia.pivot.prioritat"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "prioritat",
+                                id: "prioritat",
+                                disabled: ""
+                              },
+                              domProps: {
+                                value: recursIncidencia.pivot.prioritat
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    recursIncidencia.pivot,
+                                    "prioritat",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 col-form-label",
+                              attrs: { for: "desti" }
+                            },
+                            [_vm._v("Destí")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: recursIncidencia.pivot.desti,
+                                  expression: "recursIncidencia.pivot.desti"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "desti",
+                                id: "desti",
+                                disabled: ""
+                              },
+                              domProps: { value: recursIncidencia.pivot.desti },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    recursIncidencia.pivot,
+                                    "desti",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 col-form-label",
+                              attrs: { for: "hora_activacio" }
+                            },
+                            [_vm._v("Hora d'Activació")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: recursIncidencia.pivot.hora_activacio,
+                                  expression:
+                                    "recursIncidencia.pivot.hora_activacio"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "hora_activacio",
+                                id: "hora_activacio",
+                                disabled: ""
+                              },
+                              domProps: {
+                                value: recursIncidencia.pivot.hora_activacio
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    recursIncidencia.pivot,
+                                    "hora_activacio",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 col-form-label",
+                              attrs: { for: "hora_mobilitzacio" }
+                            },
+                            [_vm._v("Hora de Mobilització")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    recursIncidencia.pivot.hora_mobilitzacio,
+                                  expression:
+                                    "recursIncidencia.pivot.hora_mobilitzacio"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "hora_mobilitzacio",
+                                id: "hora_mobilitzacio",
+                                disabled: ""
+                              },
+                              domProps: {
+                                value: recursIncidencia.pivot.hora_mobilitzacio
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    recursIncidencia.pivot,
+                                    "hora_mobilitzacio",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 col-form-label",
+                              attrs: { for: "hora_assistencia" }
+                            },
+                            [_vm._v("Hora d'Assistència")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    recursIncidencia.pivot.hora_assistencia,
+                                  expression:
+                                    "recursIncidencia.pivot.hora_assistencia"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "hora_assistencia",
+                                id: "hora_assistencia",
+                                disabled: ""
+                              },
+                              domProps: {
+                                value: recursIncidencia.pivot.hora_assistencia
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    recursIncidencia.pivot,
+                                    "hora_assistencia",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 col-form-label",
+                              attrs: { for: "hora_transport" }
+                            },
+                            [_vm._v("Hora de Transport")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: recursIncidencia.pivot.hora_transport,
+                                  expression:
+                                    "recursIncidencia.pivot.hora_transport"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "hora_transport",
+                                id: "hora_transport",
+                                disabled: ""
+                              },
+                              domProps: {
+                                value: recursIncidencia.pivot.hora_transport
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    recursIncidencia.pivot,
+                                    "hora_transport",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 col-form-label",
+                              attrs: { for: "hora_arribada_hospital" }
+                            },
+                            [_vm._v("Hora d'Arribada a l'Hospital")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    recursIncidencia.pivot
+                                      .hora_arribada_hospital,
+                                  expression:
+                                    "recursIncidencia.pivot.hora_arribada_hospital"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "hora_arribada_hospital",
+                                id: "hora_arribada_hospital",
+                                disabled: ""
+                              },
+                              domProps: {
+                                value:
+                                  recursIncidencia.pivot.hora_arribada_hospital
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    recursIncidencia.pivot,
+                                    "hora_arribada_hospital",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 col-form-label",
+                              attrs: { for: "hora_transferencia" }
+                            },
+                            [_vm._v("Hora de Transferència")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    recursIncidencia.pivot.hora_transferencia,
+                                  expression:
+                                    "recursIncidencia.pivot.hora_transferencia"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "hora_transferencia",
+                                id: "hora_transferencia",
+                                disabled: ""
+                              },
+                              domProps: {
+                                value: recursIncidencia.pivot.hora_transferencia
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    recursIncidencia.pivot,
+                                    "hora_transferencia",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 col-form-label",
+                              attrs: { for: "hora_finalitzacio" }
+                            },
+                            [_vm._v("Hora de Finalització")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    recursIncidencia.pivot.hora_finalitzacio,
+                                  expression:
+                                    "recursIncidencia.pivot.hora_finalitzacio"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "hora_finalitzacio",
+                                id: "hora_finalitzacio",
+                                disabled: ""
+                              },
+                              domProps: {
+                                value: recursIncidencia.pivot.hora_finalitzacio
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    recursIncidencia.pivot,
+                                    "hora_finalitzacio",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      ])
+                    })
+                  ],
+                  2
+                )
               ]),
               _vm._v(" "),
               _vm._m(7)
