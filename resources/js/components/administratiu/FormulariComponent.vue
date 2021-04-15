@@ -131,17 +131,7 @@
 
                         <div class="form-group row">
 
-                            <div class="col-sm-5 col-5">
-                                <label for="provincia" class="col-form-label"><strong>Província</strong></label><br>
-
-                                <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id" >
-                                    <input class="form-check-input" type="radio" name="provincia" :id="provincia.nom" :value="provincia.id" v-model="provinciaSelec">
-                                    <label class="form-check-label" :for="provincia.nom">{{ provincia.nom }}</label>
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-7 col-7">
+                            <div class="col-sm9 col-9">
                                 <label for="direccio" class="col-form-label"><strong>Adreça</strong></label>
                                 <input type="text" class="form-control" name="direccio" id="direccio">
                                 <label for="comp_direccio" class="col-form-label"><strong>Adreça complementària</strong></label>
@@ -247,7 +237,7 @@
 
                                     <div class="col-sm-5 col-5">
                                         <label for="telefon_alertant1" class="col-form-label"><strong>Telèfon</strong></label>
-                                        <input class="form-control" type="tel" name="telefon_alertant1" id="telefon_alertant1" maxlength="9" min="0" :value="telefonAfectat">
+                                        <input class="form-control" type="tel" name="telefon_alertant1" id="telefon_alertant1" maxlength="9" min="0" :value="telefonAfectat" disabled>
 
                                     </div>
 
@@ -642,7 +632,7 @@
                                 <h5><u>Primer recurs mòbil</u></h5>
                                 <label for="recurs1" class="col-form-label"><strong>Tipus de recurs</strong></label>
                                 <select class="form-control" name="recurs1" id="recurs1" v-model="recursSelec1">
-
+                                    <option selected disabled>Seleccionar...</option>
                                     <option v-for="recurs in recursos" :key="recurs.id" :value="recurs.id">{{ recurs.tipus }}</option>
                                     <option value="altre">Altre</option>
                                 </select>
@@ -652,7 +642,7 @@
                                 <h5><u>Segon recurs mòbil</u></h5>
                                 <label for="recurs2" class="col-form-label"><strong>Tipus de recurs</strong></label>
                                 <select class="form-control" name="recurs2" id="recurs2" v-model="recursSelec2">
-
+                                    <option selected disabled>Seleccionar...</option>
                                     <option v-for="recurs in recursos" :key="recurs.id" :value="recurs.id">{{ recurs.tipus }}</option>
                                     <option value="altre2">Altre</option>
                                 </select>
@@ -662,6 +652,7 @@
                                 <h5><u>Tercer recurs mòbil</u></h5>
                                 <label for="recurs3" class="col-form-label"><strong>Tipus de recurs</strong></label>
                                 <select class="form-control" name="recurs3" id="recurs3" v-model="recursSelec3">
+                                    <option selected disabled>Seleccionar...</option>
                                     <option v-for="recurs in recursos" :key="recurs.id" :value="recurs.id">{{ recurs.tipus }}</option>
                                     <option value="altre3">Altre</option>
                                 </select>
