@@ -14,7 +14,7 @@ class Incidencies extends Model
 
     public function afectats()
     {
-        return $this->hasMany(Afectats::class, 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
+        return $this->belongsToMany(Afectats::class, 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
     }
 
     public function tipus_incidencies()

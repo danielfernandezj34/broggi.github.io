@@ -119,6 +119,29 @@
                                     <textarea class="form-control" name="descripcio" id="descripcio" rows="4"  v-model="incidencia.descripcio"></textarea>
                                 </div>
                             </div>
+                            <hr><hr>
+                            <div class="form-group row">
+                                <h5 class="modal-title ml-3" id="AlertantModalLabel">  Recursos Assignats</h5>
+                            </div>
+                            <div v-for="recursIncidencia in recursosIncidencia" :key="recursIncidencia.id">
+                                <div class="form-group row">
+                                    <label for="recursos_id" class="col-sm-2 col-form-label" >Id del Recurs</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="recursos_id" class="form-control" id="recursos_id"  v-model="recursIncidencia.pivot.recursos_id" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="prioritat" class="col-sm-2 col-form-label" >Prioritat</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="prioritat" class="form-control" id="prioritat"  v-model="recursIncidencia.pivot.prioritat">
+                                    </div>
+                                    <label for="desti" class="col-sm-2 col-form-label" >Destí</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="desti" class="form-control" id="desti"  v-model="recursIncidencia.pivot.desti">
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -140,7 +163,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <div>
                             <div class="form-group row">
                                 <label for="num_incident" class="col-sm-2 col-form-label">Número de l'incidència</label>
                                 <div class="col-sm-4">
@@ -148,7 +171,7 @@
                                 </div>
                                 <label for="usuaris_id" class="col-sm-2 col-form-label" >Nom de l'Administratiu</label>
                                 <div class="col-sm-4">
-                                   <div v-for="usuari in usuaris" :key="usuari.id">
+                                    <div v-for="usuari in usuaris" :key="usuari.id">
                                         <input v-if="usuari.id == incidencia.usuaris_id" type="text" name="usuaris_id" class="form-control" id="usuaris_id"  v-model="usuari.nom" disabled>
                                     </div>
                                 </div>
@@ -163,7 +186,6 @@
                                     <input type="time" name="hora" id="hora" class="form-control" placeholder="Hora de l'incidència"  v-model="incidencia.hora" disabled>
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label for="adreca" class="col-sm-2 col-form-label">Adreça</label>
                                 <div class="col-sm-4">
@@ -174,7 +196,6 @@
                                     <input type="text" name="adreca_complement" id="adreca_complement" class="form-control" v-model="incidencia.adreca_complement" disabled>
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label for="nom_metge" class="col-sm-2 col-form-label" >Nom del Metge</label>
                                 <div class="col-sm-4">
@@ -182,12 +203,11 @@
                                 </div>
                                 <label for="tipus_incidencies_id" class="col-sm-2 col-form-label" >Tipus d'Incidència</label>
                                 <div class="col-sm-4">
-                                   <div v-for="tipusIncidencia in tipusIncidencies" :key="tipusIncidencia.id">
+                                    <div v-for="tipusIncidencia in tipusIncidencies" :key="tipusIncidencia.id">
                                         <input v-if="tipusIncidencia.id == incidencia.tipus_incidencies_id" type="text" name="tipus_incidencies_id" class="form-control" id="tipus_incidencies_id"  v-model="tipusIncidencia.tipus" disabled>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label for="alertants_id" class="col-sm-2 col-form-label" >Nom de l'Alertant</label>
                                 <div class="col-sm-4">
@@ -196,11 +216,11 @@
                                     </div>
                                 </div>
                                 <label for="municipis_id" class="col-sm-2 col-form-label" >Municipi</label>
-                                 <div class="col-sm-4">
+                                <div class="col-sm-4">
                                     <div v-for="municipi in municipis" :key="municipi.id">
                                         <input v-if="municipi.id == incidencia.municipis_id" type="text" name="tipus_incidencies_id" class="form-control" id="tipus_incidencies_id"  v-model="municipi.nom" disabled>
                                     </div>
-                                 </div>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-12">
@@ -208,11 +228,59 @@
                                     <textarea class="form-control" name="descripcio" id="descripcio" rows="4"  v-model="incidencia.descripcio" disabled></textarea>
                                 </div>
                             </div>
+                            <hr><hr>
+                        </div>
+                        <div>
+                            <div class="form-group row">
+                                 <h5 class="modal-title ml-3" id="AlertantModalLabel">  Afectats</h5>
+                            </div>
+                            <div v-for="afectat in afectats" :key="afectat.id">
+                                <div class="form-group row">
+                                    <label for="nom_afectat" class="col-sm-2 col-form-label" >Nom</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="nom_afectat" class="form-control" id="nom_afectat"  v-model="afectat.nom" disabled>
+                                    </div>
+                                    <label for="cognom_afectat" class="col-sm-2 col-form-label" >Cognoms</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cognom_afectat" class="form-control" id="cognom_afectat"  v-model="afectat.cognoms" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tel_afectat" class="col-sm-2 col-form-label" >Telèfon</label>
+                                    <div class="col-sm-4">
+                                        <input type="tel" name="tel_afectat" class="form-control" id="tel_afectat"  v-model="afectat.telefon" disabled>
+                                    </div>
+                                    <label for="edat_afectat" class="col-sm-2 col-form-label" >Edat</label>
+                                    <div class="col-sm-4">
+                                        <input type="tel" name="edat_afectat" class="form-control" id="edat_afectat"  v-model="afectat.edat" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tel_afectat" class="col-sm-2 col-form-label" >Té cip</label>
+                                    <div class="col-sm-4">
+                                        <input v-if="afectat.te_cip" type="text" name="te_cip_afectat" class="form-control" id="te_cip_afectat" value="Sí" disabled>
+                                        <input v-else type="text" name="te_cip_afectat" class="form-control" id="te_cip_afectat" value="No" disabled>
+                                    </div>
+                                    <label for="edat_afectat" class="col-sm-2 col-form-label" >Sexe</label>
+                                    <div class="col-sm-4">
+                                        <div v-for ="sexe in sexes" :key="sexe.id">
+                                            <input v-if="afectat.sexes_id == sexe.id" type="text" name="sexe_afectat" class="form-control" id="sexe_afectat"  v-model="sexe.sexe" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            <hr>
+                        </div>
+                        <div>
+                            <div class="form-group row">
+                                <h5 class="modal-title ml-3" id="AlertantModalLabel">  Recursos Assignats</h5>
+                            </div>
                             <div v-for="recursIncidencia in recursosIncidencia" :key="recursIncidencia.id">
                                 <div class="form-group row">
                                     <label for="recursos_id" class="col-sm-2 col-form-label" >Id del Recurs</label>
                                     <div class="col-sm-4">
-                                            <input type="text" name="recursos_id" class="form-control" id="recursos_id"  v-model="recursIncidencia.pivot.recursos_id" disabled>
+                                        <input type="text" name="recursos_id" class="form-control" id="recursos_id"  v-model="recursIncidencia.pivot.recursos_id" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -261,8 +329,9 @@
                                         <input type="text" name="hora_finalitzacio" id="hora_finalitzacio" class="form-control"  v-model="recursIncidencia.pivot.hora_finalitzacio" disabled>
                                     </div>
                                 </div>
+                                <hr>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
@@ -285,6 +354,8 @@ export default ({
             alertants:[],
             recursos:[],
             recursosIncidencia:[],
+            afectats:[],
+            sexes:[],
             incidencia:{
                 id:'',
                 num_incident:'',
@@ -371,9 +442,35 @@ export default ({
                 this.errored = true;
              })
                 .finally(() => this.loading = false)
+            let me7= this;
+            axios
+            .get('/sexes')
+            .then(response => {
+                me7.sexes = response.data;
+             })
+                .catch(error => {
+                console.log(error)
+                this.errored = true;
+             })
+                .finally(() => this.loading = false)
+        },
+        selectMunicipis(){
+            let me= this;
+            axios
+            .get('/municipis')
+            .then(response => {
+                me.municipis = response.data;
+             })
+                .catch(error => {
+                console.log(error)
+                this.errored = true;
+             })
+                .finally(() => this.loading = false)
         },
         editIncidencia(incidencia){
                 this.incidencia = incidencia;
+                this.recursosIncidencia = incidencia.recursos;
+                this.afectats = incidencia.afectats;
                 $('#modalIncidencia').modal('show')
             },
          updateIncidencia(){
@@ -407,11 +504,13 @@ export default ({
             mostrarIncidencia(incidencia){
                 this.incidencia = incidencia;
                 this.recursosIncidencia = incidencia.recursos;
+                this.afectats = incidencia.afectats;
                 $('#modalMostrarIncidencia').modal('show')
             }
     },
     created(){
        this.selectIncidencies();
+      // this.selectMunicipis();
     }
 })
 </script>
