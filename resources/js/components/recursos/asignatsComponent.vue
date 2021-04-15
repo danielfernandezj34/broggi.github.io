@@ -15,11 +15,14 @@
                             <th scope="col">Data</th>
                             <th scope="col">Hora</th>
                             <th scope="col">Descripcio</th>
+
                             <th></th>
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="incidencia in incidencies" :key="incidencia.id">
+
                         <!-- <div v-if="user_id == incidencia.usuaris_id"> -->
                             <td v-if="user_id == incidencia.usuaris_id">{{ incidencia.num_incident }}</td>
                             <td v-if="user_id == incidencia.usuaris_id">{{ incidencia.telefon_alertant }}</td>
@@ -32,18 +35,19 @@
                         <!-- </div> -->
                         </tr>
                         
+
                     </tbody>
                 </table>
             </div>
 
         </div>
-
                 <!-- Modal Mostrar -->
         <div class="modal fade" id="modalMostrarIncidencia" tabindex="-1" role="dialog" aria-labelledby="modalBorrarLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="AlertantModalLabel">Mostrar Incidencia</h5>
+
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -179,7 +183,7 @@
                 </div>
             </div>
         </div>
-        
+
     </main>
 </template>
 
@@ -297,6 +301,7 @@
                     .then(function(response){
                         me.selectIncidencies();
                         $('#modalIncidencies').modal('hide');
+
                     }).catch(function(error){
                         me.errorMessage = error.response.data.error;
                     })
@@ -306,6 +311,7 @@
                 $('#modalBorrar').modal('show')
             },
             borrarIncidencia(){
+
                 let me = this;
                 axios
                     .delete('/incidencies/'+ me.incidencia.id)
@@ -332,6 +338,7 @@
         mounted() {
             console.log('Component mounted.')
             console.log(this.user_id);
+
         }
     }
 
