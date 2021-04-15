@@ -16,6 +16,7 @@
                             <th scope="col">Hora</th>
                             <th scope="col">Descripcio</th>
                             <th></th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -181,6 +182,7 @@
         </div>
         
     </main>
+
 </template>
 
 <script>
@@ -336,3 +338,4 @@
     }
 
 </script>
+

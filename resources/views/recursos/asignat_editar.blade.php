@@ -5,5 +5,7 @@
 @section('boto_atras', './consultar')
 @section('container')
 
+
 <incidencies-asignades :user_id="{{Auth::user()->id}}"></incidencies-asignades>
+
 @endsection
