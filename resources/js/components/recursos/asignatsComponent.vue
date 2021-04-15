@@ -42,7 +42,7 @@
             </div>
 
         </div>
-                <!-- Modal Editar -->
+                        <!-- Modal Editar -->
         <div class="modal fade" id="modalEditarIncidencia" tabindex="-1" role="dialog" aria-labelledby="modalBorrarLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
