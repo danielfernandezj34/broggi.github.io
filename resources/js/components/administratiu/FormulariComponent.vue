@@ -77,13 +77,13 @@
                         <div class="form-group row">
 
                             <div class="col-sm-5 col-5">
-                                <label for="nom_afectat1" class="col-form-label"><strong>Nom</strong></label>
-                                <input class="form-control" type="text" name="nom_afectat1" id="nom_afectat1" v-model="nomAfectat">
+                                <label for="nom_alertant1" class="col-form-label"><strong>Nom</strong></label>
+                                <input class="form-control" type="text" name="nom_alertant1" id="nom_alertant1" v-model="nomAfectat">
                             </div>
 
                             <div class="col-sm-5 col-5">
-                                <label for="cognom_afectat1" class="col-form-label"><strong>Cognom</strong></label>
-                                <input class="form-control" type="text" name="cognom_afectat1" id="cognom_afectat1" v-model="cognomAfectat">
+                                <label for="cognom_alertant1" class="col-form-label"><strong>Cognom</strong></label>
+                                <input class="form-control" type="text" name="cognom_alertant1" id="cognom_alertant1" v-model="cognomAfectat">
 
                             </div>
 
@@ -100,7 +100,7 @@
                                 <label for="provincia" class="col-form-label"><strong>Província</strong></label><br>
                                 <div>
                                     <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id" >
-                                        <input class="form-check-input" type="radio" name="provincia" :id="provincia.nom" :value="provincia.id" v-model="provinciaSelec">
+                                        <input class="form-check-input" type="radio" name="provincia" :id="provincia.nom" :value="provincia.id" v-model="ProvinciaSelec" @click="ordenarComarques(provincia.id)">
                                         <label class="form-check-label" :for="provincia.nom">{{ provincia.nom }}</label>
                                     </div>
                                 </div>
@@ -112,8 +112,8 @@
 
                             <div class="col-sm-5 col-5">
                                 <label for="comarca" class="col-form-label"><strong>Comarca</strong></label>
-                                <select v-model="ComarcaSelec" class="form-control" name="comarca" id="comarca">
-                                    <option  v-for="comarca in comarques" :key="comarca.id" :value="comarca.id"><div v-if="comarca.provincies_id == provinciaSelec" >{{ comarca.nom }}</div></option>
+                                <select v-model="ComarcaSelec" @click="ordenarMunicipis(comarcaOrdenat.id)" class="form-control" name="comarca" id="comarca">
+                                    <option  v-for="comarcaOrdenat in comarquesOrdenat" :key="comarcaOrdenat.id" :value="comarcaOrdenat.id">{{ comarcaOrdenat.nom }}</option>
                                 </select>
                             </div>
 
@@ -121,7 +121,7 @@
                                 <label for="municipi" class="col-form-label"><strong>Municipi</strong></label>
                                 <select v-model="ProvinciaSelec" class="form-control" name="municipi" id="municipi">
 
-                                    <option v-for="municipi in municipis" :key="municipi.id" :value="municipi.id"><div v-if="municipi.comarques_id == ComarcaSelec">{{ municipi.nom }}</div></option>
+                                    <option v-for="municipiOrdenat in municipisOrdenat" :key="municipiOrdenat.id" :value="municipiOrdenat.id">{{ municipiOrdenat.nom }}</option>
 
                                 </select>
                             </div>
@@ -362,7 +362,7 @@
                                 <div class="col-sm-5 col-5">
                                     <label for="genere2" class="col-form-label"><strong>Génere</strong></label><br>
                                     <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
-                                        <input class="form-check-input" type="radio" name="genere2" :id="sexe.id" v-model="checked" :value="sexe.sexe">
+                                        <input class="form-check-input" type="radio" name="genere2" :id="sexe.id" :value="sexe.id">
                                         <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
                                     </div>
                                 </div>
@@ -436,7 +436,7 @@
                                 <div class="col-sm-5 col-5">
                                     <label for="genere3" class="col-form-label"><strong>Génere</strong></label><br>
                                     <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
-                                        <input class="form-check-input" type="radio" name="genere3" :id="sexe.id" v-model="checked" :value="sexe.sexe">
+                                        <input class="form-check-input" type="radio" name="genere3" :id="sexe.id" :value="sexe.sexe">
                                         <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
                                     </div>
                                 </div>
@@ -510,7 +510,7 @@
                                 <div class="col-sm-5 col-5">
                                     <label for="genere4" class="col-form-label"><strong>Génere</strong></label><br>
                                     <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
-                                        <input class="form-check-input" type="radio" name="genere4" :id="sexe.id" v-model="checked" :value="sexe.sexe">
+                                        <input class="form-check-input" type="radio" name="genere4" :id="sexe.id" :value="sexe.sexe">
                                         <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
                                     </div>
                                 </div>
@@ -584,7 +584,7 @@
                                 <div class="col-sm-5 col-5">
                                     <label for="genere5" class="col-form-label"><strong>Génere</strong></label><br>
                                     <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
-                                        <input class="form-check-input" type="radio" name="genere5" :id="sexe.id" v-model="checked" :value="sexe.sexe">
+                                        <input class="form-check-input" type="radio" name="genere5" :id="sexe.id" :value="sexe.sexe">
                                         <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
                                     </div>
                                 </div>
@@ -736,11 +736,19 @@
 
 <script>
     export default {
+        props : {
+            user_id: {
+                type : Number,
+                require : true
+            }
+        },
         data(){
             return{
                 comarques: [],
+                comarquesOrdenat : [],
                 provincies: [],
                 municipis: [],
+                municipisOrdenat: [],
                 sexes : [],
                 accidents : [],
                 tipusAlertants : [],
@@ -749,8 +757,9 @@
                 recursSelec1 : '',
                 recursSelec2 : '',
                 recursSelec3 : '',
-                provinciaSelec: '',
-                comarcaSelec: '',
+                ProvinciaSelec: '',
+                ComarcaSelec: '',
+                sexeSelec : '',
                 tipusaSelec : '',
                 centreSelec: '',
                 nomAfectat: '',
@@ -760,7 +769,7 @@
                 color2 : '#2c3e50',
                 color3 : '#2c3e50',
                 color4 : '#2c3e50',
-                color5 : '#2c3e50'
+                color5 : '#2c3e50',
             }
         },
         methods: {
@@ -857,6 +866,28 @@
                     .finally(() => this.loading = false)
 
             },
+            ordenarComarques(ProvinciaSelec){
+                var i = 0;
+
+                while(this.comarques.length > i){
+
+                    if(this.comarques[i].provincies_id == ProvinciaSelec){
+                        this.comarquesOrdenat.push(this.comarques[i]);
+                    }
+                    i++;
+                }
+                console.log('funcion running');
+            },
+            ordenarMunicipis(ComarcaSelec){
+                var i = 0;
+                while(this.municipis.length > i){
+
+                    if(this.municipis[i].comarques_id == ComarcaSelec){
+                        this.municipisOrdenat.push(this.municipis[i]);
+                    }
+                }
+                console.log('Funcio ordenar municipis running')
+            },
             colorboto : function(){
                 if(this.color == '#f70c74'){
                     this.color = '#2c3e50';
@@ -900,12 +931,10 @@
         },
         created() {
             this.selectAll();
-            this.municipisFiltered();
-            this.comarcaFiltered();
-
         },
         mounted() {
             console.log('Component mounted.')
+
         }
     }
 </script>

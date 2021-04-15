@@ -8,6 +8,6 @@
 @endsection
 @section('container')
 
-    <formulari-administratiu></formulari-administratiu>
+    <formulari-administratiu :user_id = {{Auth::user()->id}}></formulari-administratiu>
 
 @endsection
