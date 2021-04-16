@@ -624,12 +624,36 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="edat_afectat4" class="col-form-label"><strong>Edat</strong></label>
+                                    <label for="edat_afectat4" class="col-form-label"><strong>Edat</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="How old are you?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quina edat tens?"></i>
+                                        </div>
+                                    </label>
                                     <input class="form-control" type="number" name="edat_afectat4" id="edat_afectat4" min="0" maxlength="3">
                                 </div>
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="genere4" class="col-form-label"><strong>Génere</strong></label><br>
+                                    <label for="genere4" class="col-form-label"><strong>Génere</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="Are you a man or a woman?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Ets home o dona?"></i>
+                                        </div>
+                                    </label><br>
                                     <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
                                         <input class="form-check-input" type="radio" name="genere4" :id="sexe.id" :value="sexe.sexe">
                                         <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
@@ -640,19 +664,55 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="tipus_accident4" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
+                                    <label for="tipus_accident4" class="col-form-label"><strong>Tipus d'accident o d'incident</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="What is the type of accident or incident?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quin és el tipus d'accident?"></i>
+                                        </div>
+                                    </label>
                                     <select class="form-control" name="tipus_accident4" id="tipus_accident4">
                                         <option selected disabled>Seleccionar...</option>
                                         <option v-for="accident in accidents" :key="accident.id" :value="accident.id">{{ accident.tipus }}</option>
                                     </select>
 
-                                    <label for="num_afectats4" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
+                                    <label for="num_afectats4" class="col-form-label mt-2"><strong>Numero de afectats</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="What is the number of affected?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quin és el numero de l'afectat?"></i>
+                                        </div>
+                                    </label>
                                     <input type="number" class="form-control" name="num_afectats4" id="num_afectats4" min="0">
                                 </div>
 
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="descripcio4" class="col-form-label"><strong>Descripció d'accident o d'incident</strong></label>
+                                    <label for="descripcio4" class="col-form-label"><strong>Descripció d'accident o d'incident</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="Can you describe what happened?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Pots descriure que ha pasat?"></i>
+                                        </div>
+                                    </label>
                                     <textarea class="form-control" id="descripcio4" name= "descripcio4" rows="4" placeholder="Descripció sobre l'accident o l'incident..."></textarea>
                                 </div>
                             </div>
@@ -748,12 +808,36 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="edat_afectat3" class="col-form-label"><strong>Edat</strong></label>
+                                    <label for="edat_afectat3" class="col-form-label"><strong>Edat</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="How old are you?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quina edat tens?"></i>
+                                        </div>
+                                    </label>
                                     <input class="form-control" type="number" name="edat_afectat3" id="edat_afectat3" min="0" maxlength="3">
                                 </div>
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="genere3" class="col-form-label"><strong>Génere</strong></label><br>
+                                    <label for="genere3" class="col-form-label"><strong>Génere</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="Are you a man or a woman?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Ets home o dona?"></i>
+                                        </div>
+                                    </label><br>
                                     <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
                                         <input class="form-check-input" type="radio" name="genere3" :id="sexe.id" :value="sexe.sexe">
                                         <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
@@ -764,19 +848,55 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="tipus_accident3" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
+                                    <label for="tipus_accident3" class="col-form-label"><strong>Tipus d'accident o d'incident</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="What is the type of accident or incident?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quin és el tipus d'accident?"></i>
+                                        </div>
+                                    </label>
                                     <select class="form-control" name="tipus_accident3" id="tipus_accident3">
                                         <option selected disabled>Seleccionar...</option>
                                         <option v-for="accident in accidents" :key="accident.id" :value="accident.id">{{ accident.tipus }}</option>
                                     </select>
 
-                                    <label for="num_afectats3" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
+                                    <label for="num_afectats3" class="col-form-label mt-2"><strong>Numero de afectats</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="What is the number of affected?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quin és el numero de l'afectat?"></i>
+                                        </div>
+                                    </label>
                                     <input type="number" class="form-control" name="num_afectats3" id="num_afectats3" min="0">
                                 </div>
 
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="descripcio3" class="col-form-label"><strong>Descripció d'accident o d'incident</strong></label>
+                                    <label for="descripcio3" class="col-form-label"><strong>Descripció d'accident o d'incident</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="Can you describe what happened?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Pots descriure que ha pasat?"></i>
+                                        </div>
+                                    </label>
                                     <textarea class="form-control" id="descripcio3" name= "descripcio3" rows="4" placeholder="Descripció sobre l'accident o l'incident..."></textarea>
                                 </div>
                             </div>
@@ -872,12 +992,36 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="edat_afectat2" class="col-form-label"><strong>Edat</strong></label>
+                                    <label for="edat_afectat2" class="col-form-label"><strong>Edat</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="How old are you?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quina edat tens?"></i>
+                                        </div>
+                                    </label>
                                     <input class="form-control" type="number" name="edat_afectat2" id="edat_afectat2" min="0" maxlength="3">
                                 </div>
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="genere2" class="col-form-label"><strong>Génere</strong></label><br>
+                                    <label for="genere2" class="col-form-label"><strong>Génere</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="Are you a man or a woman?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Ets home o dona?"></i>
+                                        </div>
+                                    </label><br>
                                     <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
                                         <input class="form-check-input" type="radio" name="genere2" :id="sexe.id" :value="sexe.id">
                                         <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
@@ -888,19 +1032,55 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="tipus_accident2" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
+                                    <label for="tipus_accident2" class="col-form-label"><strong>Tipus d'accident o d'incident</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="What is the type of accident or incident?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quin és el tipus d'accident?"></i>
+                                        </div>
+                                    </label>
                                     <select class="form-control" name="tipus_accident2" id="tipus_accident2">
                                         <option selected disabled>Seleccionar...</option>
                                         <option v-for="accident in accidents" :key="accident.id" :value="accident.id">{{ accident.tipus }}</option>
                                     </select>
 
-                                    <label for="num_afectats2" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
+                                    <label for="num_afectats2" class="col-form-label mt-2"><strong>Numero de afectats</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="What is the number of affected?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quin és el numero de l'afectat?"></i>
+                                        </div>
+                                    </label>
                                     <input type="number" class="form-control" name="num_afectats2" id="num_afectats2" min="0">
                                 </div>
 
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="descripcio2" class="col-form-label"><strong>Descripció d'accident o d'incident</strong></label>
+                                    <label for="descripcio2" class="col-form-label"><strong>Descripció d'accident o d'incident</strong>
+                                        <div class="mt-2">
+                                            <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="Can you describe what happened?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Pots descriure que ha pasat?"></i>
+                                        </div>
+                                    </label>
                                     <textarea class="form-control" id="descripcio2" name= "descripcio2" rows="4" placeholder="Descripció sobre l'accident o l'incident..."></textarea>
                                 </div>
                             </div>
@@ -1053,7 +1233,19 @@
                                     </div>
 
                                     <div class="col-sm-5 col-5">
-                                        <label for="telefon_alertant1" class="col-form-label"><strong>Telèfon</strong></label>
+                                        <label for="telefon_alertant1" class="col-form-label"><strong>Telèfon</strong>
+                                            <div class="mt-2">
+                                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                    type="button"
+                                                    title="What is your phone number?"
+                                                    data-container="body"
+                                                    data-toggle="popover"
+                                                    data-placement="left"
+                                                    data-trigger="hover"
+                                                    data-delay= "500"
+                                                    data-content="Quin és el seu numero de telefon?"></i>
+                                            </div>
+                                        </label>
                                         <input class="form-control" type="tel" name="telefon_alertant1" id="telefon_alertant1" maxlength="9" min="0">
 
                                     </div>
@@ -1067,12 +1259,36 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="edat_afectat1" class="col-form-label"><strong>Edat</strong></label>
+                                    <label for="edat_afectat1" class="col-form-label"><strong>Edat</strong>
+                                        <div class="mt-2">
+                                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                    type="button"
+                                                    title="How old are you?"
+                                                    data-container="body"
+                                                    data-toggle="popover"
+                                                    data-placement="left"
+                                                    data-trigger="hover"
+                                                    data-delay= "500"
+                                                    data-content="Quina edat tens?"></i>
+                                            </div>
+                                    </label>
                                     <input class="form-control" type="number" name="edat_afectat1" id="edat_afectat1" min="0" maxlength="3">
                                 </div>
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="genere1" class="col-form-label"><strong>Génere</strong></label><br>
+                                    <label for="genere1" class="col-form-label"><strong>Génere</strong>
+                                        <div class="mt-2">
+                                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                    type="button"
+                                                    title="Are you a man or a woman?"
+                                                    data-container="body"
+                                                    data-toggle="popover"
+                                                    data-placement="left"
+                                                    data-trigger="hover"
+                                                    data-delay= "500"
+                                                    data-content="Ets home o dona?"></i>
+                                            </div>
+                                    </label><br>
                                     <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
                                         <input class="form-check-input" type="radio" name="genere1" :id="sexe.id" :value="sexe.sexe">
                                         <label class="form-check-label" :for="sexe.id">{{ sexe.sexe }}</label>
@@ -1083,19 +1299,55 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="tipus_accident1" class="col-form-label"><strong>Tipus d'accident o d'incident</strong></label>
+                                    <label for="tipus_accident1" class="col-form-label"><strong>Tipus d'accident o d'incident</strong>
+                                        <div class="mt-2">
+                                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                    type="button"
+                                                    title="What is the type of accident or incident?"
+                                                    data-container="body"
+                                                    data-toggle="popover"
+                                                    data-placement="left"
+                                                    data-trigger="hover"
+                                                    data-delay= "500"
+                                                    data-content="Quin és el tipus d'accident?"></i>
+                                            </div>
+                                    </label>
                                     <select class="form-control" name="tipus_accident1" id="tipus_accident1">
                                         <option selected disabled>Seleccionar...</option>
                                         <option v-for="accident in accidents" :key="accident.id" :value="accident.id">{{ accident.tipus }}</option>
                                     </select>
 
-                                    <label for="num_afectats1" class="col-form-label mt-2"><strong>Numero de afectats</strong></label>
+                                    <label for="num_afectats1" class="col-form-label mt-2"><strong>Numero de afectats</strong>
+                                        <div class="mt-2">
+                                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                    type="button"
+                                                    title="What is the number of affected?"
+                                                    data-container="body"
+                                                    data-toggle="popover"
+                                                    data-placement="left"
+                                                    data-trigger="hover"
+                                                    data-delay= "500"
+                                                    data-content="Quin és el numero de l'afectat?"></i>
+                                            </div>
+                                    </label>
                                     <input type="number" class="form-control" name="num_afectats1" id="num_afectats1" min="0">
                                 </div>
 
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="descripcio1" class="col-form-label"><strong>Descripció d'accident o d'incident</strong></label>
+                                    <label for="descripcio1" class="col-form-label"><strong>Descripció d'accident o d'incident</strong>
+                                        <div class="mt-2">
+                                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                    type="button"
+                                                    title="Can you describe what happened?"
+                                                    data-container="body"
+                                                    data-toggle="popover"
+                                                    data-placement="left"
+                                                    data-trigger="hover"
+                                                    data-delay= "500"
+                                                    data-content="Pots descriure que ha pasat?"></i>
+                                            </div>
+                                    </label>
                                     <textarea class="form-control" id="descripcio1" name= "descripcio1" rows="4" placeholder="Descripció sobre l'accident o l'incident..."></textarea>
                                 </div>
                             </div>
@@ -1109,14 +1361,14 @@
 
 
 
-        <div class="form-group row ml-5">
-            <a class="btn btn-primary m-2 btn-lg" data-toggle="collapse" href="#recurs_mobil" role="button" aria-expanded="false" aria-controls="recurs_mobil">Resposta amb recurs mòbil</a>
-            <a class="btn btn-primary m-2 btn-lg" data-toggle="collapse" href="#no_recurs" role="button" aria-expanded="false" aria-controls="no_recurs">Resposta sense recurs mòbil</a>
+        <div class="form-group row">
+            <a class="btn btn-primary m-2 btn-lg" style="width:200px; height:80px" data-toggle="collapse" href="#recurs_mobil" role="button" aria-expanded="false" aria-controls="recurs_mobil">Resposta amb recurs mòbil</a>
+            <a class="btn btn-primary m-2 btn-lg" style="width:200px; height:80px" data-toggle="collapse" href="#no_recurs" role="button" aria-expanded="false" aria-controls="no_recurs">Resposta sense recurs mòbil</a>
         </div>
 
 
-        <div class="row mt-2 mb-1">
-            <div class="col">
+        <div class="row mt-2 mb-1 ml-3">
+            <div class="col col-md-12">
                 <div class="collapse multi-collapse" id="recurs_mobil">
                     <div class="card card-body">
                         <div class="form-group row">
@@ -1197,7 +1449,7 @@
 
 
             <div class="row mt-2 mb-1">
-                <div class="col">
+                <div class="col col-md-12">
                     <div class="collapse multi-collapse" id="no_recurs">
                         <div class="card card-body">
 
