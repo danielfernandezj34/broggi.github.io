@@ -12,10 +12,10 @@
 
                         <div class="col-sm-7 col-7">
                             <label for="telefon_alertant" class="col-form-label"><strong>Telèfon</strong>
-                                <div v-for="help in helpbox" :key="help.id" class="mt-2">
-                                    <i v-if="help.id == 1" style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                <div class="mt-2">
+                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                         type="button"
-                                        title= {{ help.preguntaEN }}
+                                        title="What is your phone number?"
                                         data-container="body"
                                         data-toggle="popover"
                                         data-placement="left"
@@ -1456,8 +1456,8 @@
                             <div class="form-group row">
 
 
-                                <label for="resp_no_recurs" class="col-form-label"><strong>Tipus de resposta</strong></label>
-                                <select class="form-control" name="resp_no_recurs" id="resp_no_recurs">
+                                <label for="resp_no_recurs" class="col-form-label col-2 col-sm-2"><strong>Tipus de resposta</strong></label>
+                                <select class="form-control col-5 col-sm-5" name="resp_no_recurs" id="resp_no_recurs">
                                     <option value="seleccionar" selected disabled>Seleccionar...</option>
                                     <option value="consulta_telefonica" name="consulta_telefonica">Consulta telefònica</option>
                                     <option value="informacio_telefonica" name="informacio_telefonica">Informació telefònica</option>
@@ -1658,6 +1658,7 @@
                 var j = 0;
                 var x = 0;
                 this.alertant = [];
+                debugger;
                 while(this.alertants.length > i){
                     if(this.alertants[i].telefon == telefon){
                         this.alertant.id = this.alertants[i].id;

@@ -544,32 +544,6 @@ CREATE TABLE `usuaris` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-
-
-LOCK TABLES `afectats` WRITE;
-/*!40000 ALTER TABLE `afectats` DISABLE KEYS */;
-INSERT INTO `afectats` VALUES (1,3,76,'asdf','qwefgfghj',67,1,1);
-INSERT INTO `afectats` VALUES (2,45,54,'qwert','sdfg',53,0,2);
-/*!40000 ALTER TABLE `afectats` ENABLE KEYS */;
-UNLOCK TABLES;
-
-LOCK TABLES `recursos` WRITE;
-/*!40000 ALTER TABLE `recursos` DISABLE KEYS */;
-INSERT INTO `recursos` VALUES (2,2,2,2);
-/*!40000 ALTER TABLE `recursos` ENABLE KEYS */;
-UNLOCK TABLES;
-
-LOCK TABLES `incidencies` WRITE;
-/*!40000 ALTER TABLE `incidencies` DISABLE KEYS */;
-INSERT INTO `incidencies` VALUES (1,1,1,1,1,1,1,1,1,1,1,1,1);
-/*!40000 ALTER TABLE `incidencies` ENABLE KEYS */;
-UNLOCK TABLES;
-LOCK TABLES `incidencies_has_recursos` WRITE;
-/*!40000 ALTER TABLE `incidencies_has_recursos` DISABLE KEYS */;
-INSERT INTO `incidencies_has_recursos` VALUES (1,2,2,2,2,2,2,2,2,2,2);
-/*!40000 ALTER TABLE `incidencies_has_recursos` ENABLE KEYS */;
-UNLOCK TABLES;
-
 --
 -- Dumping data for table `usuaris`
 --
