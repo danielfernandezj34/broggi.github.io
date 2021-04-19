@@ -85,6 +85,9 @@ i[data-atras='recurs']:hover{
 .form-inline{
     margin-left:35%;
 }
+#buscador_form{
+    left: 3%;
+}
 #titol_form{
     margin-left:40%;
 }
