@@ -1784,7 +1784,7 @@
                     i++;
                 }
 
-            },
+            },//Función para seleccionar el alertante cuando el administrativo pone el telefono
             selectAlertant(telefon){
                 var i = 0;
                 var j = 0;
