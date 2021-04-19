@@ -5118,10 +5118,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      buscador: '',
+      setTimeoutBuscador: '',
       incidencies: [],
       tipusIncidencies: [],
       usuaris: [],
@@ -5153,7 +5154,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var me = this;
-      axios.get('/incidencies').then(function (response) {
+      axios.get('/incidencies', {
+        params: {
+          buscador: this.buscador
+        }
+      }).then(function (response) {
         me.incidencies = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -5251,6 +5256,10 @@ __webpack_require__.r(__webpack_exports__);
       this.recursosIncidencia = incidencia.recursos;
       this.afectats = incidencia.afectats;
       $('#modalMostrarIncidencia').modal('show');
+    },
+    buscarIncidencies: function buscarIncidencies() {
+      clearTimeout(this.setTimeoutBuscador);
+      this.setTimeoutBuscador = setTimeout(this.selectIncidencies, 360);
     }
   },
   created: function created() {
@@ -50248,12 +50257,49 @@ var render = function() {
           _vm._v("Taula d'Incidencies")
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _c(
+          "form",
+          {
+            staticClass: "form-inline my-2 my-lg-0 col-sm-4",
+            attrs: { id: "buscador_form" }
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.buscador,
+                  expression: "buscador"
+                }
+              ],
+              staticClass: "form-control mr-sm-2",
+              attrs: {
+                type: "text",
+                placeholder: "Número de la incidència",
+                "aria-label": "Buscar ID incidència"
+              },
+              domProps: { value: _vm.buscador },
+              on: {
+                keyup: _vm.buscarIncidencies,
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.buscador = $event.target.value
+                }
+              }
+            })
+          ]
+        ),
         _vm._v(" "),
         _vm.incidencies.length == 0
           ? _c(
               "div",
-              { staticClass: "alert alert-light", attrs: { role: "alert" } },
+              {
+                staticClass: "alert alert-light mt-2",
+                attrs: { role: "alert" }
+              },
               [
                 _vm._v(
                   "\n                        No hi ha cap incidència.\n            "
@@ -50261,7 +50307,7 @@ var render = function() {
               ]
             )
           : _c("table", { staticClass: "table mt-2" }, [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -50381,7 +50427,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("p", [
@@ -50394,7 +50440,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
-                _vm._m(3),
+                _vm._m(2),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -50437,7 +50483,7 @@ var render = function() {
           { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -50771,7 +50817,7 @@ var render = function() {
                     _c("hr"),
                     _c("hr"),
                     _vm._v(" "),
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _vm._l(_vm.recursosIncidencia, function(recursIncidencia) {
                       return _c("div", { key: recursIncidencia.id }, [
@@ -50917,7 +50963,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
-                _vm._m(6),
+                _vm._m(5),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -50957,7 +51003,7 @@ var render = function() {
           { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(7),
+              _vm._m(6),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", [
@@ -51473,7 +51519,7 @@ var render = function() {
                 _c(
                   "div",
                   [
-                    _vm._m(8),
+                    _vm._m(7),
                     _vm._v(" "),
                     _vm._l(_vm.afectats, function(afectat) {
                       return _c("div", { key: afectat.id }, [
@@ -51739,7 +51785,7 @@ var render = function() {
                 _c(
                   "div",
                   [
-                    _vm._m(9),
+                    _vm._m(8),
                     _vm._v(" "),
                     _vm._l(_vm.recursosIncidencia, function(recursIncidencia) {
                       return _c("div", { key: recursIncidencia.id }, [
@@ -52216,7 +52262,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(10)
+              _vm._m(9)
             ])
           ]
         )
@@ -52225,30 +52271,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "form-inline my-2 my-lg-0" }, [
-      _c("input", {
-        staticClass: "form-control mr-sm-2",
-        attrs: {
-          type: "search",
-          placeholder: "Número de la incidència",
-          "aria-label": "Buscar ID incidència"
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-success my-2 my-sm-0",
-          attrs: { type: "submit", id: "boto_buscar" }
-        },
-        [_c("i", { staticClass: "fal fa-search" }, [_vm._v(" Buscar")])]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
