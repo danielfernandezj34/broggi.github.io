@@ -24,7 +24,7 @@
                                         data-content="Quin és el seu numero de telefon?"></i>
                                 </div>
                             </label>
-                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="telefonAfectat" @keypress="selectAlertant(telefonAfectat)">
+                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="telefonAlertant" @keyup="buscarAlertant">
                             <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
                         </div>
 
@@ -1636,7 +1636,8 @@
                 centreSelec: '',
                 nomAfectat: '',
                 cognomAfectat: '',
-                telefonAfectat: '',
+                telefonAlertant: '',
+                setTimeoutAlertant: '',
                 municipiHospital: '',
                 Alertantradio : '',
                 municipiSelec : '',
@@ -1785,10 +1786,11 @@
                 }
 
             },//Función para seleccionar el alertante cuando el administrativo pone el telefono
-            selectAlertant(telefon){
+            selectAlertant(){
                 var i = 0;
                 var j = 0;
                 var x = 0;
+                var telefon = this.telefonAlertant;
                 this.alertant = [];
                 while(this.alertants.length > i){
                     if(this.alertants[i].telefon == telefon){
@@ -1820,6 +1822,11 @@
                         x++;
                     }
                 }
+            },
+            buscarAlertant(){
+                console.log('El arnau se cree que sabe');
+                clearTimeout(this.setTimeoutAlertant);
+                this.setTimeoutAlertant = setTimeout(this.selectAlertant, 360);
             },
             colorboto : function(){
                 if(this.color == '#f70c74'){
