@@ -4654,6 +4654,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -4812,6 +4817,8 @@ __webpack_require__.r(__webpack_exports__);
       var j = 0;
       var x = 0;
       this.alertant = [];
+      this.alertantAgafat = null;
+      this.municipiHospital = '';
 
       while (this.alertants.length > i) {
         if (this.alertants[i].telefon == telefon) {
@@ -45805,51 +45812,69 @@ var render = function() {
               _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-12 col-12" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-check form-check-inline" },
-                  _vm._l(_vm.tipusAlertants, function(tipusAlertant) {
-                    return _c("div", { key: tipusAlertant.id }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.Alertantradio,
-                            expression: "Alertantradio"
-                          }
-                        ],
-                        staticClass: "form-check-input",
-                        attrs: {
-                          type: "radio",
-                          name: "tipus_alertant",
-                          id: tipusAlertant.id,
-                          disabled: tipusAlertant.id == 1
-                        },
-                        domProps: {
-                          value: tipusAlertant.id,
-                          checked: tipusAlertant.tipus == _vm.alertantAgafat,
-                          checked: _vm._q(_vm.Alertantradio, tipusAlertant.id)
-                        },
-                        on: {
-                          change: function($event) {
-                            _vm.Alertantradio = tipusAlertant.id
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-check-label mr-2",
-                          attrs: { for: tipusAlertant.id }
-                        },
-                        [_vm._v(_vm._s(tipusAlertant.tipus))]
+                _c("div", { staticClass: "form-check form-check-inline" }, [
+                  _vm.alertantAgafat != null
+                    ? _c("div", [
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            name: "tipus_alertant",
+                            id: "tipus_alertant"
+                          },
+                          domProps: { value: _vm.alertantAgafat }
+                        })
+                      ])
+                    : _c(
+                        "div",
+                        _vm._l(_vm.tipusAlertants, function(tipusAlertant) {
+                          return _c("div", { key: tipusAlertant.id }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Alertantradio,
+                                  expression: "Alertantradio"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "tipus_alertant",
+                                id: tipusAlertant.id,
+                                disabled: tipusAlertant.id == 1
+                              },
+                              domProps: {
+                                value: tipusAlertant.id,
+                                checked: _vm._q(
+                                  _vm.Alertantradio,
+                                  tipusAlertant.id
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.Alertantradio = tipusAlertant.id
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label mr-2",
+                                attrs: {
+                                  value: tipusAlertant.id,
+                                  for: tipusAlertant.id
+                                }
+                              },
+                              [_vm._v(_vm._s(tipusAlertant.tipus))]
+                            )
+                          ])
+                        }),
+                        0
                       )
-                    ])
-                  }),
-                  0
-                )
+                ])
               ])
             ]),
             _vm._v(" "),

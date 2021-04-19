@@ -49,9 +49,14 @@
                         </label>
                         <div class="col-sm-12 col-12">
                             <div class="form-check form-check-inline">
-                                <div v-for="tipusAlertant in tipusAlertants" :key="tipusAlertant.id" >
-                                    <input class="form-check-input" type="radio" name="tipus_alertant" :id="tipusAlertant.id" :value="tipusAlertant.id" v-model="Alertantradio" :checked="tipusAlertant.tipus == alertantAgafat" :disabled="tipusAlertant.id == 1">
-                                    <label class="form-check-label mr-2" :for="tipusAlertant.id" >{{ tipusAlertant.tipus }}</label>
+                                <div v-if="alertantAgafat != null">
+                                    <input class="form-control" type="text" name="tipus_alertant" id="tipus_alertant" :value="alertantAgafat">
+                                </div>
+                                <div v-else>
+                                    <div v-for="tipusAlertant in tipusAlertants" :key="tipusAlertant.id" >
+                                        <input class="form-check-input" type="radio" name="tipus_alertant" :id="tipusAlertant.id"  v-model="Alertantradio" :value="tipusAlertant.id" :disabled="tipusAlertant.id == 1">
+                                        <label class="form-check-label mr-2" :value="tipusAlertant.id" :for="tipusAlertant.id" >{{ tipusAlertant.tipus }}</label>
+                                    </div>
                                 </div>
 
                             </div>
@@ -1791,6 +1796,8 @@
                 var j = 0;
                 var x = 0;
                 this.alertant = [];
+                this.alertantAgafat = null;
+                this.municipiHospital = '';
                 while(this.alertants.length > i){
                     if(this.alertants[i].telefon == telefon){
                         this.alertant.id = this.alertants[i].id;
