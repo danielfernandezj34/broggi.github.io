@@ -2910,10 +2910,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      buscador: '',
+      setTimeoutBuscador: '',
       usuaris: [],
       rols: [],
       usuari: {
@@ -2945,7 +2946,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var me = this;
-      axios.get('/usuaris').then(function (response) {
+      axios.get('/usuaris', {
+        params: {
+          buscador: this.buscador
+        }
+      }).then(function (response) {
         me.usuaris = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -3016,6 +3021,10 @@ __webpack_require__.r(__webpack_exports__);
         me.errorMessage = error.response.data.error;
         $('modalBorrar').modal('hide');
       });
+    },
+    buscarUsuaris: function buscarUsuaris() {
+      clearTimeout(this.setTimeoutBuscador);
+      this.setTimeoutBuscador = setTimeout(this.selectUsuaris, 360);
     }
   },
   created: function created() {
@@ -44953,10 +44962,44 @@ var render = function() {
           _vm._v("Usuaris")
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _c(
+          "form",
+          {
+            staticClass: "form-inline my-2 my-lg-0 col-sm-4",
+            attrs: { id: "buscador_form" }
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.buscador,
+                  expression: "buscador"
+                }
+              ],
+              staticClass: "form-control mr-sm-2",
+              attrs: {
+                type: "text",
+                placeholder: "Buscar Usuari",
+                "aria-label": "Buscar Usuari"
+              },
+              domProps: { value: _vm.buscador },
+              on: {
+                keyup: _vm.buscarUsuaris,
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.buscador = $event.target.value
+                }
+              }
+            })
+          ]
+        ),
         _vm._v(" "),
         _c("table", { staticClass: "table mt-2" }, [
-          _vm._m(1),
+          _vm._m(0),
           _vm._v(" "),
           _c(
             "tbody",
@@ -45063,7 +45106,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("p", [
@@ -45076,7 +45119,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
-                _vm._m(3),
+                _vm._m(2),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -45138,7 +45181,7 @@ var render = function() {
                       [_vm._v("Modificar Usuari")]
                     ),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(3)
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -45457,7 +45500,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
-                _vm._m(5),
+                _vm._m(4),
                 _vm._v(" "),
                 _vm.insert
                   ? _c(
@@ -45495,30 +45538,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "form-inline my-2 my-lg-0" }, [
-      _c("input", {
-        staticClass: "form-control mr-sm-2",
-        attrs: {
-          type: "search",
-          placeholder: "Buscar Usuari",
-          "aria-label": "Buscar Usuari"
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-success my-2 my-sm-0",
-          attrs: { type: "submit" }
-        },
-        [_c("i", { staticClass: "fal fa-search" }, [_vm._v(" Buscar")])]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -47050,8 +47069,8 @@ var render = function() {
       _vm._v(" "),
       _vm._m(60),
       _vm._v(" "),
-      _c("div", { staticClass: "row mt-2 mb-1" }, [
-        _c("div", { staticClass: "col" }, [
+      _c("div", { staticClass: "row mt-2 mb-1 ml-3" }, [
+        _c("div", { staticClass: "col col-md-12" }, [
           _c(
             "div",
             {
@@ -49948,11 +49967,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row ml-5" }, [
+    return _c("div", { staticClass: "form-group row" }, [
       _c(
         "a",
         {
           staticClass: "btn btn-primary m-2 btn-lg",
+          staticStyle: { width: "200px", height: "80px" },
           attrs: {
             "data-toggle": "collapse",
             href: "#recurs_mobil",
@@ -49968,6 +49988,7 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "btn btn-primary m-2 btn-lg",
+          staticStyle: { width: "200px", height: "80px" },
           attrs: {
             "data-toggle": "collapse",
             href: "#no_recurs",
@@ -50126,7 +50147,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row mt-2 mb-1" }, [
-      _c("div", { staticClass: "col" }, [
+      _c("div", { staticClass: "col col-md-12" }, [
         _c(
           "div",
           {
