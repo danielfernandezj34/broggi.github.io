@@ -24,7 +24,8 @@
                                         data-content="Quin és el seu numero de telefon?"></i>
                                 </div>
                             </label>
-                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="telefonAlertant" @keyup="buscarAlertant">
+
+                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="telefonAlertant" @keyup="selectAlertant(telefonAlertant)">
                             <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
                         </div>
 
@@ -59,7 +60,7 @@
                     </div>
 
 
-                    <div class="card-body" v-if="alertant.telefon == telefonAfectat" style="border: 2px solid #2c3e50">
+                    <div class="card-body" v-if="alertant.telefon == telefonAlertant" style="border: 2px solid #2c3e50">
 
                         <div v-if="alertant.tipus_alertants_id == 1">
 
@@ -1304,7 +1305,7 @@
                                                     data-content="Quin és el seu telèfon?"></i>
                                             </div>
                                         </label>
-                                        <input class="form-control" type="tel" name="telefon_alertant1" id="telefon_alertant1" maxlength="9" min="0" :value="telefonAfectat" disabled>
+                                        <input class="form-control" type="tel" name="telefon_alertant1" id="telefon_alertant1" maxlength="9" min="0" :value="telefonAlertant" disabled>
 
                                     </div>
 
@@ -1637,7 +1638,6 @@
                 nomAfectat: '',
                 cognomAfectat: '',
                 telefonAlertant: '',
-                setTimeoutAlertant: '',
                 municipiHospital: '',
                 Alertantradio : '',
                 municipiSelec : '',
@@ -1786,11 +1786,10 @@
                 }
 
             },//Función para seleccionar el alertante cuando el administrativo pone el telefono
-            selectAlertant(){
+            selectAlertant(telefon){
                 var i = 0;
                 var j = 0;
                 var x = 0;
-                var telefon = this.telefonAlertant;
                 this.alertant = [];
                 while(this.alertants.length > i){
                     if(this.alertants[i].telefon == telefon){
@@ -1822,11 +1821,6 @@
                         x++;
                     }
                 }
-            },
-            buscarAlertant(){
-                console.log('El arnau se cree que sabe');
-                clearTimeout(this.setTimeoutAlertant);
-                this.setTimeoutAlertant = setTimeout(this.selectAlertant, 360);
             },
             colorboto : function(){
                 if(this.color == '#f70c74'){
