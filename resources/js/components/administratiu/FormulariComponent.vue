@@ -1361,14 +1361,14 @@
 
 
 
-        <div class="form-group row ml-5">
-            <a class="btn btn-primary m-2 btn-lg" data-toggle="collapse" href="#recurs_mobil" role="button" aria-expanded="false" aria-controls="recurs_mobil">Resposta amb recurs mòbil</a>
-            <a class="btn btn-primary m-2 btn-lg" data-toggle="collapse" href="#no_recurs" role="button" aria-expanded="false" aria-controls="no_recurs">Resposta sense recurs mòbil</a>
+        <div class="form-group row">
+            <a class="btn btn-primary m-2 btn-lg" style="width:200px; height:80px" data-toggle="collapse" href="#recurs_mobil" role="button" aria-expanded="false" aria-controls="recurs_mobil">Resposta amb recurs mòbil</a>
+            <a class="btn btn-primary m-2 btn-lg" style="width:200px; height:80px" data-toggle="collapse" href="#no_recurs" role="button" aria-expanded="false" aria-controls="no_recurs">Resposta sense recurs mòbil</a>
         </div>
 
 
-        <div class="row mt-2 mb-1">
-            <div class="col">
+        <div class="row mt-2 mb-1 ml-3">
+            <div class="col col-md-12">
                 <div class="collapse multi-collapse" id="recurs_mobil">
                     <div class="card card-body">
                         <div class="form-group row">
@@ -1449,7 +1449,7 @@
 
 
             <div class="row mt-2 mb-1">
-                <div class="col">
+                <div class="col col-md-12">
                     <div class="collapse multi-collapse" id="no_recurs">
                         <div class="card card-body">
 
